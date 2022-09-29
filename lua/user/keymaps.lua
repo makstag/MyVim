@@ -60,6 +60,7 @@ end
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 vim.keymap.set("n", "<C-r>", "<Cmd>NvimTreeToggle<CR>", opts)
-vim.keymap.set("n", "<C-f>", "<Cmd>TagbarToggle<CR>", opts)
+-- vim.keymap.set("n", "<C-f>", "<Cmd>TagbarToggle<CR>", opts)
 vim.keymap.set("n", "<C-s>", "<Cmd>:w<CR>", opts)
-vim.keymap.set("n", "<C-q>", "<Cmd>:qa<CR>", opts)
+vim.keymap.set("n", "<C-q>", "<Cmd>:q<CR>", opts)
+vim.keymap.set("n", "<C-z>", "<Cmd>:u<CR>", opts)

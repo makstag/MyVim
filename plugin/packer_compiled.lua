@@ -241,11 +241,6 @@ _G.packer_plugins = {
     path = "/home/bpm/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
   },
-  tagbar = {
-    loaded = true,
-    path = "/home/bpm/.local/share/nvim/site/pack/packer/start/tagbar",
-    url = "https://github.com/preservim/tagbar"
-  },
   ["todo-comments.nvim"] = {
     loaded = true,
     path = "/home/bpm/.local/share/nvim/site/pack/packer/start/todo-comments.nvim",

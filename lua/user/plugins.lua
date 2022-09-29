@@ -127,7 +127,7 @@ return packer.startup(function(use)
   use "windwp/nvim-autopairs"
   use "andymass/vim-matchup"
   use "folke/zen-mode.nvim"
-  use "preservim/tagbar"
+  -- use "preservim/tagbar"
 
   -- Markdown
   use {
