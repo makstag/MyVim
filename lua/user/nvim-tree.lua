@@ -1,17 +1,10 @@
-local status_ok, nvim_tree = pcall(require, "nvim-tree")
-if not status_ok then
-  return
+local function custom_callback(callback_name)
+    return string.format(":lua require('user.treeutils').%s()<CR>", callback_name)
 end
 
-local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
-if not config_status_ok then
-  return
-end
-
+local nvim_tree = require "nvim-tree"
+local nvim_tree_config = require "nvim-tree.config"
 local icons = require "user.icons"
-
-local tree_cb = nvim_tree_config.nvim_tree_callback
-
 local utils = require "nvim-tree.utils"
 
 ---@diagnostic disable-next-line: unused-local
@@ -138,20 +131,26 @@ nvim_tree.setup {
     timeout = 500,
   },
   view = {
-    width = 30,
-    height = 30,
     hide_root_folder = false,
     side = "left",
     -- auto_resize = true,
     mappings = {
       custom_only = false,
       list = {
-        { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-        { key = "h", cb = tree_cb "close_node" },
-        { key = "v", cb = tree_cb "vsplit" },
+	{ key = "<c-f>", cb = custom_callback "launch_find_files" },
+        { key = "<c-g>", cb = custom_callback "launch_live_grep" },
+	{ key = "l", action = "edit", action_cb = edit_or_open },
+        { key = "L", action = "vsplit_preview", action_cb = vsplit_preview },
+        { key = "h", action = "close_node" },
+        { key = "H", action = "collapse_all", action_cb = collapse_all }
       },
     },
     number = false,
     relativenumber = false,
   },
+  actions = {
+    open_file = {
+        quit_on_open = false
+    }
+  }
 }

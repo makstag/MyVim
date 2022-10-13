@@ -56,9 +56,9 @@ return packer.startup(function(use)
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
   use "jose-elias-alvarez/null-ls.nvim"
-  use "onsails/lspkind.nvim"
   use "glepnir/lspsaga.nvim"
-  use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
+  use "onsails/lspkind-nvim"
+  -- use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
   
   -- Completion
   use "hrsh7th/nvim-cmp"
@@ -70,6 +70,7 @@ return packer.startup(function(use)
 
   -- Syntax/Treesitter
   use "nvim-treesitter/nvim-treesitter"
+  use "JoosepAlviste/nvim-ts-context-commentstring"
 
   -- Color
   use "norcalli/nvim-colorizer.lua"
@@ -79,7 +80,6 @@ return packer.startup(function(use)
   use "folke/tokyonight.nvim"
 
   -- Utility
-  use "onsails/lspkind-nvim"
   use "moll/vim-bbye"
   use "lewis6991/impatient.nvim"
 
@@ -105,10 +105,17 @@ return packer.startup(function(use)
   -- Comment
   use "numToStr/Comment.nvim"
   use "folke/todo-comments.nvim"
-  use "JoosepAlviste/nvim-ts-context-commentstring"
 
   -- Terminal
   use "akinsho/toggleterm.nvim"
+
+  -- Telescope
+  use "nvim-telescope/telescope.nvim"
+  use "nvim-telescope/telescope-file-browser.nvim"
+
+  -- Project
+  use "ahmedkhalf/project.nvim"
+  use "windwp/nvim-spectre"
 
   -- Quickfix
   use "kevinhwang91/nvim-bqf"
@@ -127,7 +134,6 @@ return packer.startup(function(use)
   use "windwp/nvim-autopairs"
   use "andymass/vim-matchup"
   use "folke/zen-mode.nvim"
-  -- use "preservim/tagbar"
 
   -- Markdown
   use {

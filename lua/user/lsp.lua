@@ -12,7 +12,7 @@ lspconfig.ccls.setup{
       threads = 0;
     };
     clang = {
-      excludeArgs = { "-frounding-math"} ;
+      excludeArgs = { "-march=armv7ve","-Wno-psabi", "-Wno-maybe-uninitialized"} ;
     };
   }
 }

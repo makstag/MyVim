@@ -22,7 +22,7 @@ configs.setup {
     enable = true, 
   },
   indent = {
-    enable = true, -- default is disabled anyways
+    enable = false, -- default is disabled anyways
   }
 }
 

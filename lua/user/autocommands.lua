@@ -1,4 +1,4 @@
---[[ auto formating
+--[[ --auto compile
 vim.api.nvim_create_autocmd("BufWritePre", {
 	command = "lua vim.lsp.buf.formatting_sync(nil, 1000)",
 	pattern = "*.astro,*.cpp,*.css,*.go,*.h,*.html,*.js,*.json,*.jsx,*.lua,*.md,*.py,*.rs,*.ts,*.tsx,*.yaml",
