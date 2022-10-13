@@ -4,7 +4,7 @@ lspconfig.pyright.setup{}
 -- lspconfig.clangd.setup{}
 lspconfig.ccls.setup{
   init_options = {
-    compilationDatabaseDirectory = "Release";
+    compilationDatabaseDirectory = "build";
     cache = {
       directory = "/tmp/ccls-cache";
     };
@@ -17,15 +17,7 @@ lspconfig.ccls.setup{
   }
 }
 lspconfig.gdscript.setup{}
---[[lspconfig.sumneko_lua.setup{
-  settings = {
-    Lua = {
-      completion = {
-        callSnippet = "Replace"
-      }
-    }
-  }
-}]]
+-- lspconfig.sumneko_lua.setup{}
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -103,7 +95,7 @@ local servers = {
   'tsserver', 
   'ccls', 
   'gdscript', 
-  'sumneko_lua',
+  -- 'sumneko_lua',
   'cssls',
   'jsonls',
   'bashls',
