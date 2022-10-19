@@ -82,6 +82,7 @@ return packer.startup(function(use)
   -- Utility
   use "moll/vim-bbye"
   use "lewis6991/impatient.nvim"
+  use "nathom/filetype.nvim"
 
   -- Debugging
   use "mfussenegger/nvim-dap"
