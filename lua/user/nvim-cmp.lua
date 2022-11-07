@@ -88,10 +88,12 @@ cmp.setup {
       return vim_item
     end,
   },
-  sources = {
+  sources = cmp.config.sources({
     { name = "nvim_lsp" },
     { name = "luasnip" },
-  },
+  }, {
+    { name = "buffer" },
+  }),
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,
@@ -106,3 +108,30 @@ cmp.setup {
     native_menu = false,
   },
 }
+
+cmp.setup.filetype('gitcommit', {
+  sources = cmp.config.sources({
+    { name = 'cmp-git' },
+  }, {
+    { name = 'buffer' },
+  })
+})
+
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+   }
+})
+
+
+
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
+})
+

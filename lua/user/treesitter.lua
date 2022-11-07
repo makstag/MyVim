@@ -19,7 +19,7 @@ configs.setup {
     "yaml"
   }, -- Only use parsers that are maintained
   highlight = { -- enable highlighting
-    enable = true, 
+    enable = false, 
   },
   indent = {
     enable = false, -- default is disabled anyways
