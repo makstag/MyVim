@@ -25,7 +25,7 @@ vim.keymap.set("n", "<Leader>q", ":bprevious<CR>:bdelete #<CR>", opts)
 vim.keymap.set("n", "<Leader>y", ":%y<CR>")
 vim.keymap.set("n", "k", "gk", opts)
 vim.keymap.set("n", "j", "gj", opts)
-vim.keymap.set("n", "<Leader>l", ":vsplit term://fish <CR>", opts)
+vim.keymap.set("n", "<Leader>l", ":vsplit term://zsh <CR>", opts)
 vim.keymap.set("t", "<Leader><Esc>", "<C-\\><C-n>", opts)
 vim.keymap.set("n", "<Leader>v", ":edit ~/.config/nvim/init.lua<CR>", opts)
 
