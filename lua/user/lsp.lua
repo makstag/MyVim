@@ -132,14 +132,14 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+--[[vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
   underline = true,
   update_in_insert = false,
   virtual_text = { spacing = 4, prefix = "●" },
   severity_sort = true,
 }
-)
+)]]
 
 -- Diagnostic symbols in the sign column (gutter)
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
@@ -148,7 +148,7 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
-vim.diagnostic.config({
+--[[vim.diagnostic.config({
   virtual_text = {
     prefix = '●'
   },
@@ -156,9 +156,9 @@ vim.diagnostic.config({
   float = {
     source = "always", -- Or "if_many"
   },
-})
+})]]
 
 require "user.lsp-full.null-ls"
 
---require("lsp_lines").setup{}
---vim.keymap.set("n", "<Leader>x", require("lsp_lines").toggle)
+require("lsp_lines").setup{}
+vim.keymap.set("n", "<Leader>x", require("lsp_lines").toggle)
