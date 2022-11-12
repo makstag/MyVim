@@ -1,7 +1,7 @@
 local lspconfig = require('lspconfig')
 
 lspconfig.pyright.setup{}
--- lspconfig.clangd.setup{}
+lspconfig.cmake.setup{}
 lspconfig.ccls.setup{
   init_options = {
     compilationDatabaseDirectory = "build";
@@ -17,7 +17,7 @@ lspconfig.ccls.setup{
   }
 }
 lspconfig.gdscript.setup{}
-lspconfig.rust_analyzer.setup({
+lspconfig.rust_analyzer.setup{
   on_attach=on_attach,
   settings = {
     ["rust-analyzer"] = {
@@ -37,7 +37,7 @@ lspconfig.rust_analyzer.setup({
       },
     }
   }
-})
+}
 -- lspconfig.sumneko_lua.setup{}
 
 -- Mappings.
