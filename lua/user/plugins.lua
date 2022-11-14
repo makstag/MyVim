@@ -59,7 +59,8 @@ return packer.startup(function(use)
   use "glepnir/lspsaga.nvim"
   use "onsails/lspkind-nvim"
   use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
-  
+  use "ray-x/lsp_signature.nvim"
+
   -- Completion
   use {
     "hrsh7th/nvim-cmp",

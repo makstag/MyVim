@@ -19,7 +19,8 @@ configs.setup {
     "yaml"
   }, -- Only use parsers that are maintained
   highlight = { -- enable highlighting
-    enable = false, 
+    enable = true, 
+    additional_vim_regex_highlighting = false,
   },
   indent = {
     enable = false, -- default is disabled anyways
