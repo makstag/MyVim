@@ -1,9 +1,6 @@
 %compile_commands.json
-%c -std=c11
-%cpp -std=c++2a
-%c %cpp -pthread
-%h %hpp -x c++-header
--Iinc
+%h -x
+%h c++-header
 
 -isystem
 /usr/lib/gcc-cross/arm-linux-gnueabi/9/../../../../arm-linux-gnueabi/include/c++/9
@@ -19,4 +16,4 @@
 /usr/include
 
 -target
-armv7e-unknown-linux-elf
+armv7--linux-gnueabi
