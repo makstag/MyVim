@@ -16,31 +16,31 @@ db.custom_header = {
 }
 db.custom_center = {
 	{
-		icon = " ",
+		icon = "▐ ",
 		desc = "New File            ",
 		action = "DashboardNewFile",
 		shortcut = "SPC o",
 	},
 	{
-		icon = " ",
+		icon = "▐ ",
 		desc = "Browse Files        ",
 		action = "Telescope file_browser",
 		shortcut = "SPC n",
 	},
 	{
-		icon = " ",
+		icon = "▐ ",
 		desc = "Find File           ",
 		action = "Telescope find_files",
 		shortcut = "SPC f",
 	},
 	{
-		icon = " ",
+		icon = "▐ ",
 		desc = "Configure Neovim    ",
 		action = "edit ~/.config/nvim/init.lua",
 		shortcut = "SPC v",
 	},
 	{
-		icon = " ",
+		icon = "▐ ",
 		desc = "Exit Neovim              ",
 		action = "quit",
 	},
