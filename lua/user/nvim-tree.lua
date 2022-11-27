@@ -2,6 +2,8 @@ local function custom_callback(callback_name)
     return string.format(":lua require('user.treeutils').%s()<CR>", callback_name)
 end
 
+vim.opt.termguicolors = true
+
 local nvim_tree = require "nvim-tree"
 local nvim_tree_config = require "nvim-tree.config"
 local icons = require "user.icons"
