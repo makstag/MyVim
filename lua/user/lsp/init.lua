@@ -24,7 +24,6 @@ require("user.lsp.handlers").setup {}
 require "user.lsp.null-ls"
 require "user.lsp.lsp"
 require "user.lsp.lspsaga"
-require "user.lsp.lsp-signature"
 require("lsp_lines").setup {}
 vim.keymap.set("n", "<Leader>x", require("lsp_lines").toggle)
 

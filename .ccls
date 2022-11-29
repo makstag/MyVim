@@ -15,5 +15,4 @@
 -isystem
 /usr/include
 
--target
-armv7--linux-gnueabi
+-target armv7e-unknown-linux-elf
