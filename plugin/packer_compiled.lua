@@ -79,11 +79,6 @@ _G.packer_plugins = {
     path = "/home/bpm/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
-  ale = {
-    loaded = true,
-    path = "/home/bpm/.local/share/nvim/site/pack/packer/start/ale",
-    url = "https://github.com/dense-analysis/ale"
-  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/bpm/.local/share/nvim/site/pack/packer/start/cmp-buffer",
