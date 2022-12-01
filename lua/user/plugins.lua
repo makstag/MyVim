@@ -60,7 +60,7 @@ return packer.startup(function(use)
   use "onsails/lspkind-nvim"
   use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
   use "williamboman/nvim-lsp-installer"
-  
+
   -- Completion
   use {
     "hrsh7th/nvim-cmp",
@@ -84,6 +84,7 @@ return packer.startup(function(use)
   -- Color
   use "norcalli/nvim-colorizer.lua"
   use "nvim-colortils/colortils.nvim"
+  use "cdelledonne/vim-cmake"
 
   -- Colorschemes
   use "folke/tokyonight.nvim"
