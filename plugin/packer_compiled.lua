@@ -286,6 +286,11 @@ _G.packer_plugins = {
     path = "/home/bpm/.local/share/nvim/site/pack/packer/start/project.nvim",
     url = "https://github.com/ahmedkhalf/project.nvim"
   },
+  ["synthwave84.nvim"] = {
+    loaded = true,
+    path = "/home/bpm/.local/share/nvim/site/pack/packer/start/synthwave84.nvim",
+    url = "https://github.com/lunarvim/synthwave84.nvim"
+  },
   ["telescope-file-browser.nvim"] = {
     loaded = true,
     path = "/home/bpm/.local/share/nvim/site/pack/packer/start/telescope-file-browser.nvim",

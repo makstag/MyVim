@@ -88,6 +88,7 @@ return packer.startup(function(use)
 
   -- Colorschemes
   use "folke/tokyonight.nvim"
+  use "lunarvim/synthwave84.nvim"
 
   -- Utility
   use "moll/vim-bbye"
