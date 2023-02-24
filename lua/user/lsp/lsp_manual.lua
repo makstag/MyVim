@@ -7,7 +7,7 @@ local servers = {
   'tsserver', 
   'ccls', 
   'gdscript', 
-  'sumneko_lua',
+  'lua_ls',
   'cssls',
   'jsonls',
   'bashls',

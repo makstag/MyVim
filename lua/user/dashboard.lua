@@ -1,48 +1,55 @@
 local db = require "dashboard"
-db.custom_header = {
-	"",
-	"",
-	"",
-	"",
-	" ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
-	" ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
-	" ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
-	" ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
-	" ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
-	" ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
-	"",
-	"",
-	"",
-}
-db.custom_center = {
-	{
-		icon = "",
-		desc = "New File              ",
-		action = "DashboardNewFile",
-		shortcut = "SPC o",
-	},
-	{
-		icon = "",
-		desc = "Browse Files          ",
-		action = "Telescope file_browser",
-		shortcut = "SPC n",
-	},
-	{
-		icon = "",
-		desc = "Find File             ",
-		action = "Telescope find_files",
-		shortcut = "SPC f",
-	},
-	{
-		icon = "",
-		desc = "Configure Neovim      ",
-		action = "edit ~/.config/nvim/init.lua",
-		shortcut = "SPC v",
-	},
-	{
-		icon = "",
-		desc = "Exit Neovim                ",
-		action = "quit",
-	},
-}
+db.setup({
+  theme = 'hyper',
+  config = {
+    header = {
+      '               ▄▄██████████▄▄             ',
+      '               ▀▀▀   ██   ▀▀▀             ',
+      '       ▄██▄   ▄▄████████████▄▄   ▄██▄     ',
+      '     ▄███▀  ▄████▀▀▀    ▀▀▀████▄  ▀███▄   ',
+      '    ████▄ ▄███▀              ▀███▄ ▄████  ',
+      '   ███▀█████▀▄████▄      ▄████▄▀█████▀███ ',
+      '   ██▀  ███▀ ██████      ██████ ▀███  ▀██ ',
+      '    ▀  ▄██▀  ▀████▀  ▄▄  ▀████▀  ▀██▄  ▀  ',
+      '       ███           ▀▀           ███     ',
+      '       ██████████████████████████████     ',
+      '   ▄█  ▀██  ███   ██    ██   ███  ██▀  █▄ ',
+      '   ███  ███ ███   ██    ██   ███▄███  ███ ',
+      '   ▀██▄████████   ██    ██   ████████▄██▀ ',
+      '    ▀███▀ ▀████   ██    ██   ████▀ ▀███▀  ',
+      '     ▀███▄  ▀███████    ███████▀  ▄███▀   ',
+      '       ▀███    ▀▀██████████▀▀▀   ███▀     ',
+      '         ▀    ▄▄▄    ██    ▄▄▄    ▀       ',
+      '               ▀████████████▀             ',
+      '',
+      '',
+      '',
+      '',
+    },
+    week_header = {
+      enable = false,
+    },
+    shortcut = {
+      { desc = 'Update', group = '@property', action = 'Lazy update', key = 'SPC u' },
+      {
+        desc = 'Browse Files',
+        group = 'DiagnosticHint',
+        action = 'Telescope file_browser',
+        key = 'SPC n',
+      },
+      {
+        desc = 'Find File',
+        group = 'Label',
+        action = 'Telescope find_files',
+        key = 'SPC f',
+      },
+      {
+        desc = 'Configure Neovim',
+        group = 'Number',
+        action = 'edit ~/.config/nvim/init.lua',
+        key = 'SPC v',
+      },
+    },
+  },
+})
 vim.keymap.set("n", "<Leader>o", ":DashboardNewFile<CR>", { silent = true })
