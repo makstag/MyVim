@@ -84,7 +84,6 @@ return packer.startup(function(use)
   -- Color
   use "norcalli/nvim-colorizer.lua"
   use "nvim-colortils/colortils.nvim"
-  use "cdelledonne/vim-cmake"
 
   -- Colorschemes
   use "folke/tokyonight.nvim"
@@ -93,6 +92,8 @@ return packer.startup(function(use)
   -- Utility
   use "moll/vim-bbye"
   use "lewis6991/impatient.nvim"
+  use "cdelledonne/vim-cmake"
+  use "antoinemadec/FixCursorHold.nvim"
 
   -- Debugging
   use "mfussenegger/nvim-dap"

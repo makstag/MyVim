@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "/home/bpm/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
+  ["FixCursorHold.nvim"] = {
+    loaded = true,
+    path = "/home/bpm/.local/share/nvim/site/pack/packer/start/FixCursorHold.nvim",
+    url = "https://github.com/antoinemadec/FixCursorHold.nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/bpm/.local/share/nvim/site/pack/packer/start/cmp-buffer",
