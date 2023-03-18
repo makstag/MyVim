@@ -7,6 +7,14 @@ configs.setup {
   },
   indent = {
     enable = false, -- default is disabled anyways
-  }
+  },
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false,
+    config = {
+      c = { __default = '/* %s */', __multiline = '/* %s */' },
+      cpp = { __default = '// %s', __multiline = '/* %s */' },
+    }
+  },
 }
 

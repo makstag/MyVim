@@ -20,11 +20,12 @@ M.server_capabilities = function()
   end)
 end
 
-require("config.lsp.handlers").setup {}
+require "config.lsp.handlers".setup {}
 require "config.lsp.null-ls"
+require "config.lsp.prettier"
 require "config.lsp.lsp_auto"
 require "config.lsp.lspsaga"
-require("lsp_lines").setup {}
+require "lsp_lines".setup {}
 vim.keymap.set("n", "<Leader>x", require("lsp_lines").toggle)
 
 return M

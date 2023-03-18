@@ -56,21 +56,32 @@ return packer.startup(function(use)
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
   use "jose-elias-alvarez/null-ls.nvim"
+  use "MunifTanjim/prettier.nvim"
+  use 'folke/trouble.nvim'
   use "glepnir/lspsaga.nvim"
   use "onsails/lspkind-nvim"
   use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
-  use "williamboman/nvim-lsp-installer"
+  use {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim"
+  }
 
   -- Completion
+  use "hrsh7th/nvim-cmp"    -- The completion plugin
+  use "hrsh7th/cmp-buffer"  -- Buffer completions
+  use "hrsh7th/cmp-path"    -- Path completions
+  use "hrsh7th/cmp-cmdline" -- Cmdline completions
+  use "hrsh7th/cmp-nvim-lsp"
+  -- cmp snippet engine
   use {
-    "hrsh7th/nvim-cmp",
-    requires = {
-      "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp",
-      'quangnguyen30192/cmp-nvim-ultisnips', 'hrsh7th/cmp-nvim-lua',
-      'octaltree/cmp-look', 'hrsh7th/cmp-path', 'hrsh7th/cmp-calc',
-      'f3fora/cmp-spell', 'hrsh7th/cmp-emoji'
-    }
+    "L3MON4D3/LuaSnip",
+    -- follow latest release.
+    tag = "v<CurrentMajor>.*",
+    -- install jsregexp (optional!:).
+    run = "make install_jsregexp"
   }
+  use "hrsh7th/cmp-nvim-lua" -- nvim-cmp source for neovim lua api
+  use "rafamadriz/friendly-snippets"
   use {
     'tzachar/cmp-tabnine',
     run = './install.sh',
@@ -78,7 +89,13 @@ return packer.startup(function(use)
   }
 
   -- Syntax/Treesitter
-  use "nvim-treesitter/nvim-treesitter"
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    run = function()
+        local ts_update = require "nvim-treesitter.install".update({ with_sync = true })
+        ts_update()
+    end,
+  }
   use "JoosepAlviste/nvim-ts-context-commentstring"
 
   -- Color
@@ -124,6 +141,7 @@ return packer.startup(function(use)
         event = 'VimEnter',
         requires = {'nvim-tree/nvim-web-devicons'}
     }
+
   -- Ranger terminal file manager
   use "kevinhwang91/rnvimr"
 
@@ -133,13 +151,13 @@ return packer.startup(function(use)
 	config = function()
 	  require("image").setup {
 	    render = {
-		  min_padding = 5,
-		  show_label = true,
-		  use_dither = true,
-		},
-		events = {
-		  update_on_nvim_resize = true,
-		},
+	      min_padding = 5,
+	      show_label = true,
+	      use_dither = true,
+	    },
+	    events = {
+	      update_on_nvim_resize = true,
+	    },
 	  }
 	end,
   }
@@ -172,11 +190,24 @@ return packer.startup(function(use)
   -- Github
   use "pwntester/octo.nvim"
 
+  -- surround: Add/change/delete surrouding delimiter pairs
+  use {
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = function()
+      require "nvim-surround".setup {
+        -- Configuration here, or leave empty to use defaults
+      }
+    end
+  }
+
   -- Editing Support
   use "windwp/nvim-autopairs"
   use "andymass/vim-matchup"
   use "folke/zen-mode.nvim"
 
+  -- Latex
+  use "lervag/vimtex"
   -- Markdown
   use {
     "iamcco/markdown-preview.nvim",

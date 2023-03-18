@@ -7,7 +7,7 @@ db.setup({
   shortcut_type = 'letter',
   change_to_vcs_root = false,
   preview = {
-    command = 'chafa -C on -c full -p on --polite on --stretch --threads 3', -- preview command chafa -c full --fg-only --symbols braille
+    command = 'chafa -c full --polite on --stretch --threads 2', -- preview command -C on -p on --polite on
     file_path = home .. '/static/db.gif',     -- preview file path
     file_height = 30,  -- preview file height
     file_width = 120,    -- preview file width
@@ -65,7 +65,7 @@ db.setup({
     -- limit how many projects list, action when you press key or enter it will run this action.
     -- action can be a functino type, e.g.
     -- action = func(path) vim.cmd('Telescope find_files cwd=' .. path) end
-    footer = {'neovim'}, -- footer
+    footer = {'321neovim'}, -- footer
   },
 })
 
