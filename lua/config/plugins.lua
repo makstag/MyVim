@@ -113,8 +113,22 @@ return packer.startup(function(use)
   use "antoinemadec/FixCursorHold.nvim"
 
   -- Debugging
-  use "mfussenegger/nvim-dap"
-  use "rcarriga/nvim-dap-ui"
+  use {
+      "mfussenegger/nvim-dap",
+      opt = true,
+      module = { "dap" },
+      requires = {
+        { "theHamsta/nvim-dap-virtual-text", module = { "nvim-dap-virtual-text" } },
+        { "rcarriga/nvim-dap-ui", module = { "dapui" } },
+        --{ "mfussenegger/nvim-dap-python", module = { "dap-python" } },
+        "nvim-telescope/telescope-dap.nvim",
+        --{ "jbyuki/one-small-step-for-vimkind", module = "osv" },
+      },
+      config = function()
+        require("config.dap").setup()
+      end,
+      disable = false,
+  }
 
   -- Statusline
   use "nvim-lualine/lualine.nvim"
@@ -201,6 +215,18 @@ return packer.startup(function(use)
     end
   }
 
+    -- WhichKey
+    use {
+      "folke/which-key.nvim",
+      event = "VimEnter",
+      module = { "which-key" },
+      -- keys = { [[<leader>]] },
+      config = function()
+        require("config.whichkey").setup()
+      end,
+      disable = false,
+    }
+
   -- Editing Support
   use "windwp/nvim-autopairs"
   use "andymass/vim-matchup"
@@ -208,6 +234,7 @@ return packer.startup(function(use)
 
   -- Latex
   use "lervag/vimtex"
+
   -- Markdown
   use {
     "iamcco/markdown-preview.nvim",
