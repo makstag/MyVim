@@ -39,7 +39,7 @@ cmp.setup {
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
       ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
       ["<C-e>"] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close(), },
-      ["<CR>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true },
+      ["<CR>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true },
       ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
               cmp.select_next_item()
@@ -73,8 +73,8 @@ cmp.setup {
                           " " .. vim_item.kind
       -- set a name for each source
       vim_item.menu = ({
-        buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
+        buffer = "[Buffer]",
         luasnip = "[LuaSnip]",
         nvim_lua = "[Lua]",
         cmp_tabnine = "[TabNine]",
@@ -84,7 +84,7 @@ cmp.setup {
     end
   },
   sources = {
-    {name = 'buffer'}, {name = 'nvim_lsp'}, {name = "luasnip"},
+    {name = 'nvim_lsp'}, {name = 'buffer'}, {name = "luasnip"},
     {name = "nvim_lua"}, {name = "path"}, {name = 'cmp_tabnine'}
   },
   completion = {completeopt = 'menu,menuone,noselect,noinsert'},
