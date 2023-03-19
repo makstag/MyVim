@@ -21,6 +21,7 @@ require 'config.zen-mode'
 require 'config.autocommands'
 require 'config.lsp'
 require 'config.support'
+require 'config.dap'.setup {}
 require 'config.nvim-web-devicons'
 require 'config.lualine'
 require 'config.telescope'

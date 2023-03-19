@@ -1,5 +1,5 @@
-local home = vim.fn.stdpath"config"
-local db = require"dashboard"
+local home = vim.fn.stdpath "config"
+local db = require "dashboard"
 
 db.setup({
   theme = 'hyper',
@@ -7,10 +7,10 @@ db.setup({
   shortcut_type = 'letter',
   change_to_vcs_root = false,
   preview = {
-    command = 'chafa -c full --polite on --stretch --threads 2', -- preview command -C on -p on --polite on
-    file_path = home .. '/static/db.gif',     -- preview file path
-    file_height = 30,  -- preview file height
-    file_width = 120,    -- preview file width
+    command = 'chafa -c full --stretch --threads 3', -- preview command -C on -p on --polite on --threads 2
+    file_path = home .. '/static/engine.gif',     -- preview file path
+    file_height = 34,  -- preview file height
+    file_width = 110,    -- preview file width
   },
   config = {
     header = {
@@ -67,16 +67,6 @@ db.setup({
     -- action = func(path) vim.cmd('Telescope find_files cwd=' .. path) end
     footer = {'321neovim'}, -- footer
   },
-})
-
-vim.api.nvim_create_autocmd("TermOpen", {
-    callback = function()
-        -- disable line numbers
-        vim.opt_local.number = false
-        vim.opt_local.relativenumber = false
-        -- always start in insert mode
-        vim.cmd("stopinsert")
-    end,
 })
 
 vim.keymap.set("n", "<Leader>o", ":DashboardNewFile<CR>", { silent = true })
