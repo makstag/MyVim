@@ -5,6 +5,17 @@ local lspconfig = require "lspconfig"
 -- 1. Set up mason-lspconfig first!
 mason.setup {}
 masonlsp.setup {
+    ensure_installed = { 
+        "pylsp", 
+        "dockerls", 
+        "marksman", 
+        "diagnosticls", 
+        "clangd", 
+        "lua_ls", 
+        "opencl_ls", 
+        "jsonls", 
+        "yamlls" 
+    },
     automatic_installation = true,
 }
 
