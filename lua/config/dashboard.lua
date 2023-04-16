@@ -7,7 +7,7 @@ db.setup({
   shortcut_type = 'letter',
   change_to_vcs_root = false,
   preview = {
-    command = 'chafa -c full --stretch -C on -p on --polite on --threads 3', -- preview command -C on -p on --polite on --threads 2
+    command = 'chafa -c full --stretch -C on -p on --polite on', -- preview command -C on -p on --polite on --threads 2
     file_path = home .. '/static/engine.gif',     -- preview file path
     file_height = 34,  -- preview file height
     file_width = 110,    -- preview file width

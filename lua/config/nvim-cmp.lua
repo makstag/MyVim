@@ -1,6 +1,7 @@
 -- nvim-cmp setup
 local cmp = require "cmp"
 local luasnip = require "luasnip"
+local lspkind = require "lspkind"
 
 local has_words_before = function()
   unpack = unpack or table.unpack
@@ -66,11 +67,26 @@ cmp.setup {
       end, { "i", "s", }),
   },
   formatting = {
+    -- Youtube: How to set up nice formatting for your sources.
+    format = lspkind.cmp_format {
+      with_text = true,
+      menu = {
+        buffer = "[Buffer]",
+        nvim_lsp = "[LSP]",
+        nvim_lua = "[Lua]",
+        path = "[Path]",
+        luasnip = "[LuaSnip]",
+        gh_issues = "[issues]",
+        tn = "[TabNine]",
+        eruby = "[erb]",
+      },
+    },
+  },
+  --[[formatting = {
     fields = { "abbr", "kind", "menu" },
     format = function(entry, vim_item)
       -- fancy icons and a name of kind
-      vim_item.kind = require "lspkind".presets.default[vim_item.kind] ..
-                          " " .. vim_item.kind
+      --vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
       -- set a name for each source
       vim_item.menu = ({
         nvim_lsp = "[LSP]",
@@ -82,7 +98,7 @@ cmp.setup {
       })[entry.source.name]
       return vim_item
     end
-  },
+  },]]
   sources = {
     {name = 'nvim_lsp'}, {name = 'buffer'}, {name = "luasnip"},
     {name = "nvim_lua"}, {name = "path"}, {name = 'cmp_tabnine'}
