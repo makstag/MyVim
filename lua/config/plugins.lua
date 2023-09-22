@@ -51,15 +51,17 @@ return packer.startup(function(use)
   -- Lua Development
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use "nvim-lua/popup.nvim"
-  use "folke/lua-dev.nvim"
+  use "folke/neodev.nvim"
 
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
   use "jose-elias-alvarez/null-ls.nvim"
-  use "MunifTanjim/prettier.nvim"
-  use 'folke/trouble.nvim'
+  use "rmagatti/goto-preview"
+  -- use "MunifTanjim/prettier.nvim"
+  use "folke/trouble.nvim"
   use "glepnir/lspsaga.nvim"
   use "onsails/lspkind-nvim"
+  -- use "onsails/lspkind-nvim"
   use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
   use {
       "williamboman/mason.nvim",
@@ -76,16 +78,16 @@ return packer.startup(function(use)
   use {
     "L3MON4D3/LuaSnip",
     -- follow latest release.
-    tag = "v<CurrentMajor>.*",
+    tag = "v2.*",
     -- install jsregexp (optional!:).
     run = "make install_jsregexp"
   }
   use "hrsh7th/cmp-nvim-lua" -- nvim-cmp source for neovim lua api
   use "rafamadriz/friendly-snippets"
   use {
-    'tzachar/cmp-tabnine',
-    run = './install.sh',
-    requires = 'hrsh7th/nvim-cmp'
+    "tzachar/cmp-tabnine",
+    run = "./install.sh",
+    requires = "hrsh7th/nvim-cmp"
   }
 
   -- Syntax/Treesitter
@@ -94,9 +96,13 @@ return packer.startup(function(use)
     run = function()
         local ts_update = require "nvim-treesitter.install".update({ with_sync = true })
         ts_update()
-    end,
+    end
   }
   use "JoosepAlviste/nvim-ts-context-commentstring"
+  use "nvim-treesitter/playground"
+  use "p00f/nvim-ts-rainbow"
+  use "nvim-treesitter/nvim-treesitter-textobjects"
+  use "nvim-treesitter/nvim-treesitter-context"
 
   -- Color
   use "norcalli/nvim-colorizer.lua"
@@ -104,7 +110,7 @@ return packer.startup(function(use)
 
   -- Colorschemes
   use "folke/tokyonight.nvim"
-  use "lunarvim/synthwave84.nvim"
+  use "lunarVim/synthwave84.nvim"
 
   -- Utility
   use "moll/vim-bbye"
@@ -124,7 +130,7 @@ return packer.startup(function(use)
       },
       config = function()
         require "config.dap".setup {}
-      end,
+      end
   }
 
   -- Statusline
@@ -138,39 +144,13 @@ return packer.startup(function(use)
     },
     tag = "nightly"
   }
+  use "ThePrimeagen/harpoon"
 
   -- Preview
-    use {
-        "goolord/alpha-nvim",
-        requires = { "nvim-tree/nvim-web-devicons" },
-        --config = function ()
-        --    require"alpha".setup(require"alpha.themes.startify".config)
-        --end
-    }
-    use {
-        'glepnir/dashboard-nvim',
-        event = 'VimEnter',
-        requires = {'nvim-tree/nvim-web-devicons'}
-    }
-
-  -- Ranger terminal file manager
-  use "kevinhwang91/rnvimr"
-
-  -- ASCII image viewer
   use {
-    "samodostal/image.nvim",
-	config = function()
-	  require("image").setup {
-	    render = {
-	      min_padding = 5,
-	      show_label = true,
-	      use_dither = true,
-	    },
-	    events = {
-	      update_on_nvim_resize = true,
-	    },
-	  }
-	end,
+    "glepnir/dashboard-nvim",
+    event = "VimEnter",
+    requires = {"nvim-tree/nvim-web-devicons"}
   }
  
   -- Comment
@@ -183,13 +163,26 @@ return packer.startup(function(use)
   -- Telescope
   use "nvim-telescope/telescope.nvim"
   use "nvim-telescope/telescope-file-browser.nvim"
+  use "nvim-telescope/telescope-media-files.nvim"
+  use {
+    "nvim-telescope/telescope-fzf-native.nvim", 
+    run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+  }
+  -- use {
+  --   "nvim-telescope/telescope-frecency.nvim",
+  --   requires = { "kkharji/sqlite.lua" },
+  -- }
 
   -- Project
   use "ahmedkhalf/project.nvim"
-  use "windwp/nvim-spectre"
+  use "nvim-pack/nvim-spectre"
+  use "tpope/vim-obsession"
 
   -- Quickfix
   use "kevinhwang91/nvim-bqf"
+
+  -- Startup time
+  use "dstein64/vim-startuptime"
 
   -- Git
   use "lewis6991/gitsigns.nvim"
@@ -200,6 +193,27 @@ return packer.startup(function(use)
 
   -- Github
   use "pwntester/octo.nvim"
+
+  --AI
+  -- use "github/copilot.vim"
+  use {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false }
+      })
+    end,
+  }
+  use {
+    "zbirenbaum/copilot-cmp",
+    after = { "copilot.lua" },
+    config = function ()
+      require("copilot_cmp").setup()
+    end
+  }
 
   -- surround: Add/change/delete surrouding delimiter pairs
   use {
@@ -212,17 +226,17 @@ return packer.startup(function(use)
     end
   }
 
-    -- WhichKey
-    use {
-      "folke/which-key.nvim",
-      event = "VimEnter",
-      module = { "which-key" },
-      -- keys = { [[<leader>]] },
-      config = function()
-        require("config.whichkey").setup()
-      end,
-      disable = false,
-    }
+  -- WhichKey
+  use {
+    "folke/which-key.nvim",
+    event = "VimEnter",
+    module = { "which-key" },
+    -- keys = { [[<leader>]] },
+    config = function()
+      require("config.whichkey").setup()
+    end,
+    disable = false
+  }
 
   -- Editing Support
   use "windwp/nvim-autopairs"
@@ -236,7 +250,7 @@ return packer.startup(function(use)
   use {
     "iamcco/markdown-preview.nvim",
     run = "cd app && npm install",
-    ft = "markdown",
+    ft = "markdown"
   }
 
   -- Automatically set up your configuration after cloning packer.nvim

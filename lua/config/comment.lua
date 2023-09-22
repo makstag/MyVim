@@ -13,7 +13,7 @@ comment.setup {
       location = utils.get_visual_start_location()
     end
 
-    local internals = require "ts_context_commentstring.internals"
+    local internal = require "ts_context_commentstring.internal"
 
     return internals.calculate_commentstring {
       key = ctx.ctype == U.ctype.line and "__default" or "__multiline",

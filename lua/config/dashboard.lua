@@ -7,36 +7,12 @@ db.setup({
   shortcut_type = 'letter',
   change_to_vcs_root = false,
   preview = {
-    command = 'chafa -c full --stretch -C on -p on --polite on', -- preview command -C on -p on --polite on --threads 2
-    file_path = home .. '/static/engine.gif',     -- preview file path
+    command = 'chafa -w 1 -c full --stretch -C on -p on --polite on', -- preview command -C on -p on --polite on --threads 2  --stretch
+    file_path = home .. '/static/pp.gif',     -- preview file path
     file_height = 34,  -- preview file height
     file_width = 110,    -- preview file width
   },
   config = {
-    header = {
-      '               ▄▄██████████▄▄             ',
-      '               ▀▀▀   ██   ▀▀▀             ',
-      '       ▄██▄   ▄▄████████████▄▄   ▄██▄     ',
-      '     ▄███▀  ▄████▀▀▀    ▀▀▀████▄  ▀███▄   ',
-      '    ████▄ ▄███▀              ▀███▄ ▄████  ',
-      '   ███▀█████▀▄████▄      ▄████▄▀█████▀███ ',
-      '   ██▀  ███▀ ██████      ██████ ▀███  ▀██ ',
-      '    ▀  ▄██▀  ▀████▀  ▄▄  ▀████▀  ▀██▄  ▀  ',
-      '       ███           ▀▀           ███     ',
-      '       ██████████████████████████████     ',
-      '   ▄█  ▀██  ███   ██    ██   ███  ██▀  █▄ ',
-      '   ███  ███ ███   ██    ██   ███▄███  ███ ',
-      '   ▀██▄████████   ██    ██   ████████▄██▀ ',
-      '    ▀███▀ ▀████   ██    ██   ████▀ ▀███▀  ',
-      '     ▀███▄  ▀███████    ███████▀  ▄███▀   ',
-      '       ▀███    ▀▀██████████▀▀▀   ███▀     ',
-      '         ▀    ▄▄▄    ██    ▄▄▄    ▀       ',
-      '               ▀████████████▀             ',
-      '',
-      '',
-      '',
-      '',
-    },
     shortcut = {
       { desc = 'Recently latest session', group = '@property', action = 'SessionLoad', key = 'SPC u' },
       {
@@ -65,7 +41,7 @@ db.setup({
     -- limit how many projects list, action when you press key or enter it will run this action.
     -- action can be a functino type, e.g.
     -- action = func(path) vim.cmd('Telescope find_files cwd=' .. path) end
-    footer = {'321neovim'}, -- footer
+    footer = {'start'}, -- footer
   },
 })
 

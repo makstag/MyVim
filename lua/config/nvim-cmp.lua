@@ -69,8 +69,11 @@ cmp.setup {
   formatting = {
     -- Youtube: How to set up nice formatting for your sources.
     format = lspkind.cmp_format {
+      mode = "symbol",
+      max_width = 50,
       with_text = true,
       menu = {
+        copilot = "[Copilot]",
         buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
         nvim_lua = "[Lua]",
@@ -79,29 +82,13 @@ cmp.setup {
         gh_issues = "[issues]",
         tn = "[TabNine]",
         eruby = "[erb]",
-      },
-    },
+      }
+    }
   },
-  --[[formatting = {
-    fields = { "abbr", "kind", "menu" },
-    format = function(entry, vim_item)
-      -- fancy icons and a name of kind
-      --vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
-      -- set a name for each source
-      vim_item.menu = ({
-        nvim_lsp = "[LSP]",
-        buffer = "[Buffer]",
-        luasnip = "[LuaSnip]",
-        nvim_lua = "[Lua]",
-        cmp_tabnine = "[TabNine]",
-        path = "[Path]",
-      })[entry.source.name]
-      return vim_item
-    end
-  },]]
   sources = {
-    {name = 'nvim_lsp'}, {name = 'buffer'}, {name = "luasnip"},
-    {name = "nvim_lua"}, {name = "path"}, {name = 'cmp_tabnine'}
+    { name = "copilot" },
+    { name = 'nvim_lsp'}, { name = 'buffer'}, { name = "luasnip" },
+    { name = "nvim_lua"}, { name = "path" }, { name = 'cmp_tabnine'}
   },
   completion = {completeopt = 'menu,menuone,noselect,noinsert'},
   confirm_opts = {
