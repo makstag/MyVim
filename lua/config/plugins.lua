@@ -195,7 +195,8 @@ return packer.startup(function(use)
   use "pwntester/octo.nvim"
 
   --AI
-  -- use "github/copilot.vim"
+  use "github/copilot.vim"
+  --[[
   use {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
@@ -214,6 +215,7 @@ return packer.startup(function(use)
       require("copilot_cmp").setup()
     end
   }
+  ]]
 
   -- surround: Add/change/delete surrouding delimiter pairs
   use {

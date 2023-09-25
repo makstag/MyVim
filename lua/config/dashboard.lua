@@ -7,7 +7,7 @@ db.setup({
   shortcut_type = 'letter',
   change_to_vcs_root = false,
   preview = {
-    command = 'chafa -w 3 -c full --stretch -C on -p on --polite on', -- preview command -C on -p on --polite on --threads 2  --stretch
+    command = 'chafa -w 1 -c full --stretch -C on -p on --polite on', -- preview command -C on -p on --polite on --threads 2  --stretch
     file_path = home .. '/static/pp.gif',     -- preview file path
     file_height = 36,  -- preview file height
     file_width = 120,    -- preview file width

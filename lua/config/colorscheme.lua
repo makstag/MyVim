@@ -1,3 +1,4 @@
+--[[
 require"tokyonight".setup({
   -- your configuration comes here
   -- or leave it empty to use the default settings
@@ -38,5 +39,6 @@ require"tokyonight".setup({
   ---@param colors ColorScheme
   on_highlights = function(highlights, colors) end,
 })
-vim.cmd[[colorscheme tokyonight]]
---vim.cmd[[colorscheme synthwave84]]
+]]
+-- vim.cmd[[colorscheme tokyonight]]
+vim.cmd[[colorscheme synthwave84]]

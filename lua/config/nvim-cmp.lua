@@ -73,7 +73,7 @@ cmp.setup {
       max_width = 50,
       with_text = true,
       menu = {
-        copilot = "[Copilot]",
+        -- copilot = "[Copilot]",
         buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
         nvim_lua = "[Lua]",
@@ -86,7 +86,7 @@ cmp.setup {
     }
   },
   sources = {
-    { name = "copilot" },
+    -- { name = "copilot" },
     { name = 'nvim_lsp'}, { name = 'buffer'}, { name = "luasnip" },
     { name = "nvim_lua"}, { name = "path" }, { name = 'cmp_tabnine'}
   },
