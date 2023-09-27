@@ -16,12 +16,12 @@ local function notify_level(level)
     end)
   end
 end
-
+--[[
 utils.notify.warn = notify_level(vim.log.levels.WARN)
 utils.notify.error = notify_level(vim.log.levels.ERROR)
 utils.notify.info = notify_level(vim.log.levels.INFO)
 utils.notify.debug = notify_level(vim.log.levels.DEBUG)
-
+]]
 local function on_attach(bufnr)
   local api = require('nvim-tree.api')
 

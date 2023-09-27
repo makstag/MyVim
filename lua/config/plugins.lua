@@ -110,7 +110,7 @@ return packer.startup(function(use)
 
   -- Colorschemes
   use "folke/tokyonight.nvim"
-  use "lunarVim/synthwave84.nvim"
+  use "maxmx03/fluoromachine.nvim"
 
   -- Utility
   use "moll/vim-bbye"
@@ -142,7 +142,8 @@ return packer.startup(function(use)
     requires = {
       "kyazdani42/nvim-web-devicons",
     },
-    tag = "nightly"
+    tag = "nightly",
+    config = function() require'nvim-tree'.setup {} end
   }
   use "ThePrimeagen/harpoon"
 
