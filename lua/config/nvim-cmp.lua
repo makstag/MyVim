@@ -73,11 +73,11 @@ cmp.setup {
       max_width = 50,
       with_text = true,
       menu = {
-        -- copilot = "[Copilot]",
+        copilot = "[Copilot]",
         buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
         nvim_lua = "[Lua]",
-        path = "[Path]",
+        -- path = "[Path]",
         luasnip = "[LuaSnip]",
         gh_issues = "[issues]",
         tn = "[TabNine]",
@@ -86,9 +86,12 @@ cmp.setup {
     }
   },
   sources = {
-    -- { name = "copilot" },
-    { name = 'nvim_lsp'}, { name = 'buffer'}, { name = "luasnip" },
-    { name = "nvim_lua"}, { name = "path" }, { name = 'cmp_tabnine'}
+    { name = "copilot" },
+    { name = "nvim_lsp" }, { name = "buffer" }, { name = "luasnip" },
+    { name = "nvim_lua" }, 
+    -- { name = "path" }, 
+    { name = "tn" },
+    { name = "eruby" }, { name = "gh_issues" }
   },
   completion = {completeopt = 'menu,menuone,noselect,noinsert'},
   confirm_opts = {
