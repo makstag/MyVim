@@ -59,13 +59,19 @@ return packer.startup(function(use)
   use "rmagatti/goto-preview"
   -- use "MunifTanjim/prettier.nvim"
   use "folke/trouble.nvim"
-  use "glepnir/lspsaga.nvim"
+  use {
+    "nvimdev/lspsaga.nvim",
+    after = "nvim-lspconfig",
+    config = function()
+      require "lspsaga".setup{}
+    end
+  }
   use "onsails/lspkind-nvim"
   -- use "onsails/lspkind-nvim"
   use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
   use {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim"
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim"
   }
 
   -- Completion
