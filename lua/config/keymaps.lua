@@ -15,10 +15,10 @@ km.set({ "n", "v" }, "<Space>", "<Nop>", opts)
 --   term_mode = "t",
 --   command_mode = "c",
 
-km.set("n", "<Leader>w", "<C-w>k")
-km.set("n", "<Leader>a", "<C-w>h")
-km.set("n", "<Leader>s", "<C-w>j")
-km.set("n", "<Leader>d", "<C-w>l")
+km.set("n", "<C-k>", "<C-w>k")
+km.set("n", "<C-h>", "<C-w>h")
+km.set("n", "<C-j>", "<C-w>j")
+km.set("n", "<C-l>", "<C-w>l")
 km.set("n", "<Leader>j", ":bprevious<CR>", opts)
 km.set("n", "<Leader>k", ":bnext<CR>", opts)
 km.set("n", "<Leader>q", ":bprevious<CR>:bdelete #<CR>", opts)

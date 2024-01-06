@@ -41,8 +41,6 @@ db.setup({
     -- limit how many projects list, action when you press key or enter it will run this action.
     -- action can be a functino type, e.g.
     -- action = func(path) vim.cmd('Telescope find_files cwd=' .. path) end
-    footer = {'start'}, -- footer
+    footer = {'...'}, -- footer
   },
 })
-
-vim.keymap.set("n", "<Leader>o", ":DashboardNewFile<CR>", { silent = true })

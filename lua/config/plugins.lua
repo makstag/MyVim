@@ -142,6 +142,11 @@ return packer.startup(function(use)
 
   -- Statusline
   use "nvim-lualine/lualine.nvim"
+  use {
+    "akinsho/bufferline.nvim",
+    tag = "*",
+    requires = "nvim-tree/nvim-web-devicons"
+  }
 
   -- File Explorer
   use {
