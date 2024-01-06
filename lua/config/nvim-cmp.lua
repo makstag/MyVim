@@ -14,6 +14,34 @@ local check_back_space = function()
     return col == 0 or vim.fn.getline ".":sub(col, col):match "%s" ~= nil
 end
 
+local kind_icons = {
+    Text = "",
+    Method = "m",
+    Function = "",
+    Constructor = "",
+    Field = "",
+    Variable = "",
+    Class = "",
+    Interface = "",
+    Module = "",
+    Property = "",
+    Unit = "",
+    Value = "",
+    Enum = "",
+    Keyword = "",
+    Snippet = "",
+    Color = "",
+    File = "",
+    Reference = "",
+    Folder = "",
+    EnumMember = "",
+    Constant = "",
+    Struct = "",
+    Event = "",
+    Operator = "",
+    TypeParameter = "",
+}
+
 cmp.setup {
   enabled = {
     function()
@@ -69,27 +97,32 @@ cmp.setup {
   formatting = {
     -- Youtube: How to set up nice formatting for your sources.
     format = lspkind.cmp_format {
-      mode = "symbol",
+      mode = "symbol_text",
       max_width = 50,
       with_text = true,
-      menu = {
-        copilot = "[Copilot]",
-        buffer = "[Buffer]",
-        nvim_lsp = "[LSP]",
-        nvim_lua = "[Lua]",
-        -- path = "[Path]",
-        luasnip = "[LuaSnip]",
-        gh_issues = "[issues]",
-        tn = "[TabNine]",
-        eruby = "[erb]",
-      }
+      ellipsis_char = '...',
+      before = function (entry, vim_item)
+        vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+        vim_item.menu = ({
+          copilot = "[Copilot]",
+          buffer = "[Buffer]",
+          nvim_lsp = "[LSP]",
+          nvim_lua = "[Lua]",
+          path = "[Path]",
+          luasnip = "[LuaSnip]",
+          gh_issues = "[issues]",
+          tn = "[TabNine]",
+          eruby = "[erb]",
+        })[entry.source.name]
+        return vim_item
+      end
     }
   },
   sources = {
     { name = "copilot" },
     { name = "nvim_lsp" }, { name = "buffer" }, { name = "luasnip" },
     { name = "nvim_lua" }, 
-    -- { name = "path" }, 
+    { name = "path" }, 
     { name = "tn" },
     { name = "eruby" }, { name = "gh_issues" }
   },
