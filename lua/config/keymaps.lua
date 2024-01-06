@@ -19,15 +19,15 @@ km.set("n", "<C-k>", "<C-w>k")
 km.set("n", "<C-h>", "<C-w>h")
 km.set("n", "<C-j>", "<C-w>j")
 km.set("n", "<C-l>", "<C-w>l")
-km.set("n", "<Leader>j", ":bprevious<CR>", opts)
-km.set("n", "<Leader>k", ":bnext<CR>", opts)
-km.set("n", "<Leader>q", ":bprevious<CR>:bdelete #<CR>", opts)
-km.set("n", "<Leader>y", ":%y<CR>")
+km.set("n", "<leader>j", ":bprevious<CR>", opts)
+km.set("n", "<leader>k", ":bnext<CR>", opts)
+km.set("n", "<leader>q", ":bprevious<CR>:bdelete #<CR>", opts)
+km.set("n", "<leader>y", ":%y<CR>")
 km.set("n", "k", "gk", opts)
 km.set("n", "j", "gj", opts)
-km.set("n", "<Leader>l", ":vsplit term://zsh <CR>", opts)
-km.set("t", "<Leader><Esc>", "<C-\\><C-n>", opts)
-km.set("n", "<Leader>v", ":edit ~/.config/nvim/init.lua<CR>", opts)
+km.set("n", "<leader>l", ":vsplit term://zsh <CR>", opts)
+km.set("t", "<leader><Esc>", "<C-\\><C-n>", opts)
+km.set("n", "<leader>v", ":edit ~/.config/nvim/init.lua<CR>", opts)
 
 local lang_maps = {
 	cpp = { build = "g++ % -o %:r", exec = "./%:r" },
@@ -43,12 +43,12 @@ for lang, data in pairs(lang_maps) do
 	if data.build ~= nil then
 		vim.api.nvim_create_autocmd(
 			"FileType",
-			{ command = "nnoremap <Leader>b :!" .. data.build .. "<CR>", pattern = lang }
+			{ command = "nnoremap <leader>b :!" .. data.build .. "<CR>", pattern = lang }
 		)
 	end
 	vim.api.nvim_create_autocmd(
 		"FileType",
-		{ command = "nnoremap <Leader>e :split<CR>:terminal " .. data.exec .. "<CR>", pattern = lang }
+		{ command = "nnoremap <leader>e :split<CR>:terminal " .. data.exec .. "<CR>", pattern = lang }
 	)
 end
 
