@@ -1,1 +1,1 @@
-require'lualine'.setup {options = {theme = 'fluoromachine'}}
+require'lualine'.setup {options = {theme = 'retrowave'}}

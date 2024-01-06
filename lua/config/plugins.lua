@@ -117,6 +117,7 @@ return packer.startup(function(use)
   -- Colorschemes
   use "folke/tokyonight.nvim"
   use "maxmx03/fluoromachine.nvim"
+  use "lunarvim/synthwave84.nvim"
 
   -- Utility
   use "moll/vim-bbye"

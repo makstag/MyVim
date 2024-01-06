@@ -1,3 +1,4 @@
+
 local fm = require 'fluoromachine'
 
 function overrides(c)
@@ -13,7 +14,7 @@ end
 
 fm.setup {
   glow = true,
-  theme = 'fluoromachine',
+  theme = 'retrowave',
   overrides = overrides,
   transparent = 'full',
   colors = function(_, d)
@@ -31,3 +32,20 @@ fm.setup {
 }
 
 vim.cmd.colorscheme 'fluoromachine'
+
+--[[
+require 'synthwave84'.setup({
+  glow = {
+    error_msg = true,
+    type2 = true,
+    func = true,
+    keyword = true,
+    operator = false,
+    buffer_current_target = true,
+    buffer_visible_target = true,
+    buffer_inactive_target = true,
+  }
+})
+
+vim.cmd.colorscheme 'synthwave84'
+]]
