@@ -15,13 +15,13 @@ M.setup = function()
 
     local config = {
         -- disable virtual text
-        virtual_text = true,
+        virtual_text = false,
         -- show signs
         signs = {
             active = signs,
         },
         update_in_insert = false, -- when insert, don't show diagnostic
-        underline = false, -- it is annoying me!!!
+        underline = true, -- it is annoying me!!!
         severity_sort = true,
         float = {
             focusable = false,
@@ -36,10 +36,12 @@ M.setup = function()
 
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
         border = "rounded",
+        width = 60
     })
 
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
         border = "rounded",
+        width = 60
     })
 end
 
@@ -138,10 +140,7 @@ end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_ok then
-    return
-end
+local cmp_nvim_lsp = require "cmp_nvim_lsp"
 
 -- See :h deprecated
 -- update_capabilities is deprecated, use default_capabilities instead.

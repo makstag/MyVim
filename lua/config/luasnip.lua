@@ -1,7 +1,4 @@
-local snip_status_ok, ls = pcall(require, "luasnip")
-if not snip_status_ok then
-    return
-end
+local ls = require "luasnip"
 
 --[[ require("luasnip.loaders.from_vscode").lazy_load() -- have configged in cmp-nvim ]]
 
