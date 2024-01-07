@@ -55,6 +55,7 @@ end
 km.set("n", "<C-r>", "<Cmd>NvimTreeToggle<CR>", opts)
 km.set("n", "<C-s>", "<Cmd>:w<CR>", opts)
 km.set("n", "<C-q>", "<Cmd>:q<CR>", opts)
+km.set("n", "<C-a>", "<Cmd>:qa<CR>", opts)
 km.set("n", "<C-z>", "<Cmd>:u<CR>", opts)
 
 -- Copy - Paste
