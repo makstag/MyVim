@@ -55,7 +55,7 @@ vim.opt.fillchars:append {
 }
 
 vim.opt.shortmess:append "c"
-
+vim.opt.termguicolors = true
 for k, v in pairs(options) do
   vim.opt[k] = v
 end
