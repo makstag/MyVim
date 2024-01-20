@@ -66,8 +66,7 @@ return packer.startup(function(use)
       require "lspsaga".setup{}
     end
   }
-  use "onsails/lspkind-nvim"
-  -- use "onsails/lspkind-nvim"
+  use { "onsails/lspkind-nvim",  event = "VimEnter" }
   use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
   use {
     "williamboman/mason.nvim",
@@ -192,7 +191,7 @@ return packer.startup(function(use)
   use "tpope/vim-obsession"
 
   -- Quickfix
-  use "kevinhwang91/nvim-bqf"
+  use { 'kevinhwang91/nvim-bqf', ft = "qf", config = [[require('config.bqf')]] }
 
   -- Startup time
   use "dstein64/vim-startuptime"
@@ -267,6 +266,14 @@ return packer.startup(function(use)
     run = "cd app && npm install",
     ft = "markdown"
   }
+
+  use { 'aserowy/tmux.nvim',  config = [[require('config.tmux')]] }
+  use { 'rcarriga/nvim-notify',
+    event = "BufEnter",
+    config = function() vim.defer_fn(function() 
+      require("config.nvim-notify") end, 2000) end,
+  }
+  use {'karb94/neoscroll.nvim', config = [[require('config.neoscroll')]] }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
