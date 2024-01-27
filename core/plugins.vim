@@ -1,4 +1,5 @@
 lua require "plugins"
+lua require "colorizer".setup{}
 
 "asyncrun""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " automatically open quickfix window when AsyncRun command is executed

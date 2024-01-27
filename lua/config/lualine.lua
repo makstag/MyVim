@@ -1,1 +1,4 @@
-require'lualine'.setup {options = {theme = 'retrowave'}}
+require "lualine".setup 
+{
+    options = { theme = "retrowave" }
+}

@@ -60,10 +60,10 @@ return packer.startup(function(use)
 
     -- LSP
     use { "neovim/nvim-lspconfig", config = [[require "config.lsp"]]
-    use { "nvimdev/lspsaga.nvim", befor = "nvim-lspconfig" }
-    use { "https://git.sr.ht/~whynothugo/lsp_lines.nvim", befor = "nvim-lspconfig" }
-    use { "williamboman/mason.nvim", befor = "nvim-lspconfig" }
-    use { "williamboman/mason-lspconfig.nvim", befor = "nvim-lspconfig" }
+    use "nvimdev/lspsaga.nvim"
+    use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
+    use "williamboman/mason.nvim"
+    use "williamboman/mason-lspconfig.nvim"
 
     -- Completion
     use { "onsails/lspkind-nvim", event = "VimEnter" }
@@ -102,57 +102,65 @@ return packer.startup(function(use)
         end
     }
 
-  -- Syntax/Treesitter
-  use {
-    "nvim-treesitter/nvim-treesitter",
-    run = function()
-        local ts_update = require "nvim-treesitter.install".update({ with_sync = true })
-        ts_update()
-    end
-  }
-  use "JoosepAlviste/nvim-ts-context-commentstring"
-  use "nvim-treesitter/playground"
-  use "p00f/nvim-ts-rainbow"
-  use "nvim-treesitter/nvim-treesitter-textobjects"
-  use "nvim-treesitter/nvim-treesitter-context"
+    -- Syntax/Treesitter
+    use 
+    {
+        "nvim-treesitter/nvim-treesitter",
+        event = "BufEnter",
+        run = function() require "nvim-treesitter.install".update({with_sync = true}) end, 
+        config = [[require "config.treesitter"]]
+    }
+    use { "JoosepAlviste/nvim-ts-context-commentstring", after = "nvim-treesitter" }
+    use
+    {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        after = "nvim-treesitter",
+        requires = "nvim-treesitter/nvim-treesitter"
+    }
+    
+    -- Color
+    use "norcalli/nvim-colorizer.lua"
 
-  -- Color
-  use "norcalli/nvim-colorizer.lua"
-  use "nvim-colortils/colortils.nvim"
+    -- Colorschemes
+    use { "maxmx03/fluoromachine.nvim", config = [[require "config.colorscheme"]] }
 
-  -- Colorschemes
-  use "folke/tokyonight.nvim"
-  use "maxmx03/fluoromachine.nvim"
-  use "lunarvim/synthwave84.nvim"
+    -- Debugging
+    use 
+    {
+        "mfussenegger/nvim-dap",
+        requires = 
+        {
+            { "theHamsta/nvim-dap-virtual-text", module = { "nvim-dap-virtual-text" } },
+            { "rcarriga/nvim-dap-ui", module = { "dapui" } },
+            -- { "mfussenegger/nvim-dap-python", module = { "dap-python" } },
+            "nvim-telescope/telescope-dap.nvim",
+            -- { "jbyuki/one-small-step-for-vimkind", module = "osv" },
+        },
+        config = function()
+            require "config.dap".setup {}
+        end
+    }
 
-  -- Utility
-  use "moll/vim-bbye"
-  use "cdelledonne/vim-cmake"
-  use "antoinemadec/FixCursorHold.nvim"
-
-  -- Debugging
-  use {
-      "mfussenegger/nvim-dap",
-      requires = {
-        { "theHamsta/nvim-dap-virtual-text", module = { "nvim-dap-virtual-text" } },
-        { "rcarriga/nvim-dap-ui", module = { "dapui" } },
-        -- { "mfussenegger/nvim-dap-python", module = { "dap-python" } },
-        "nvim-telescope/telescope-dap.nvim",
-        -- { "jbyuki/one-small-step-for-vimkind", module = "osv" },
-      },
-      config = function()
-        require "config.dap".setup {}
-      end
-  }
-
-  -- Statusline
-  use "nvim-lualine/lualine.nvim"
-  use {
-    "akinsho/bufferline.nvim",
-    tag = "*",
-    requires = "nvim-tree/nvim-web-devicons"
-  }
-
+    -- Statusline
+    use 
+    { 
+        "nvim-lualine/lualine.nvim", 
+        requires = { "nvim-tree/nvim-web-devicons", opt = true },
+        config = [[require "config.lualine"]]
+    }
+    use 
+    {
+        "akinsho/bufferline.nvim", 
+        event = "VimEnter",
+        tag = "*", 
+        cond = firenvim_not_active,
+        requires = "nvim-tree/nvim-web-devicons",
+        config = [[require "config.bufferline"]] 
+    }
+    
+    
+    
+    
   -- File Explorer
   use {
     "kyazdani42/nvim-tree.lua",
@@ -283,7 +291,9 @@ return packer.startup(function(use)
   --}
   --use { 'karb94/neoscroll.nvim', config = [[require('config.neoscroll')]] }
   use 'karb94/neoscroll.nvim'
-    -- Other
+    -- Utility
+    use "cdelledonne/vim-cmake"
+
     use 
     {
         "j-hui/fidget.nvim", 
