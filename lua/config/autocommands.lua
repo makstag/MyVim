@@ -2,7 +2,7 @@ local api = vim.api
 
 api.nvim_create_autocmd("InsertEnter", { command = "set norelativenumber", pattern = "*" })
 api.nvim_create_autocmd("TermOpen", { command = "startinsert", pattern = "*" })
-vim.api.nvim_create_autocmd("TermOpen", {
+api.nvim_create_autocmd("TermOpen", {
     callback = function()
         -- disable line numbers
         vim.opt_local.number = false
@@ -26,5 +26,3 @@ api.nvim_create_autocmd(
   end,
   pattern = "*"
 })
-
-vim.diagnostic.config { virtual_text = false }
