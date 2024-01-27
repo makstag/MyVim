@@ -65,28 +65,42 @@ return packer.startup(function(use)
     use { "williamboman/mason.nvim", befor = "nvim-lspconfig" }
     use { "williamboman/mason-lspconfig.nvim", befor = "nvim-lspconfig" }
 
-  -- Completion
-  use { "onsails/lspkind-nvim", event = "VimEnter" }
-  use "hrsh7th/nvim-cmp"    -- The completion plugin
-  use "hrsh7th/cmp-buffer"  -- Buffer completions
-  use "hrsh7th/cmp-path"    -- Path completions
-  use "hrsh7th/cmp-cmdline" -- Cmdline completions
-  use "hrsh7th/cmp-nvim-lsp"
-  -- cmp snippet engine
-  use {
-    "L3MON4D3/LuaSnip",
-    -- follow latest release.
-    tag = "v2.*",
-    -- install jsregexp (optional!:).
-    run = "make install_jsregexp"
-  }
-  use "hrsh7th/cmp-nvim-lua" -- nvim-cmp source for neovim lua api
-  use "rafamadriz/friendly-snippets"
-  use {
-    "tzachar/cmp-tabnine",
-    run = "./install.sh",
-    requires = "hrsh7th/nvim-cmp"
-  }
+    -- Completion
+    use { "onsails/lspkind-nvim", event = "VimEnter" }
+    use 
+    { 
+        "hrsh7th/nvim-cmp", 
+        after = "lspkind-nvim",
+        config = [[require "config.nvim-cmp"]] 
+    }
+    use "hrsh7th/cmp-buffer"
+    use "hrsh7th/cmp-path"
+    use "hrsh7th/cmp-cmdline"
+    use "hrsh7th/cmp-nvim-lsp"
+    use "hrsh7th/cmp-nvim-lua"
+    use 
+    {
+        "tzachar/cmp-tabnine",
+        run = "./install.sh",
+        requires = "hrsh7th/nvim-cmp"
+    }
+    use 
+    {
+        "L3MON4D3/LuaSnip",
+        requires = "rafamadriz/friendly-snippets",
+        tag = "v2.*",
+        run = "make install_jsregexp",
+        config = function(opts) 
+            if opts then require "luasnip".config.setup(opts) end
+            vim.tbl_map(
+                function(type) require("luasnip.loaders.from_" .. type).lazy_load() end,
+                { "vscode", "snipmate", "lua" }
+            )
+            require "luasnip".filetype_extend("c", { "cdoc" })
+            require "luasnip".filetype_extend("cpp", { "cppdoc" })
+            require "luasnip".filetype_extend("cc", { "ccdoc" })
+        end
+    }
 
   -- Syntax/Treesitter
   use {
@@ -200,7 +214,6 @@ return packer.startup(function(use)
   use "pwntester/octo.nvim"
 
   --AI
-  use "github/copilot.vim"
   --[[
   use {
     "zbirenbaum/copilot.lua",
@@ -219,27 +232,6 @@ return packer.startup(function(use)
     config = function ()
       require("copilot_cmp").setup()
     end
-  }
-
-  {
-    "nvimdev/guard.nvim",
-    -- Builtin configuration, optional
-    dependencies = {
-        "nvimdev/guard-collection",
-    },
-    event = "BufReadPre",
-    config = function()
-     local ft = require("guard.filetype")
-
-     ft("c,cpp,json"):fmt("clang-format")
-
-     require("guard").setup({
-      -- the only options for the setup function
-      fmt_on_save = true,
-      -- Use lsp if no formatter was defined for this filetype
-      lsp_as_default_formatter = false,
-     })
-    end,
   }
   ]]
 
@@ -275,7 +267,8 @@ return packer.startup(function(use)
   use "lervag/vimtex"
 
   -- Markdown
-  use {
+  use 
+  {
     "iamcco/markdown-preview.nvim",
     run = "cd app && npm install",
     ft = "markdown"
@@ -301,14 +294,11 @@ return packer.startup(function(use)
     use
     {
         "nvimdev/guard.nvim",
-        -- Builtin configuration, optional
-        dependencies = 
-        {
-            "nvimdev/guard-collection",
-        },
+        requires = "nvimdev/guard-collection",
         event = "BufReadPre",
         config = [[require "config.guard"]]  
     }
+    use { "ganquan/autocwd", config = [[require "config.autocwd"]] }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
