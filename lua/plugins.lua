@@ -210,8 +210,6 @@ return packer.startup(function(use)
         "folke/which-key.nvim",
         event = "VimEnter",
         module = { "which-key" },
-        -- keys = { [[<leader>]] },
-        -- config = function() require("config.whichkey").setup() end,
         disable = false
     } -- TODO: examine
 
@@ -241,6 +239,8 @@ return packer.startup(function(use)
     }
     
     use { "ganquan/autocwd", config = function() require "autocwd".setup{} end }
+    use "skywind3000/asyncrun.vim"
+    use "skywind3000/asynctasks.vim" -- TODO: examine
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
