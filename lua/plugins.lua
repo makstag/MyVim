@@ -50,11 +50,10 @@ packer.init
 -- Install your plugins here
 return packer.startup(function(use)
     -- Plugin Mangager
-    use { "lewis6991/impatient.nvim", config = [[require "config.impatient"]] }
+    use { "lewis6991/impatient.nvim", config = [[require "impatient"]] }
     use "wbthomason/packer.nvim" -- Have packer manage itself
 
     -- Lua Development
-    use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
     use "nvim-lua/popup.nvim"
     use "folke/neodev.nvim"
 
@@ -110,7 +109,7 @@ return packer.startup(function(use)
         run = function() require "nvim-treesitter.install".update({with_sync = true}) end, 
         config = [[require "config.treesitter"]]
     }
-    use { "JoosepAlviste/nvim-ts-context-commentstring", after = "nvim-treesitter" }
+    use { "JoosepAlviste/nvim-ts-context-commentstring", after = "nvim-treesitter" } -- TODO: examine
     use
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
@@ -132,21 +131,23 @@ return packer.startup(function(use)
         {
             { "theHamsta/nvim-dap-virtual-text", module = { "nvim-dap-virtual-text" } },
             { "rcarriga/nvim-dap-ui", module = { "dapui" } },
-            -- { "mfussenegger/nvim-dap-python", module = { "dap-python" } },
             "nvim-telescope/telescope-dap.nvim",
-            -- { "jbyuki/one-small-step-for-vimkind", module = "osv" },
+            "rcarriga/cmp-dap"
         },
         config = function()
             require "config.dap".setup {}
         end
-    }
+    } -- TODO: examine
 
-    -- Statusline
+    -- GUI
     use 
     { 
         "nvim-lualine/lualine.nvim", 
-        requires = { "nvim-tree/nvim-web-devicons", opt = true },
-        config = [[require "config.lualine"]]
+        after = "fluoromachine",
+        requires = "nvim-tree/nvim-web-devicons"
+        config = function()
+            require "lualine".setup { options = { theme = "retrowave" } }
+        end
     }
     use 
     {
@@ -158,139 +159,67 @@ return packer.startup(function(use)
         config = [[require "config.bufferline"]] 
     }
     
-    
-    
-    
-  -- File Explorer
-  use {
-    "kyazdani42/nvim-tree.lua",
-    requires = {
-      "kyazdani42/nvim-web-devicons",
-    },
-    tag = "nightly",
-    config = function() require'nvim-tree'.setup {} end
-  }
-  use "ThePrimeagen/harpoon"
+    -- File Explorer
+    use 
+    {
+        "kyazdani42/nvim-tree.lua",
+        requires = "kyazdani42/nvim-web-devicons",
+        tag = "nightly",
+        config = function() require "nvim-tree".setup {} end
+    }
 
-  -- Preview
-  use {
-    "glepnir/dashboard-nvim",
-    event = "VimEnter",
-    requires = {"nvim-tree/nvim-web-devicons"}
-  }
+    -- Preview
+    use 
+    {
+        "glepnir/dashboard-nvim",
+        event = "VimEnter",
+        requires = "nvim-tree/nvim-web-devicons",
+        config = [[require "config.dashboard"]] 
+    }
  
-  -- Comment
-  use "numToStr/Comment.nvim"
-  use "folke/todo-comments.nvim"
+    -- Terminal
+    use { "akinsho/toggleterm.nvim", tag = "*", config = [[require "config.toggleterm"]] }
 
-  -- Terminal
-  use "akinsho/toggleterm.nvim"
+    -- Telescope
+    use 
+    { 
+        "nvim-telescope/telescope.nvim", 
+        tag = "*", 
+        requires = "nvim-lua/plenary.nvim", 
+        config = [[require "config.telescope"]] 
+    }
+    use { "nvim-telescope/telescope-ui-select.nvim", requires = "nvim-lua/plenary.nvim" } -- TODO: examine
+    use 
+    {
+        "nvim-telescope/telescope-fzf-native.nvim", 
+        run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+    }
 
-  -- Telescope
-  use "nvim-telescope/telescope.nvim"
-  use "nvim-telescope/telescope-file-browser.nvim"
-  use "nvim-telescope/telescope-media-files.nvim"
-  use {
-    "nvim-telescope/telescope-fzf-native.nvim", 
-    run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
-  }
-  -- use {
-  --   "nvim-telescope/telescope-frecency.nvim",
-  --   requires = { "kkharji/sqlite.lua" },
-  -- }
+    -- Project
+    use { "nvim-pack/nvim-spectre", [[require "config.specter"]] } -- TODO: examine
 
-  -- Project
-  use "ahmedkhalf/project.nvim"
-  use "nvim-pack/nvim-spectre"
-  use "tpope/vim-obsession"
+    -- Quickfix
+    use { "kevinhwang91/nvim-bqf", ft = "qf", config = [[require "config.bqf"]] }
 
-  -- Quickfix
-  --use { 'kevinhwang91/nvim-bqf', ft = "qf", config = [[require('config.bqf')]] }
-  use 'kevinhwang91/nvim-bqf'
+    -- Git
+    use { "lewis6991/gitsigns.nvim", config = [[require "config.gitsigns"]] } -- TODO: examine
 
-  -- Startup time
-  use "dstein64/vim-startuptime"
+    -- WhichKey
+    use 
+    {
+        "folke/which-key.nvim",
+        event = "VimEnter",
+        module = { "which-key" },
+        -- keys = { [[<leader>]] },
+        -- config = function() require("config.whichkey").setup() end,
+        disable = false
+    } -- TODO: examine
 
-  -- Git
-  use "lewis6991/gitsigns.nvim"
-  use "f-person/git-blame.nvim"
-  use "ruifm/gitlinker.nvim"
-  use "mattn/vim-gist"
-  use "mattn/webapi-vim"
+    -- Editing Support
+    use { "windwp/nvim-autopairs", config = [[require "config.autopairs"]] }
 
-  -- Github
-  use "pwntester/octo.nvim"
+    use { "karb94/neoscroll.nvim", config = [[require"config.neoscroll"]] } -- TODO: examine
 
-  --AI
-  --[[
-  use {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require("copilot").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false }
-      })
-    end,
-  }
-  use {
-    "zbirenbaum/copilot-cmp",
-    after = { "copilot.lua" },
-    config = function ()
-      require("copilot_cmp").setup()
-    end
-  }
-  ]]
-
-  -- surround: Add/change/delete surrouding delimiter pairs
-  use {
-    "kylechui/nvim-surround",
-    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-    config = function()
-      require "nvim-surround".setup {
-        -- Configuration here, or leave empty to use defaults
-      }
-    end
-  }
-
-  -- WhichKey
-  use {
-    "folke/which-key.nvim",
-    event = "VimEnter",
-    module = { "which-key" },
-    -- keys = { [[<leader>]] },
-    config = function()
-      require("config.whichkey").setup()
-    end,
-    disable = false
-  }
-
-  -- Editing Support
-  use "windwp/nvim-autopairs"
-  use "andymass/vim-matchup"
-  use "folke/zen-mode.nvim"
-
-  -- Latex
-  use "lervag/vimtex"
-
-  -- Markdown
-  use 
-  {
-    "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
-    ft = "markdown"
-  }
-
-  --use { 'aserowy/tmux.nvim',  config = [[require('config.tmux')]] }
-  use 'aserowy/tmux.nvim'
-  --use { 'rcarriga/nvim-notify',
-  --  event = "BufEnter",
-  --  config = function() vim.defer_fn(function() 
-  --    require("config.nvim-notify") end, 2000) end,
-  --}
-  --use { 'karb94/neoscroll.nvim', config = [[require('config.neoscroll')]] }
-  use 'karb94/neoscroll.nvim'
     -- Utility
     use "cdelledonne/vim-cmake"
 
@@ -299,8 +228,10 @@ return packer.startup(function(use)
         "j-hui/fidget.nvim", 
         after = "nvim-lspconfig",
         config = [[require "config.fidget-nvim"]] 
-    }
-    use { "rmagatti/goto-preview", config = [[require "config.goto-preview"]] }
+    } -- TODO: examine
+    
+    use { "rmagatti/goto-preview", config = [[require "config.goto-preview"]] } -- TODO: examine
+    
     use
     {
         "nvimdev/guard.nvim",
@@ -308,7 +239,8 @@ return packer.startup(function(use)
         event = "BufReadPre",
         config = [[require "config.guard"]]  
     }
-    use { "ganquan/autocwd", config = [[require "config.autocwd"]] }
+    
+    use { "ganquan/autocwd", config = function() require "autocwd".setup{} end }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

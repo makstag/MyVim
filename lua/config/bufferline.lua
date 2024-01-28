@@ -1,7 +1,21 @@
 local bufferline = require "bufferline"
 
-bufferline.setup {
-    options = {
+bufferline.setup 
+{
+    keys = 
+    {
+        { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
+        { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
+        { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete other buffers" },
+        { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete buffers to the right" },
+        { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete buffers to the left" },
+        { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
+        { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
+        { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
+        { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" }
+    },
+    options = 
+    {
         mode = 'buffers',
         numbers = "none", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
         close_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
@@ -11,7 +25,8 @@ bufferline.setup {
         -- NOTE: this plugin is designed with this icon in mind,
         -- and so changing this is NOT recommended, this is intended
         -- as an escape hatch for people who cannot bear it for whatever reason
-        indicator = {
+        indicator = 
+        {
             icon = '▎', -- this should be omitted if indicator style is not 'icon'
             style = 'underline',
         },
@@ -77,98 +92,5 @@ bufferline.setup {
         --   -- add custom logic
         --   return buffer_a.modified > buffer_b.modified
         -- end
-    },
-    highlights = {
-        fill = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-        },
-        background = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-        },
-
-        -- buffer_selected = {
-        --   fg = {attribute='fg',highlight='#ff0000'},
-        --   bg = {attribute='bg',highlight='#0000ff'},
-        --   gui = 'none'
-        --   },
-        buffer_visible = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-        },
-
-        close_button = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-        },
-        close_button_visible = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-        },
-        -- close_button_selected = {
-        --   fg = {attribute='fg',highlight='TabLineSel'},
-        --   bg ={attribute='bg',highlight='TabLineSel'}
-        --   },
-
-        tab_selected = {
-            fg = { attribute = "fg", highlight = "Normal" },
-            bg = { attribute = "bg", highlight = "Normal" },
-        },
-        tab = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-        },
-        tab_close = {
-            -- fg = {attribute='fg',highlight='LspDiagnosticsDefaultError'},
-            fg = { attribute = "fg", highlight = "TabLineSel" },
-            bg = { attribute = "bg", highlight = "Normal" },
-        },
-
-        duplicate_selected = {
-            fg = { attribute = "fg", highlight = "TabLineSel" },
-            bg = { attribute = "bg", highlight = "TabLineSel" },
-            -- gui = "italic",
-        },
-        duplicate_visible = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-            -- gui = "italic",
-        },
-        duplicate = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-            -- gui = "italic",
-        },
-
-        modified = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-        },
-        modified_selected = {
-            fg = { attribute = "fg", highlight = "Normal" },
-            bg = { attribute = "bg", highlight = "Normal" },
-        },
-        modified_visible = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-        },
-
-        separator = {
-            fg = { attribute = "bg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-        },
-        separator_selected = {
-            fg = { attribute = "bg", highlight = "Normal" },
-            bg = { attribute = "bg", highlight = "Normal" },
-        },
-        -- separator_visible = {
-        --   fg = {attribute='bg',highlight='TabLine'},
-        --   bg = {attribute='bg',highlight='TabLine'}
-        --   },
-        indicator_selected = {
-            fg = { attribute = "fg", highlight = "LspDiagnosticsDefaultHint" },
-            bg = { attribute = "bg", highlight = "Normal" },
-        },
-    },
+    }
 }

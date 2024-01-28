@@ -1,4 +1,3 @@
--- nvim-cmp setup
 local cmp = require "cmp"
 local luasnip = require "luasnip"
 local lspkind = require "lspkind"
@@ -48,14 +47,7 @@ cmp.setup
     enabled = 
     {
         function()
-            -- disable completion in comments
-            local context = require "cmp.config.context"
-            -- keep command mode completion enabled when cursor is in a comment
-            if vim.api.nvim_get_mode().mode == 'c' then
-                return true
-            else
-                return not context.in_treesitter_capture "comment" and not context.in_syntax_group "Comment"
-            end
+            return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"  or require "cmp_dap".is_dap_buffer()        
         end
     },
     snippet = 
@@ -111,7 +103,7 @@ cmp.setup
             before = function (entry, vim_item)
                 vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
                 vim_item.menu = 
-                ({
+                {
                     buffer = "[Buffer]",
                     nvim_lsp = "[LSP]",
                     nvim_lua = "[Lua]",
@@ -120,7 +112,7 @@ cmp.setup
                     gh_issues = "[Issues]",
                     tn = "[TabNine]",
                     eruby = "[erb]",
-                })[entry.source.name]
+                } [entry.source.name]
                 return vim_item
             end
         }
@@ -143,67 +135,29 @@ cmp.setup
     experimental = 
     {
         ghost_text = false,
-        view = { entries = "native" }
+        view = { entries = "native_menu" }
     },
 }
-
-cmp.setup.filetype('gitcommit', { sources = cmp.config.sources
-    ({
-        { name = 'cmp-git' },
-    }, {
-        { name = 'buffer' },
-    })
-})
-
--- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline({ '/', '?' }, 
-{
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = { { name = 'buffer' } }
-})
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', 
 {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-        { name = 'path' },
-    }, {
-        { name = 'cmdline' },
-    })
+    sources = cmp.config.sources({ { name = 'path' } }, 
+        { { name = 'cmdline' } })
 })
 
-cmp.setup.filetype("TelescopePrompt", 
+cmp.setup.cmdline('/', 
+{                                  
+    view = { entries = {name = 'wildmenu', separator = '|' } }                                             
+})                                                        
+
+cmp.setup.filetype({ "TelescopePrompt", "dap-repl", "dapui_watches", "dapui_hover" }, 
 {
     enabled = false,
+    sources = { { name = "dap" } },
 })
 
 -- TabNine
 local tabnine = require "cmp_tabnine.config"
 tabnine:setup({max_lines = 1000, max_num_results = 20, sort = true})
-
--- Database completion
-vim.api.nvim_exec([[
-autocmd FileType sql,mysql,plsql lua require "cmp".setup.buffer({ sources = {{ name = "vim-dadbod-completion" }} })
-]], false)
-
---  see https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu
-vim.cmd([[
-highlight! link CmpItemMenu Comment
-" gray
-highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
-" blue
-highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
-highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
-" light blue
-highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
-highlight! CmpItemKindInterface guibg=NONE guifg=#9CDCFE
-highlight! CmpItemKindText guibg=NONE guifg=#9CDCFE
-" pink
-highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
-highlight! CmpItemKindMethod guibg=NONE guifg=#C586C0
-" front
-highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
-highlight! CmpItemKindProperty guibg=NONE guifg=#D4D4D4
-highlight! CmpItemKindUnit guibg=NONE guifg=#D4D4D4
-]])

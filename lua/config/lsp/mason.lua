@@ -1,13 +1,15 @@
 -- Default configuration https://github.com/williamboman/mason.nvim#default-configuration
-require "mason".setup
+require "mason".setup{}
+
+require "mason-lspconfig".setup 
 {
-    ui = 
-    {
-        icons = 
-        {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗"
-        }
-    }
+    ensure_installed = 
+    { 
+        "marksman", 
+        "diagnosticls", 
+        "clangd", 
+        "cmake", 
+        "lua_ls"
+    },
+    automatic_installation = true
 }

@@ -2,7 +2,7 @@ local M = {}
 
 function M.setup()
     local dap = require "dap"
-    local install_root_dir = vim.fn.stdpath "data" .. "/cpptools"
+    local install_root_dir = vim.fn.stdpath "canfig" .. "/data/cpptools"
     local extension_path = install_root_dir .. "/extension/debugAdapters/bin"
     local cppdbg_path = extension_path .. "/OpenDebugAD7"
 
@@ -24,6 +24,14 @@ function M.setup()
             end,
             cwd = '${workspaceFolder}',
             stopAtEntry = true,
+            setupCommands = 
+            {  
+                { 
+                    text = '-enable-pretty-printing',
+                    description =  'enable pretty printing',
+                    ignoreFailures = false 
+                }
+            }
         },
         {
             name = 'Attach to gdbserver :1234',
@@ -36,11 +44,19 @@ function M.setup()
             program = function()
                 return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
             end,
-        },
+            setupCommands = 
+            {  
+                { 
+                    text = '-enable-pretty-printing',
+                    description =  'enable pretty printing',
+                    ignoreFailures = false 
+                }
+            }
+        }
     }
 
     dap.configurations.c = dap.configurations.cpp
-    dap.configurations.rust = dap.configurations.cpp
+    dap.configurations.cc = dap.configurations.cpp
 end
 
 return M

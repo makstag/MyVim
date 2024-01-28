@@ -12,29 +12,18 @@ local function ikeymap(key, map)
 	keymap("i", key, map, opts)
 end
 
-local actions = require("telescope.actions")
-local pickers = require("telescope.pickers")
-local finders = require("telescope.finders")
-local previewers = require("telescope.previewers")
-local action_state = require("telescope.actions.state")
-local conf = require("telescope.config").values
-local trouble = require("trouble.providers.telescope") -- trouble.nvim
-local builtin = require("telescope.builtin")
+local actions = require "telescope.actions"
+local pickers = require "telescope.pickers"
+local finders = require "telescope.finders"
+local previewers = require "telescope.previewers" 
+local action_state = require "telescope.actions.state" 
+local conf = require "telescope.config".values
+local builtin = require "telescope.builtin"
 
-local status_ok, telescope = pcall(require, "telescope")
-if not status_ok then
-	return
-end
+local telescope = require "telescope"
 
 nkeymap("<C-f>", "<cmd>lua require('telescope.builtin').find_files()<cr>")
 nkeymap("<C-g>", "<cmd>lua require('telescope.builtin').git_files()<cr>") -- fast than find files when in git repo
---[[ nkeymap("<leader>fs", function() ]]
---[[     telescope.builtin.search_string({ search = vim.fn.input("Search > ") }); ]]
---[[ end) ]]
-
---[[ vim.keymap.set("n", "<Leader>n", telescope.extensions.file_browser.file_browser) ]]
---[[ vim.keymap.set("n", "<Leader>f", require("telescope.builtin").find_files) ]]
---[[ vim.keymap.set("n", "<Leader>t", require("telescope.builtin").treesitter) ]]
 
 vim.keymap.set("n", "<leader>fs", function()
 	builtin.grep_string({ search = vim.fn.input("Grep > ") })
@@ -44,6 +33,7 @@ nkeymap("<leader>f2", "<cmd>lua require('telescope.builtin').find_files({no_igno
 nkeymap("<leader>f3", "<cmd>lua require('telescope.builtin').find_files({hidden=true, no_ignore=true})<cr>")
 nkeymap("<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>")
 nkeymap("<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>")
+
 -- see https://www.reddit.com/r/neovim/comments/oli7fb/permanent_recent_files_using_telescope/
 -- only keeps track of the opened files in the current session.
 -- nkeymap("<C-p>", "<cmd>lua require('telescope.builtin').oldfiles()<cr>")
@@ -64,19 +54,19 @@ nkeymap("<leader>fc", "<cmd>Telescope command_history<CR>")
 -- jumps list
 nkeymap("<leader>fj", "<cmd>lua require('telescope.builtin').jumplist()<cr>")
 
--- notify.nvim
---[[ nkeymap("<leader>fn", "<cmd>lua require('telescope').extensions.notify.notify()<cr>") ]]
--- noice.nvim
---[[ nkeymap("<leader>fn", "<cmd>Noice telescope<cr>") -- replaced by noice.nvim ]]
-telescope.setup({
-	defaults = {
+telescope.setup
+{
+	defaults = 
+	{
 
 		prompt_prefix = " ",
 		selection_caret = " ",
 		path_display = { "smart" },
 
-		mappings = {
-			i = {
+		mappings = 
+		{
+			i = 
+			{
 				["<C-n>"] = actions.cycle_history_next,
 				["<C-p>"] = actions.cycle_history_prev,
 
@@ -107,7 +97,8 @@ telescope.setup({
 				["<C-h>"] = actions.which_key, -- keys from pressing <C-/>
 			},
 
-			n = {
+			n = 
+			{
 				["<esc>"] = actions.close,
 				["<CR>"] = actions.select_default,
 				["<C-x>"] = actions.select_horizontal,
@@ -140,7 +131,8 @@ telescope.setup({
 			},
 		},
 	},
-	pickers = {
+	pickers = 
+	{
                 find_files = { hidden = true }
 		-- Default configuration for builtin pickers goes here:
 		-- picker_name = {
@@ -150,78 +142,38 @@ telescope.setup({
 		-- Now the picker_config_key will be applied every time you call this
 		-- builtin picker
 	},
-	extensions = {
+	extensions = 
+	{
 		-- see https://github.com/nvim-telescope/telescope-fzf-native.nvim#telescope-setup-and-configuration
-		fzf = {
+		["fzf"] = 
+		{
 			fuzzy = true, -- false will only do exact matching
 			override_generic_sorter = true, -- override the generic sorter
 			override_file_sorter = true, -- override the file sorter
 			case_mode = "smart_case", -- or "ignore_case" or "respect_case"
 			-- the default case_mode is "smart_case"
 		},
-
-		media_files = {
-			-- filetypes whitelist
-			-- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-			filetypes = { "png", "webp", "jpg", "jpeg", "gif" },
-			find_cmd = "rg", -- find command (defaults to `fd`)
-		},
-
-                file_browser = { hidden = true }
-
-		-- Your extension configuration goes here:
-		-- extension_name = {
-		--   extension_config_key = value,
-		-- }
-		-- please take a look at the readme of the extension you want to configure
+		["ui-select"] =
+		{
+		    require("telescope.themes").get_dropdown{}
+		    -- pseudo code / specification for writing custom displays, like the one
+               -- for "codeactions"
+               -- specific_opts = {
+               --   [kind] = {
+               --     make_indexed = function(items) -> indexed_items, width,
+               --     make_displayer = function(widths) -> displayer
+               --     make_display = function(displayer) -> function(e)
+               --     make_ordinal = function(e) -> string
+               --   },
+               --   -- for example to disable the custom builtin "codeactions" display
+               --      do the following
+               --   codeactions = false,
+               -- }
+		}
 	},
 	-- builtin configs
-	builtin = {
-		git_branches = {},
-	},
-})
+	builtin = { git_branches = {} }
+}
 
--- other config
--- see https://github.com/ThePrimeagen/.dotfiles/blob/master/nvim/.config/nvim/lua/theprimeagen/telescope.lua#L39
-local M = {}
-
--- M.find_files = function ()
---     require("telescope.builtin").find_files({
---
---     })
--- end
-
-M.git_branches = function()
-	require("telescope.builtin").git_branches({
-		attach_mappings = function(_, map)
-			map("i", "<c-d>", actions.git_delete_branch)
-			map("n", "<c-d>", actions.git_delete_branch)
-			return true
-		end,
-	})
-end
-
--- see https://github.com/nvim-telescope/telescope-fzf-native.nvim#telescope-setup-and-configuration
--- To get fzf loaded and working with telescope, you need to call
--- load_extension, somewhere after setup function:
 telescope.load_extension("fzf")
-
--- see https://github.com/nvim-telescope/telescope-media-files.nvim
-telescope.load_extension("media_files")
-
--- see https://github.com/ThePrimeagen/harpoon#telescope-support
-require("telescope").load_extension("harpoon")
-
--- need sqlite3
--- Using an implementation of Mozilla's Frecency algorithm (used in Firefox's address bar)
--- , files edited frecently are given higher precedence in the list index.
--- telescope.load_extension("frecency")
-
--- https://github.com/nvim-telescope/telescope.nvim/issues/592#issuecomment-789069837
--- found a plugin airblade/vim-rooter, It can find project root according to the file I set
--- vim.cmd[[
---     nnoremap <expr> sp ':Telescope find_files cwd='.FindRootDirectory().'/<cr>'
--- ]]
-telescope.load_extension("file_browser")
-
-return M
+telescope.load_extension("ui-select")
