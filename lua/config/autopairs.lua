@@ -1,6 +1,4 @@
-local npairs = require "nvim-autopairs"
-
-npairs.setup 
+require "nvim-autopairs".setup 
 {
     check_ts = true,
     ts_config = 
@@ -24,5 +22,4 @@ npairs.setup
 }
 
 local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-local cmp = require "cmp"
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
+require "cmp".event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })

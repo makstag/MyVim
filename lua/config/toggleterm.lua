@@ -1,6 +1,4 @@
-local toggleterm = require "toggleterm"
-
-toggleterm.setup
+require "toggleterm".setup
 {
 	size = 20,
 	open_mapping = [[<C-t>]],

@@ -50,7 +50,7 @@ packer.init
 -- Install your plugins here
 return packer.startup(function(use)
     -- Plugin Mangager
-    use { "lewis6991/impatient.nvim", config = [[require "impatient"]] }
+    use { "lewis6991/impatient.nvim", config = [[require "impatient".enable_profile()]] }
     use "wbthomason/packer.nvim" -- Have packer manage itself
 
     -- Lua Development
@@ -58,67 +58,50 @@ return packer.startup(function(use)
     use "folke/neodev.nvim"
 
     -- LSP
-    use { "neovim/nvim-lspconfig", config = [[require "config.lsp"]]
-    use "nvimdev/lspsaga.nvim"
-    use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
-    use "williamboman/mason.nvim"
-    use "williamboman/mason-lspconfig.nvim"
+    use 
+    { 
+        "neovim/nvim-lspconfig", 
+        requires = 
+        {
+            "nvimdev/lspsaga.nvim", 
+            "https://git.sr.ht/~whynothugo/lsp_lines.nvim", 
+            "williamboman/mason.nvim", 
+            "williamboman/mason-lspconfig.nvim"
+        }, 
+        config = [[require "config.lsp"]] 
+    }
 
     -- Completion
-    use { "onsails/lspkind-nvim", event = "VimEnter" }
     use 
     { 
         "hrsh7th/nvim-cmp", 
-        after = "lspkind-nvim",
-        config = [[require "config.nvim-cmp"]] 
-    }
-    use "hrsh7th/cmp-buffer"
-    use "hrsh7th/cmp-path"
-    use "hrsh7th/cmp-cmdline"
-    use "hrsh7th/cmp-nvim-lsp"
-    use "hrsh7th/cmp-nvim-lua"
-    use 
-    {
-        "tzachar/cmp-tabnine",
-        run = "./install.sh",
-        requires = "hrsh7th/nvim-cmp"
-    }
-    use 
-    {
-        "L3MON4D3/LuaSnip",
-        requires = "rafamadriz/friendly-snippets",
-        tag = "v2.*",
-        run = "make install_jsregexp",
-        config = function(opts) 
-            if opts then require "luasnip".config.setup(opts) end
-            vim.tbl_map(
-                function(type) require("luasnip.loaders.from_" .. type).lazy_load() end,
-                { "vscode", "snipmate", "lua" }
-            )
-            require "luasnip".filetype_extend("c", { "cdoc" })
-            require "luasnip".filetype_extend("cpp", { "cppdoc" })
-            require "luasnip".filetype_extend("cc", { "ccdoc" })
-        end
+        requires = 
+        {
+            { "tzachar/cmp-tabnine", run = "./install.sh" }, 
+            { "L3MON4D3/LuaSnip", tag = "v2.*", run = "make install_jsregexp" },
+            "onsails/lspkind-nvim",
+            "hrsh7th/cmp-buffer", 
+            "hrsh7th/cmp-path", 
+            "hrsh7th/cmp-cmdline", 
+            "hrsh7th/cmp-nvim-lsp", 
+            "hrsh7th/cmp-nvim-lua",
+            "saadparwaiz1/cmp_luasnip"
+        }, 
+        config = [[require "config.cmp"]] 
     }
 
     -- Syntax/Treesitter
     use 
     {
         "nvim-treesitter/nvim-treesitter",
+        requires = "JoosepAlviste/nvim-ts-context-commentstring", -- TODO: examine
         event = "BufEnter",
-        run = function() require "nvim-treesitter.install".update({with_sync = true}) end, 
+        run = function() require "nvim-treesitter.install".update{with_sync = true} end, 
         config = [[require "config.treesitter"]]
-    }
-    use { "JoosepAlviste/nvim-ts-context-commentstring", after = "nvim-treesitter" } -- TODO: examine
-    use
-    {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        after = "nvim-treesitter",
-        requires = "nvim-treesitter/nvim-treesitter"
     }
     
     -- Color
-    use "norcalli/nvim-colorizer.lua"
+    use { "norcalli/nvim-colorizer.lua", config = function() require "colorizer".setup{} end }
 
     -- Colorschemes
     use { "maxmx03/fluoromachine.nvim", config = [[require "config.colorscheme"]] }
@@ -132,22 +115,16 @@ return packer.startup(function(use)
             { "theHamsta/nvim-dap-virtual-text", module = { "nvim-dap-virtual-text" } },
             { "rcarriga/nvim-dap-ui", module = { "dapui" } },
             "nvim-telescope/telescope-dap.nvim",
-            "rcarriga/cmp-dap"
+            "rcarriga/cmp-dap",
         },
-        config = function()
-            require "config.dap".setup {}
-        end
+        config = function() require "config.dap".setup{} end
     } -- TODO: examine
 
     -- GUI
     use 
     { 
         "nvim-lualine/lualine.nvim", 
-        after = "fluoromachine",
-        requires = "nvim-tree/nvim-web-devicons"
-        config = function()
-            require "lualine".setup { options = { theme = "retrowave" } }
-        end
+        config = function() require "lualine".setup { options = { theme = "retrowave" } } end
     }
     use 
     {
@@ -163,9 +140,9 @@ return packer.startup(function(use)
     use 
     {
         "kyazdani42/nvim-tree.lua",
-        requires = "kyazdani42/nvim-web-devicons",
+        requires = "nvim-tree/nvim-web-devicons",
         tag = "nightly",
-        config = function() require "nvim-tree".setup {} end
+        config = [[require "config.tree"]]
     }
 
     -- Preview
@@ -185,21 +162,30 @@ return packer.startup(function(use)
     { 
         "nvim-telescope/telescope.nvim", 
         tag = "*", 
-        requires = "nvim-lua/plenary.nvim", 
+        requires = 
+        {
+            "nvim-lua/plenary.nvim", 
+            "nvim-telescope/telescope-ui-select.nvim", -- TODO: examine
+            {
+                "nvim-telescope/telescope-fzf-native.nvim", 
+                run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+            }
+        },
         config = [[require "config.telescope"]] 
-    }
-    use { "nvim-telescope/telescope-ui-select.nvim", requires = "nvim-lua/plenary.nvim" } -- TODO: examine
-    use 
-    {
-        "nvim-telescope/telescope-fzf-native.nvim", 
-        run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
     }
 
     -- Project
-    use { "nvim-pack/nvim-spectre", [[require "config.specter"]] } -- TODO: examine
+    use { "nvim-pack/nvim-spectre", config = [[require "config.spectre"]] } -- TODO: examine
 
     -- Quickfix
-    use { "kevinhwang91/nvim-bqf", ft = "qf", config = [[require "config.bqf"]] }
+    use 
+    { 
+        "kevinhwang91/nvim-bqf", 
+        ft = "qf", 
+        config = function()
+            require "bqf".setup { auto_resize_height = false, preview = { auto_preview = false } }
+        end
+    }
 
     -- Git
     use { "lewis6991/gitsigns.nvim", config = [[require "config.gitsigns"]] } -- TODO: examine
@@ -216,7 +202,7 @@ return packer.startup(function(use)
     -- Editing Support
     use { "windwp/nvim-autopairs", config = [[require "config.autopairs"]] }
 
-    use { "karb94/neoscroll.nvim", config = [[require"config.neoscroll"]] } -- TODO: examine
+    use { "karb94/neoscroll.nvim", config = [[require "config.neoscroll"]] } -- TODO: examine
 
     -- Utility
     use "cdelledonne/vim-cmake"
@@ -225,7 +211,7 @@ return packer.startup(function(use)
     {
         "j-hui/fidget.nvim", 
         after = "nvim-lspconfig",
-        config = [[require "config.fidget-nvim"]] 
+        config = function() require "fidget".setup{} end
     } -- TODO: examine
     
     use { "rmagatti/goto-preview", config = [[require "config.goto-preview"]] } -- TODO: examine
@@ -238,13 +224,24 @@ return packer.startup(function(use)
         config = [[require "config.guard"]]  
     }
     
-    use { "ganquan/autocwd", config = function() require "autocwd".setup{} end }
-    use "skywind3000/asyncrun.vim"
-    use "skywind3000/asynctasks.vim" -- TODO: examine
+    --AI
+    use 
+    {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function() require "copilot".setup{} end
+    }
+    use 
+    {
+        "zbirenbaum/copilot-cmp",
+        after = { "copilot.lua" },
+        config = function () require "copilot_cmp".setup{} end
+    }
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if PACKER_BOOTSTRAP then
-    require("packer").sync()
-  end
+    -- Automatically set up your configuration after cloning packer.nvim
+    -- Put this at the end after all plugins
+    if PACKER_BOOTSTRAP then
+        require "packer".sync()
+    end
 end)

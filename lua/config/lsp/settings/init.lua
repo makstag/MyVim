@@ -5,10 +5,7 @@
 
 local lspconfig = require "lspconfig"
 
-local lsp_flags = 
-{
-    debounce_text_changes = 150
-}
+local lsp_flags = { debounce_text_changes = 150 }
 
 local on_attach = require "config.lsp.handlers".on_attach
 local capabilities = require "config.lsp.handlers".capabilities

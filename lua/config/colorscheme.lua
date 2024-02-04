@@ -1,6 +1,3 @@
-
-local fm = require "fluoromachine"
-
 function overrides(c)
     return 
     {
@@ -13,14 +10,15 @@ function overrides(c)
     }
 end
 
-fm.setup 
+require "fluoromachine".setup 
 {
     glow = true,
     theme = 'retrowave',
     overrides = overrides,
     transparent = 'full',
     colors = function(_, d)
-        return {
+        return 
+        {
             bg = '#190920',
             alt_bg = d('#190920', 20),
             cyan = '#49eaff',

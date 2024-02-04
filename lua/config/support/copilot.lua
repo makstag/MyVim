@@ -1,8 +1,9 @@
 -- use this table to disable/enable filetypes
 -- copilot.vim: Copilot: Disabled for filetype=markdown by internal default #29977
 -- https://github.com/orgs/community/discussions/29977
-vim.g.copilot_filetypes = {
-    xml = false,
+vim.g.copilot_filetypes = 
+{
+    cpp = true,
     markdown = true
 }
 

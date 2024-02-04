@@ -1,3 +1,5 @@
+require "luasnip.loaders.from_vscode".lazy_load()
+
 local cmp = require "cmp"
 local luasnip = require "luasnip"
 local lspkind = require "lspkind"
@@ -47,8 +49,15 @@ cmp.setup
     enabled = 
     {
         function()
-            return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"  or require "cmp_dap".is_dap_buffer()        
-        end
+            -- disable completion in comments
+            local context = require "cmp.config.context"
+            -- keep command mode completion enabled when cursor is in a comment
+            if vim.api.nvim_get_mode().mode == 'c' then
+                return true
+            else
+                return not context.in_treesitter_capture "comment" and not context.in_syntax_group "Comment"
+            end
+        end    
     },
     snippet = 
     {
@@ -103,16 +112,15 @@ cmp.setup
             before = function (entry, vim_item)
                 vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
                 vim_item.menu = 
-                {
+                ({
                     buffer = "[Buffer]",
                     nvim_lsp = "[LSP]",
                     nvim_lua = "[Lua]",
                     path = "[Path]",
                     luasnip = "[LuaSnip]",
-                    gh_issues = "[Issues]",
                     tn = "[TabNine]",
-                    eruby = "[erb]",
-                } [entry.source.name]
+                    copilot = "[Copilot]"
+                })[entry.source.name]
                 return vim_item
             end
         }
@@ -120,12 +128,10 @@ cmp.setup
     sources = 
     {
         { name = "nvim_lsp" }, { name = "buffer" }, { name = "luasnip" },
-        { name = "nvim_lua" }, 
+        { name = "nvim_lua" }, { name = "copilot" },
         { name = "path" }, 
-        { name = "tn" },
-        { name = "eruby" }, { name = "gh_issues" }
     },
-    completion = {completeopt = 'menu,menuone,noselect,noinsert'},
+    completion = { completeopt = "menu,menuone,noselect,noinsert" },
     confirm_opts = 
     {
         behavior = cmp.ConfirmBehavior.Replace,
@@ -136,7 +142,7 @@ cmp.setup
     {
         ghost_text = false,
         view = { entries = "native_menu" }
-    },
+    }
 }
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
@@ -159,5 +165,4 @@ cmp.setup.filetype({ "TelescopePrompt", "dap-repl", "dapui_watches", "dapui_hove
 })
 
 -- TabNine
-local tabnine = require "cmp_tabnine.config"
-tabnine:setup({max_lines = 1000, max_num_results = 20, sort = true})
+require "cmp_tabnine.config":setup({max_lines = 1000, max_num_results = 20, sort = true})

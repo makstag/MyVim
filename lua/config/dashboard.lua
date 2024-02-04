@@ -1,7 +1,4 @@
-local home = vim.fn.stdpath "config"
-local db = require "dashboard"
-
-db.setup
+require "dashboard".setup
 {
     theme = 'hyper',
     disable_move = true,  -- boolean default is false disable move key
@@ -10,7 +7,7 @@ db.setup
     preview = 
     {
         command = 'chafa -w 1 -c full --stretch -C on -p on --polite on', -- preview command -C on -p on --polite on --threads 2  --stretch
-        file_path = home .. '/static/evat.gif',     -- preview file path
+        file_path = vim.fn.stdpath "config" .. '/static/evat.gif',     -- preview file path
         file_height = 36,  -- preview file height
         file_width = 120,    -- preview file width
     },

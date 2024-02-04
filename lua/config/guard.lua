@@ -1,7 +1,7 @@
 local ft = require "guard.filetype"
 
 -- Assuming you have guard-collection
-ft("c,cpp,cc"):fmt("clang-format")
+ft("c,cpp"):fmt("clang-format")
        :lint("clang-tidy")
 
 ft("lua"):fmt("lsp")
