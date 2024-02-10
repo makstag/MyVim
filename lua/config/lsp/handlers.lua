@@ -96,17 +96,6 @@ local function lsp_highlight_document(client, bufnr)
             end,
             pattern = "*"
         })
-
-        -- vimscript
-        -- vim.api.nvim_exec([[
-        --     augroup lsp_document_highlight
-        --     autocmd! * <buffer>
-        --     autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        --     autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-        --     augroup END
-        -- ]],
-        --     false
-        -- )
     end
 end
 
@@ -179,7 +168,7 @@ local function lsp_keymaps(bufnr)
         "<cmd>lua require 'lspsaga.action'.smart_scroll_with_saga(1, '<c-d>')<cr>",
         opts
     )
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>x", "<cmd>require 'lsp_lines'.toggle<cr>", opts)
+
     vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format({async = true })' ]])
 end
 

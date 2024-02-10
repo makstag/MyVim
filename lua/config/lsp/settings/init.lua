@@ -32,17 +32,6 @@ lspconfig.cmake.setup
     cmake_opts
 }
 
--- cpp
--- Mason without ccls...(con't understand why)
---[[ local ccls_opts = require "config.lsp.settings.ccls" ]]
---[[ lspconfig.ccls.setup ]]
---[[ { ]]
---[[     on_attach = on_attach, ]]
---[[     capabilities = capabilities, ]]
---[[     flags = lsp_flags, ]]
---[[     ccls_opts ]]
---[[ } ]]
-
 local clangd_opts = require "config.lsp.settings.clangd"
 lspconfig.clangd.setup
 {

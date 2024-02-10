@@ -34,6 +34,7 @@ keymap("n", "<C-s>", "<Cmd>:w<CR>", opts)
 keymap("n", "<C-q>", "<Cmd>:q<CR>", opts)
 keymap("n", "<C-a>", "<Cmd>:qa<CR>", opts)
 keymap("n", "<C-z>", "<Cmd>:u<CR>", opts)
+keymap("n", "<leader>x", require "lsp_lines".toggle)
 
 -- Copy - Paste
 keymap("n", "<C-y>", "<Cmd>:+y<CR>", opts)

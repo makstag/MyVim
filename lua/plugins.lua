@@ -99,9 +99,6 @@ return packer.startup(function(use)
         run = function() require "nvim-treesitter.install".update{with_sync = true} end, 
         config = [[require "config.treesitter"]]
     }
-    
-    -- Color
-    use { "norcalli/nvim-colorizer.lua", config = function() require "colorizer".setup{} end }
 
     -- Colorschemes
     use { "maxmx03/fluoromachine.nvim", config = [[require "config.colorscheme"]] }
@@ -133,7 +130,7 @@ return packer.startup(function(use)
         tag = "*", 
         cond = firenvim_not_active,
         requires = "nvim-tree/nvim-web-devicons",
-        config = [[require "config.bufferline"]] 
+        config = [[require "config.bufferline"]]
     }
     
     -- File Explorer
@@ -221,7 +218,7 @@ return packer.startup(function(use)
         "nvimdev/guard.nvim",
         requires = "nvimdev/guard-collection",
         event = "BufReadPre",
-        config = [[require "config.guard"]]  
+        config = [[require "config.guard"]]
     }
     
     --AI
