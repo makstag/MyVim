@@ -40,13 +40,3 @@ lspconfig.clangd.setup
     flags = lsp_flags,
     clangd_opts
 }
-
--- markdown
-local marskman_opts = require "config.lsp.settings.marksman"
-lspconfig.marksman.setup
-{
-    on_attach = on_attach,
-    capabilities = capabilities,
-    flags = lsp_flags,
-    marskman_opts
-}
