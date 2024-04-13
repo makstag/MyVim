@@ -4,21 +4,21 @@ local fn = vim.fn
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 ---@diagnostic disable-next-line: missing-parameter
 if fn.empty(fn.glob(install_path)) > 0 then
-    PACKER_BOOTSTRAP = fn.system 
-    {
-        "git",
-        "clone",
-        "--depth",
-        "1",
-        "https://github.com/wbthomason/packer.nvim",
-        install_path,
-    }
+    PACKER_BOOTSTRAP = fn.system
+        {
+            "git",
+            "clone",
+            "--depth",
+            "1",
+            "https://github.com/wbthomason/packer.nvim",
+            install_path,
+        }
     print "Installing packer close and reopen Neovim..."
     vim.cmd [[packadd packer.nvim]]
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd 
+vim.cmd
 [[
     augroup packer_user_config
         autocmd!
@@ -33,12 +33,12 @@ if not status_ok then
 end
 
 -- Have packer use a popup window
-packer.init 
+packer.init
 {
     -- snapshot = "july-24",
     snapshot_path = fn.stdpath "config" .. "/snapshots",
     max_jobs = 50,
-    display = 
+    display =
     {
         open_fn = function()
             return require "packer.util".float { border = "rounded" }
@@ -58,45 +58,45 @@ return packer.startup(function(use)
     use "folke/neodev.nvim"
 
     -- LSP
-    use 
-    { 
-        "neovim/nvim-lspconfig", 
-        requires = 
+    use
+    {
+        "neovim/nvim-lspconfig",
+        requires =
         {
-            "nvimdev/lspsaga.nvim", 
-            "https://git.sr.ht/~whynothugo/lsp_lines.nvim", 
-            "williamboman/mason.nvim", 
+            "nvimdev/lspsaga.nvim",
+            "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+            "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim"
-        }, 
-        config = [[require "config.lsp"]] 
+        },
+        config = [[require "config.lsp"]]
     }
 
     -- Completion
-    use 
-    { 
-        "hrsh7th/nvim-cmp", 
-        requires = 
+    use
+    {
+        "hrsh7th/nvim-cmp",
+        requires =
         {
-            { "tzachar/cmp-tabnine", run = "./install.sh" }, 
-            { "L3MON4D3/LuaSnip", tag = "v2.*", run = "make install_jsregexp" },
+            { "tzachar/cmp-tabnine", run = "./install.sh" },
+            { "L3MON4D3/LuaSnip",    tag = "v2.*",        run = "make install_jsregexp" },
             "onsails/lspkind-nvim",
-            "hrsh7th/cmp-buffer", 
-            "hrsh7th/cmp-path", 
-            "hrsh7th/cmp-cmdline", 
-            "hrsh7th/cmp-nvim-lsp", 
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lua",
             "saadparwaiz1/cmp_luasnip"
-        }, 
-        config = [[require "config.cmp"]] 
+        },
+        config = [[require "config.cmp"]]
     }
 
     -- Syntax/Treesitter
-    use 
+    use
     {
         "nvim-treesitter/nvim-treesitter",
         requires = "JoosepAlviste/nvim-ts-context-commentstring", -- TODO: examine
         event = "BufEnter",
-        run = function() require "nvim-treesitter.install".update{with_sync = true} end, 
+        run = function() require "nvim-treesitter.install".update { with_sync = true } end,
         config = [[require "config.treesitter"]]
     }
 
@@ -104,37 +104,38 @@ return packer.startup(function(use)
     use { "maxmx03/fluoromachine.nvim", config = [[require "config.colorscheme"]] }
 
     -- Debugging
-    use 
+    use
     {
         "mfussenegger/nvim-dap",
-        requires = 
+        requires =
         {
             { "theHamsta/nvim-dap-virtual-text", module = { "nvim-dap-virtual-text" } },
-            { "rcarriga/nvim-dap-ui", module = { "dapui" } },
+            { "rcarriga/nvim-dap-ui",            module = { "dapui" } },
             "nvim-telescope/telescope-dap.nvim",
             "rcarriga/cmp-dap",
+            "nvim-neotest/nvim-nio"
         },
-        config = function() require "config.dap".setup{} end
+        config = function() require "config.dap".setup {} end
     } -- TODO: examine
 
     -- GUI
-    use 
-    { 
-        "nvim-lualine/lualine.nvim", 
+    use
+    {
+        "nvim-lualine/lualine.nvim",
         config = function() require "lualine".setup { options = { theme = "retrowave" } } end
     }
-    use 
+    use
     {
-        "akinsho/bufferline.nvim", 
+        "akinsho/bufferline.nvim",
         event = "VimEnter",
-        tag = "*", 
+        tag = "*",
         cond = firenvim_not_active,
         requires = "nvim-tree/nvim-web-devicons",
         config = [[require "config.bufferline"]]
     }
-    
+
     -- File Explorer
-    use 
+    use
     {
         "kyazdani42/nvim-tree.lua",
         requires = "nvim-tree/nvim-web-devicons",
@@ -143,42 +144,42 @@ return packer.startup(function(use)
     }
 
     -- Preview
-    use 
+    use
     {
         "glepnir/dashboard-nvim",
         event = "VimEnter",
         requires = "nvim-tree/nvim-web-devicons",
-        config = [[require "config.dashboard"]] 
+        config = [[require "config.dashboard"]]
     }
- 
+
     -- Terminal
     use { "akinsho/toggleterm.nvim", tag = "*", config = [[require "config.toggleterm"]] }
 
     -- Telescope
-    use 
-    { 
-        "nvim-telescope/telescope.nvim", 
-        tag = "*", 
-        requires = 
+    use
+    {
+        "nvim-telescope/telescope.nvim",
+        tag = "*",
+        requires =
         {
-            "nvim-lua/plenary.nvim", 
+            "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope-ui-select.nvim", -- TODO: examine
             {
-                "nvim-telescope/telescope-fzf-native.nvim", 
+                "nvim-telescope/telescope-fzf-native.nvim",
                 run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
             }
         },
-        config = [[require "config.telescope"]] 
+        config = [[require "config.telescope"]]
     }
 
     -- Project
     use { "nvim-pack/nvim-spectre", config = [[require "config.spectre"]] } -- TODO: examine
 
     -- Quickfix
-    use 
-    { 
-        "kevinhwang91/nvim-bqf", 
-        ft = "qf", 
+    use
+    {
+        "kevinhwang91/nvim-bqf",
+        ft = "qf",
         config = function()
             require "bqf".setup { auto_resize_height = false, preview = { auto_preview = false } }
         end
@@ -188,7 +189,7 @@ return packer.startup(function(use)
     use { "lewis6991/gitsigns.nvim", config = [[require "config.gitsigns"]] } -- TODO: examine
 
     -- WhichKey
-    use 
+    use
     {
         "folke/which-key.nvim",
         event = "VimEnter",
@@ -204,15 +205,15 @@ return packer.startup(function(use)
     -- Utility
     use "cdelledonne/vim-cmake"
 
-    use 
+    use
     {
-        "j-hui/fidget.nvim", 
+        "j-hui/fidget.nvim",
         after = "nvim-lspconfig",
-        config = function() require "fidget".setup{} end
-    } -- TODO: examine
-    
+        config = function() require "fidget".setup {} end
+    }                                                                           -- TODO: examine
+
     use { "rmagatti/goto-preview", config = [[require "config.goto-preview"]] } -- TODO: examine
-    
+
     use
     {
         "nvimdev/guard.nvim",
@@ -220,20 +221,20 @@ return packer.startup(function(use)
         event = "BufReadPre",
         config = [[require "config.guard"]]
     }
-    
+
     --AI
-    use 
+    use
     {
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
         event = "InsertEnter",
-        config = function() require "copilot".setup{} end
+        config = function() require "copilot".setup {} end
     }
-    use 
+    use
     {
         "zbirenbaum/copilot-cmp",
         after = { "copilot.lua" },
-        config = function () require "copilot_cmp".setup{} end
+        config = function() require "copilot_cmp".setup {} end
     }
 
     -- Automatically set up your configuration after cloning packer.nvim

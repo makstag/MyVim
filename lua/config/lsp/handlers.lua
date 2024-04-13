@@ -169,7 +169,7 @@ local function lsp_keymaps(bufnr)
         opts
     )
 
-    vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format({async = true })' ]])
+    vim.cmd([[ command! Format execute "lua vim.lsp.buf.format({async = true })" ]])
 end
 
 -- client is LSP client, buffer?
@@ -179,10 +179,16 @@ M.on_attach = function(client, bufnr)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+	properties = { "documentation", "detail", "additionalTextEdits" }
+}
 local cmp_nvim_lsp = require "cmp_nvim_lsp"
 
 -- See :h deprecated
 -- update_capabilities is deprecated, use default_capabilities instead.
 M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+M.capabilities.textDocument.semanticHighlighting = true
+M.capabilities.offsetEncoding = "utf-8"
 
 return M
