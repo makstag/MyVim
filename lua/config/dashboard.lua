@@ -1,8 +1,8 @@
 require "dashboard".setup
 {
-    theme = 'hyper',
+    theme = "hyper",
     disable_move = true,  -- boolean default is false disable move key
-    shortcut_type = 'letter',
+    shortcut_type = "letter",
     change_to_vcs_root = false,
     preview = 
     {

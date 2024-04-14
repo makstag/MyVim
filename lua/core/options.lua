@@ -51,6 +51,7 @@ local options =
 -- vim.opt.fillchars = vim.opt.fillchars + "vertright: "
 vim.opt.fillchars = vim.opt.fillchars + 'eob: '
 vim.opt.fillchars:append { stl = ' ' }
+vim.opt.termguicolors = true
 
 vim.opt.shortmess:append "c"
 vim.opt.termguicolors = true

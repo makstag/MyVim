@@ -201,8 +201,6 @@ return packer.startup(function(use)
     use { "karb94/neoscroll.nvim", config = [[require "config.neoscroll"]] } -- TODO: examine
 
     -- Utility
-    use "cdelledonne/vim-cmake"
-
     use
     {
         "j-hui/fidget.nvim",
