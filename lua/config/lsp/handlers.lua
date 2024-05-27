@@ -1,5 +1,13 @@
 local M = {}
 
+M.with = function(handlers)
+    local _handlers = {}
+    for _, handler in ipairs(handlers) do
+        _handlers = vim.tbl_extend("keep", _handlers, handler)
+    end
+    return _handlers
+end
+
 -- TODO: backfill this to template
 M.setup = function()
     local signs = 
@@ -128,19 +136,15 @@ local function lsp_keymaps(bufnr)
     vim.api.nvim_buf_set_keymap(
         bufnr, 
         "n", 
-        "[E", 
-        function()
-            require "lspsaga.diagnostic".goto_prev({ severity = vim.diagnostic.severity.ERROR })
-        end, 
+        "[E",
+        "<cmd>lua require 'lspsaga.diagnostic'.goto_prev { severity = vim.diagnostic.severity.ERROR }<cr>",
         opts
     )
     vim.api.nvim_buf_set_keymap(
         bufnr, 
         "n", 
         "]E", 
-        function()
-            require "lspsaga.diagnostic".goto_next({ severity = vim.diagnostic.severity.ERROR })
-        end, 
+        "<cmd>lua require 'lspsaga.diagnostic'.goto_next { severity = vim.diagnostic.severity.ERROR }<cr>",
         opts
     )
 
@@ -178,11 +182,7 @@ M.on_attach = function(client, bufnr)
     lsp_highlight_document(client, bufnr)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-	properties = { "documentation", "detail", "additionalTextEdits" }
-}
+local capabilities = require "config.lsp.capability"
 local cmp_nvim_lsp = require "cmp_nvim_lsp"
 
 -- See :h deprecated

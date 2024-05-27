@@ -32,6 +32,7 @@ lspconfig.cmake.setup
     cmake_opts
 }
 
+-- cpp
 local clangd_opts = require "config.lsp.settings.clangd"
 lspconfig.clangd.setup
 {

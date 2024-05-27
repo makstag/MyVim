@@ -1,5 +1,5 @@
 -- Default configuration https://github.com/williamboman/mason.nvim#default-configuration
-require "mason".setup{}
+require "mason".setup {}
 
 require "mason-lspconfig".setup 
 {
@@ -9,7 +9,9 @@ require "mason-lspconfig".setup
         "diagnosticls", 
         "clangd", 
         "cmake", 
-        "lua_ls"
+        "lua_ls",
+        "clang-format",
+        "stylua"
     },
     automatic_installation = true
 }

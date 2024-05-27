@@ -25,4 +25,4 @@ api.nvim_create_autocmd({"TextChangedI", "TextChangedP"},
     pattern = "*"
 })
 
-vim.diagnostic.config { virtual_text = false }
+vim.diagnostic.config { virtual_text = false, severity_sort = true }

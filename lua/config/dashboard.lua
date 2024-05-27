@@ -40,6 +40,6 @@ require "dashboard".setup
         -- limit how many projects list, action when you press key or enter it will run this action.
         -- action can be a functino type, e.g.
         -- action = func(path) vim.cmd('Telescope find_files cwd=' .. path) end
-        footer = { "neovim v9.5" }, -- footer
+        footer = { "neovim v0.11.0" }, -- footer
     }
 }

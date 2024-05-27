@@ -62,6 +62,7 @@ return packer.startup(function(use)
         requires =
         {
             "nvimdev/lspsaga.nvim",
+            "nvim-lua/lsp-status.nvim",
             "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim"

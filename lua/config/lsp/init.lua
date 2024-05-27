@@ -7,7 +7,7 @@ end
 require "config.lsp.mason"
 
 -- lsp-config
-require "config.lsp.handlers".setup{}
+require "config.lsp.handlers".setup {}
 require "config.lsp.settings"
 require "config.lsp.lspsaga"
-require "lsp_lines".setup{}
+require "lsp_lines".setup {}
