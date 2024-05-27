@@ -211,14 +211,6 @@ return packer.startup(function(use)
 
     use { "rmagatti/goto-preview", config = [[require "config.goto-preview"]] } -- TODO: examine
 
-    use
-    {
-        "nvimdev/guard.nvim",
-        requires = "nvimdev/guard-collection",
-        event = "BufReadPre",
-        config = [[require "config.guard"]]
-    }
-
     --AI
     use
     {

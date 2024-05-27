@@ -181,19 +181,6 @@ _G.packer_plugins = {
     path = "/home/bpm/.local/share/nvim/site/pack/packer/start/goto-preview",
     url = "https://github.com/rmagatti/goto-preview"
   },
-  ["guard-collection"] = {
-    loaded = true,
-    path = "/home/bpm/.local/share/nvim/site/pack/packer/start/guard-collection",
-    url = "https://github.com/nvimdev/guard-collection"
-  },
-  ["guard.nvim"] = {
-    config = { 'require "config.guard"' },
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/home/bpm/.local/share/nvim/site/pack/packer/opt/guard.nvim",
-    url = "https://github.com/nvimdev/guard.nvim"
-  },
   ["impatient.nvim"] = {
     config = { 'require "impatient".enable_profile()' },
     loaded = true,
@@ -412,46 +399,30 @@ if not vim.g.packer_custom_loader_enabled then
   vim.g.packer_custom_loader_enabled = true
 end
 
--- Config for: neoscroll.nvim
-time([[Config for neoscroll.nvim]], true)
-require "config.neoscroll"
-time([[Config for neoscroll.nvim]], false)
--- Config for: lualine.nvim
-time([[Config for lualine.nvim]], true)
-try_loadstring("\27LJ\2\nh\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\foptions\1\0\1\foptions\0\1\0\1\ntheme\14retrowave\nsetup\flualine\frequire\0", "config", "lualine.nvim")
-time([[Config for lualine.nvim]], false)
--- Config for: goto-preview
-time([[Config for goto-preview]], true)
-require "config.goto-preview"
-time([[Config for goto-preview]], false)
--- Config for: impatient.nvim
-time([[Config for impatient.nvim]], true)
-require "impatient".enable_profile()
-time([[Config for impatient.nvim]], false)
--- Config for: fluoromachine.nvim
-time([[Config for fluoromachine.nvim]], true)
-require "config.colorscheme"
-time([[Config for fluoromachine.nvim]], false)
 -- Config for: nvim-lspconfig
 time([[Config for nvim-lspconfig]], true)
 require "config.lsp"
 time([[Config for nvim-lspconfig]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-require "config.autopairs"
-time([[Config for nvim-autopairs]], false)
+-- Config for: impatient.nvim
+time([[Config for impatient.nvim]], true)
+require "impatient".enable_profile()
+time([[Config for impatient.nvim]], false)
 -- Config for: gitsigns.nvim
 time([[Config for gitsigns.nvim]], true)
 require "config.gitsigns"
 time([[Config for gitsigns.nvim]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+require "config.autopairs"
+time([[Config for nvim-autopairs]], false)
 -- Config for: nvim-cmp
 time([[Config for nvim-cmp]], true)
 require "config.cmp"
 time([[Config for nvim-cmp]], false)
--- Config for: toggleterm.nvim
-time([[Config for toggleterm.nvim]], true)
-require "config.toggleterm"
-time([[Config for toggleterm.nvim]], false)
+-- Config for: goto-preview
+time([[Config for goto-preview]], true)
+require "config.goto-preview"
+time([[Config for goto-preview]], false)
 -- Config for: nvim-spectre
 time([[Config for nvim-spectre]], true)
 require "config.spectre"
@@ -460,14 +431,30 @@ time([[Config for nvim-spectre]], false)
 time([[Config for nvim-dap]], true)
 try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\15config.dap\frequire\0", "config", "nvim-dap")
 time([[Config for nvim-dap]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-require "config.telescope"
-time([[Config for telescope.nvim]], false)
+-- Config for: toggleterm.nvim
+time([[Config for toggleterm.nvim]], true)
+require "config.toggleterm"
+time([[Config for toggleterm.nvim]], false)
 -- Config for: nvim-tree.lua
 time([[Config for nvim-tree.lua]], true)
 require "config.tree"
 time([[Config for nvim-tree.lua]], false)
+-- Config for: neoscroll.nvim
+time([[Config for neoscroll.nvim]], true)
+require "config.neoscroll"
+time([[Config for neoscroll.nvim]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+require "config.telescope"
+time([[Config for telescope.nvim]], false)
+-- Config for: fluoromachine.nvim
+time([[Config for fluoromachine.nvim]], true)
+require "config.colorscheme"
+time([[Config for fluoromachine.nvim]], false)
+-- Config for: lualine.nvim
+time([[Config for lualine.nvim]], true)
+try_loadstring("\27LJ\2\nh\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\foptions\1\0\1\foptions\0\1\0\1\ntheme\14retrowave\nsetup\flualine\frequire\0", "config", "lualine.nvim")
+time([[Config for lualine.nvim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd fidget.nvim ]]
@@ -496,9 +483,8 @@ vim.cmd [[au FileType qf ++once lua require("packer.load")({'nvim-bqf'}, { ft = 
 time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
+vim.cmd [[au VimEnter * ++once lua require("packer.load")({'dashboard-nvim', 'bufferline.nvim', 'which-key.nvim'}, { event = "VimEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'copilot.lua'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
-vim.cmd [[au BufReadPre * ++once lua require("packer.load")({'guard.nvim'}, { event = "BufReadPre *" }, _G.packer_plugins)]]
-vim.cmd [[au VimEnter * ++once lua require("packer.load")({'bufferline.nvim', 'which-key.nvim', 'dashboard-nvim'}, { event = "VimEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au BufEnter * ++once lua require("packer.load")({'nvim-treesitter'}, { event = "BufEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")

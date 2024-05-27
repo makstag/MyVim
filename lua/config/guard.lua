@@ -1,8 +1,8 @@
 local ft = require "guard.filetype"
 
 -- Assuming you have guard-collection
-ft("c, cpp, cuda"):fmt("clang-format")--:lint("clang-tidy")
-ft("lua"):fmt("stylua")
+--ft("c, cpp, cuda"):fmt("clang-format")--:lint("clang-tidy")
+--ft("lua"):fmt("stylua")
 
 -- Call setup() LAST!
 require "guard".setup

@@ -9,9 +9,7 @@ require "mason-lspconfig".setup
         "diagnosticls", 
         "clangd", 
         "cmake", 
-        "lua_ls",
-        "clang-format",
-        "stylua"
+        "lua_ls"
     },
     automatic_installation = true
 }

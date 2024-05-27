@@ -116,7 +116,6 @@ cmp.setup
                     buffer = "[Buffer]",
                     nvim_lsp = "[LSP]",
                     nvim_lua = "[Lua]",
-                    path = "[Path]",
                     luasnip = "[LuaSnip]",
                     tn = "[TabNine]",
                     copilot = "[Copilot]"
@@ -128,8 +127,7 @@ cmp.setup
     sources = 
     {
         { name = "nvim_lsp" }, { name = "buffer" }, { name = "luasnip" },
-        { name = "nvim_lua" }, { name = "copilot" },
-        { name = "path" }, 
+        { name = "nvim_lua" }, { name = "copilot" }
     },
     completion = { completeopt = "menu,menuone,noselect,noinsert" },
     confirm_opts = 
