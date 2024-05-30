@@ -4,13 +4,13 @@ require "dashboard".setup
     disable_move = true,  -- boolean default is false disable move key
     shortcut_type = "letter",
     change_to_vcs_root = false,
-    preview = 
+    --[[preview = 
     {
         command = "chafa --stretch -C on -p on --polite on", -- preview command -C on -p on --polite on --threads 2  --stretch
         file_path = vim.fn.stdpath "config" .. "/static/evat.gif",     -- preview file path
         file_height = 36,  -- preview file height
         file_width = 120,    -- preview file width
-    },
+    },]]
     config = 
     {
         shortcut = 
@@ -36,10 +36,10 @@ require "dashboard".setup
             },
         },
         hide = { tabline = false },
-        packages = { enable = false }, -- show how many plugins neovim loaded
+        packages = { enable = true }, -- show how many plugins neovim loaded
         -- limit how many projects list, action when you press key or enter it will run this action.
         -- action can be a functino type, e.g.
         -- action = func(path) vim.cmd('Telescope find_files cwd=' .. path) end
-        footer = { "neovim v0.11.0" }, -- footer
+        footer = { "NEOVIM STABLE v0.10.0" }, -- footer
     }
 }

@@ -77,7 +77,7 @@ return packer.startup(function(use)
         requires =
         {
             { "tzachar/cmp-tabnine", run = "./install.sh" },
-            { "L3MON4D3/LuaSnip",    tag = "v2.*",        run = "make install_jsregexp" },
+            { "L3MON4D3/LuaSnip", tag = "v2.*", run = "make install_jsregexp" },
             "onsails/lspkind-nvim",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
@@ -109,12 +109,12 @@ return packer.startup(function(use)
         requires =
         {
             { "theHamsta/nvim-dap-virtual-text", module = { "nvim-dap-virtual-text" } },
-            { "rcarriga/nvim-dap-ui",            module = { "dapui" } },
+            { "rcarriga/nvim-dap-ui", module = { "dapui" } },
             "nvim-telescope/telescope-dap.nvim",
             "rcarriga/cmp-dap",
             "nvim-neotest/nvim-nio"
         },
-        config = function() require "config.dap".setup {} end
+        config = [[requeire "config.dap"]]
     } -- TODO: examine
 
     -- GUI
