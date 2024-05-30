@@ -130,17 +130,9 @@ cmp.setup
         { name = "nvim_lua" }, { name = "copilot" }
     },
     completion = { completeopt = "menu,menuone,noselect,noinsert" },
-    confirm_opts = 
-    {
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = false,
-    },
+    confirm_opts = { behavior = cmp.ConfirmBehavior.Replace, select = false, },
     window = { documentation = cmp.config.window.bordered() },
-    experimental = 
-    {
-        ghost_text = false,
-        view = { entries = "native_menu" }
-    }
+    experimental = { ghost_text = false, view = { entries = "native_menu" }}
 }
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
