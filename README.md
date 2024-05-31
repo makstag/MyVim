@@ -9,3 +9,5 @@ https://mnorin.com/goryachie-klavishi-vim.html
 :TSUpdate  
 :TSUpdateSync  
 :MasonUpdate  
+## TODO  
+lsp attach  
