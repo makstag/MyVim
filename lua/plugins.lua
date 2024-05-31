@@ -86,7 +86,7 @@ return packer.startup(function(use)
             "hrsh7th/cmp-nvim-lua",
             "saadparwaiz1/cmp_luasnip"
         },
-        config = function() require "config.lsnip" require "config.cmp" end
+        config = function() require "config.luasnipet" require "config.cmp" end
     }
 
     -- Syntax/Treesitter
@@ -103,6 +103,7 @@ return packer.startup(function(use)
     use { "maxmx03/fluoromachine.nvim", config = [[require "config.colorscheme"]] }
 
     -- Debugging
+    use  "mfussenegger/nvim-dap-python"
     use
     {
         "mfussenegger/nvim-dap",
@@ -110,18 +111,19 @@ return packer.startup(function(use)
         {
             { "theHamsta/nvim-dap-virtual-text", module = { "nvim-dap-virtual-text" } },
             { "rcarriga/nvim-dap-ui", module = { "dapui" } },
+            { "folke/which-key.nvim", module = { "which-key" } },
             "nvim-telescope/telescope-dap.nvim",
             "rcarriga/cmp-dap",
             "nvim-neotest/nvim-nio"
         },
-        config = [[requeire "config.dap"]]
+        config = [[require "config.dap".setup {}]]
     } -- TODO: examine
 
     -- GUI
     use
     {
         "nvim-lualine/lualine.nvim",
-        config = function() require "lualine".setup { options = { theme = "retrowave" } } end
+        config = [[require "config.lualine"]]
     }
     use
     {
@@ -136,9 +138,8 @@ return packer.startup(function(use)
     -- File Explorer
     use
     {
-        "kyazdani42/nvim-tree.lua",
+        "nvim-tree/nvim-tree.lua",
         requires = "nvim-tree/nvim-web-devicons",
-        tag = "nightly",
         config = [[require "config.tree"]]
     }
 
@@ -172,7 +173,7 @@ return packer.startup(function(use)
     }
 
     -- Project
-    use { "nvim-pack/nvim-spectre", config = [[require "config.spectre"]] } -- TODO: examine
+    use { "nvim-pack/nvim-spectre", config = [[require "config.spectre"]] }     -- TODO: examine
 
     -- Quickfix
     use
@@ -185,21 +186,12 @@ return packer.startup(function(use)
     }
 
     -- Git
-    use { "lewis6991/gitsigns.nvim", config = [[require "config.gitsigns"]] } -- TODO: examine
-
-    -- WhichKey
-    use
-    {
-        "folke/which-key.nvim",
-        event = "VimEnter",
-        module = { "which-key" },
-        disable = false
-    } -- TODO: examine
+    use { "lewis6991/gitsigns.nvim", config = [[require "config.gitsigns"]] }   -- TODO: examine
 
     -- Editing Support
     use { "windwp/nvim-autopairs", config = [[require "config.autopairs"]] }
 
-    use { "karb94/neoscroll.nvim", config = [[require "config.neoscroll"]] } -- TODO: examine
+    use { "karb94/neoscroll.nvim", config = function () require "neoscroll".setup {} end } -- TODO: examine
 
     -- Utility
     use
@@ -217,14 +209,24 @@ return packer.startup(function(use)
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
         event = "InsertEnter",
-        config = function() require "copilot".setup {} end
+        config = function() 
+            require "copilot".setup
+            {
+                suggestion = { enabled = false },
+                panel = { enabled = false },
+                filetypes = { cpp = true, c = true, markdown = true, cmake = true, ["*"] = false }
+            } 
+        end
     }
     use
     {
         "zbirenbaum/copilot-cmp",
-        after = { "copilot.lua" },
+        event = "InsertEnter",
+        fix_pairs = true,
+        after = "copilot.lua",
         config = function() require "copilot_cmp".setup {} end
     }
+    use "AndreM222/copilot-lualine"
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

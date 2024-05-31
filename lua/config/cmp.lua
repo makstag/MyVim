@@ -59,12 +59,7 @@ cmp.setup
             end
         end    
     },
-    snippet = 
-    {
-        expand = function(args)
-            luasnip.lsp_expand(args.body) -- import `luasnip` engine
-        end,
-    },
+    snippet = { expand = function(args) luasnip.lsp_expand(args.body) end },
     mapping = 
     {
         ["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -127,7 +122,7 @@ cmp.setup
     sources = 
     {
         { name = "nvim_lsp" }, { name = "buffer" }, { name = "luasnip" },
-        { name = "nvim_lua" }, { name = "copilot" }
+        { name = "nvim_lua" }, { name = "tn" }, { name = "copilot" }
     },
     completion = { completeopt = "menu,menuone,noselect,noinsert" },
     confirm_opts = { behavior = cmp.ConfirmBehavior.Replace, select = false, },
@@ -150,7 +145,7 @@ cmp.setup.cmdline('/',
 
 cmp.setup.filetype({ "TelescopePrompt", "dap-repl", "dapui_watches", "dapui_hover" }, 
 {
-    enabled = false,
+    enabled = true,
     sources = { { name = "dap" } },
 })
 

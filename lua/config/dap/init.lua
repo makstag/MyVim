@@ -120,9 +120,9 @@ local function configure_exts()
 end
 
 local function configure_debuggers()
-    -- require "config.dap.lua".setup{}
-    -- require "config.dap.python".setup{}
-    require "config.dap.cpp".setup{}
+    require "config.dap.lua".setup {}
+    require "config.dap.python".setup {}
+    require "config.dap.cpp".setup {}
 end
 
 function M.setup()
@@ -131,7 +131,5 @@ function M.setup()
     configure_debuggers()               -- Debugger
     require "config.dap.keymaps".setup{} -- Keymaps
 end
-
-configure_debuggers()
 
 return M

@@ -1,5 +1,4 @@
 require "plugins"
-
-require "core.options"
 require "core.keymaps"
+require "core.options"
 require "config.support"
