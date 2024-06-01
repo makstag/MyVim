@@ -11,3 +11,7 @@ https://mnorin.com/goryachie-klavishi-vim.html
 :MasonUpdate  
 ## TODO  
 lsp attach  
+gen  
+gitsigns  
+obsidian  
+trouble  
