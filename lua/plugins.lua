@@ -86,7 +86,7 @@ return packer.startup(function(use)
             "hrsh7th/cmp-nvim-lua",
             "saadparwaiz1/cmp_luasnip"
         },
-        config = function() require "config.luasnipet" require "config.cmp" end
+        config = function() require "config.luasnip" require "config.cmp" end
     }
 
     -- Syntax/Treesitter

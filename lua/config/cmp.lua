@@ -44,6 +44,8 @@ local kind_icons =
     TypeParameter = "",
 }
 
+local lspsnips = {}
+
 cmp.setup 
 {
     enabled = 
@@ -59,7 +61,16 @@ cmp.setup
             end
         end    
     },
-    snippet = { expand = function(args) luasnip.lsp_expand(args.body) end },
+    snippet = 
+    { 
+        expand = function(args) 
+            if lspsnips[args.body] then
+                luasnip.snip_expand(lspsnips[args.body])
+            else
+                luasnip.lsp_expand(args.body) 
+            end
+        end 
+    },
     mapping = 
     {
         ["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -111,19 +122,19 @@ cmp.setup
                     buffer = "[Buffer]",
                     nvim_lsp = "[LSP]",
                     nvim_lua = "[Lua]",
-                    luasnip = "[LuaSnip]",
-                    tn = "[TabNine]",
-                    copilot = "[Copilot]"
+                    --luasnip = "[LuaSnip]",
+                    --tn = "[TN]",
+                    --copilot = "[Copilot]"
                 })[entry.source.name]
                 return vim_item
             end
         }
     },
-    sources = 
+    sources = cmp.config.sources(
     {
-        { name = "nvim_lsp" }, { name = "buffer" }, { name = "luasnip" },
-        { name = "nvim_lua" }, { name = "tn" }, { name = "copilot" }
-    },
+        { name = "nvim_lsp" }, { name = "luasnip", option = { show_autosnippets = true } },
+        { name = "nvim_lua" }, { name = "tn" }, { name = "copilot", group_index = 2 }
+    }, { name = "buffer", keyword_length = 3 }),
     completion = { completeopt = "menu,menuone,noselect,noinsert" },
     confirm_opts = { behavior = cmp.ConfirmBehavior.Replace, select = false, },
     window = { documentation = cmp.config.window.bordered() },
@@ -134,13 +145,13 @@ cmp.setup
 cmp.setup.cmdline(':', 
 {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({ { name = 'path' } }, 
-        { { name = 'cmdline' } })
+    sources = cmp.config.sources({ { name = "path" } }, 
+        { { name = "cmdline" } })
 })
 
-cmp.setup.cmdline('/', 
+cmp.setup.cmdline("/", 
 {                                  
-    view = { entries = {name = 'wildmenu', separator = '|' } }                                             
+    view = { entries = {name = "wildmenu", separator = "|" } }                                             
 })                                                        
 
 cmp.setup.filetype({ "TelescopePrompt", "dap-repl", "dapui_watches", "dapui_hover" }, 
@@ -151,3 +162,32 @@ cmp.setup.filetype({ "TelescopePrompt", "dap-repl", "dapui_watches", "dapui_hove
 
 -- TabNine
 require "cmp_tabnine.config":setup({max_lines = 1000, max_num_results = 20, sort = true})
+
+bufIsBig = function(bufnr)
+	local max_filesize = 100 * 1024 -- 100 KB
+	local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(bufnr))
+	if ok and stats and stats.size > max_filesize then
+		return true
+	else
+		return false
+	end
+end
+
+-- default sources for all buffers
+local default_cmp_sources = cmp.config.sources({
+	{ name = "nvim_lsp" }
+}, {
+	{ name = "path" }
+})
+-- If a file is too large, I don't want to add to it's cmp sources treesitter, see:
+-- https://github.com/hrsh7th/nvim-cmp/issues/1522
+vim.api.nvim_create_autocmd("BufReadPre", 
+{
+	callback = function(t)
+		local sources = default_cmp_sources
+		if not bufIsBig(t.buf) then
+			sources[#sources+1] = {name = "treesitter", group_index = 2}
+		end
+	cmp.setup.buffer { sources = sources	}
+	end
+})

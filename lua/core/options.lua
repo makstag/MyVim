@@ -10,7 +10,7 @@ local options =
     
     hlsearch = true,                         -- highlight all matches on previous search pattern
     ignorecase = true,                       -- ignore case in search patterns
-    mouse = "",                             -- allow the mouse to be used in neovim
+    mouse = "",                              -- allow the mouse to be used in neovim
     pumheight = 10,                          -- pop up menu height
     showmode = false,                        -- we don't need to see things like -- INSERT -- anymore
     showtabline = 0,                         -- always show tabs
@@ -32,7 +32,7 @@ local options =
     laststatus = 3,
     showcmd = false,
     ruler = false,
-    relativenumber = true,                  -- set relative numbered lines
+    relativenumber = true,                   -- set relative numbered lines
     numberwidth = 4,                         -- set number column width to 2 {default 4}
     signcolumn = "no",                       -- always show the sign column, otherwise it would shift the text each time
     wrap = false,                            -- display lines as one long line
