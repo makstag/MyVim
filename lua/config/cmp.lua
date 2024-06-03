@@ -15,36 +15,15 @@ local check_back_space = function()
     return col == 0 or vim.fn.getline ".":sub(col, col):match "%s" ~= nil
 end
 
-local kind_icons = 
-{
-    Text = "",
-    Method = "m",
-    Function = "",
-    Constructor = "",
-    Field = "",
-    Variable = "",
-    Class = "",
-    Interface = "",
-    Module = "",
-    Property = "",
-    Unit = "",
-    Value = "",
-    Enum = "",
-    Keyword = "",
-    Snippet = "",
-    Color = "",
-    File = "",
-    Reference = "",
-    Folder = "",
-    EnumMember = "",
-    Constant = "",
-    Struct = "",
-    Event = "",
-    Operator = "",
-    TypeParameter = "",
-}
-
 local lspsnips = {}
+local source_mapping = 
+{
+	buffer = "[Buffer]",
+	nvim_lsp = "[LSP]",
+	nvim_lua = "[Lua]",
+	cmp_tabnine = "[TN]",
+	path = "[Path]",
+}
 
 cmp.setup 
 {
@@ -109,32 +88,33 @@ cmp.setup
     formatting = 
     {
         -- Youtube: How to set up nice formatting for your sources.
-        format = lspkind.cmp_format 
-        {
-            mode = "symbol_text",
-            max_width = 50,
-            with_text = true,
-            ellipsis_char = '...',
-            before = function (entry, vim_item)
-                vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-                vim_item.menu = 
-                ({
-                    buffer = "[Buffer]",
-                    nvim_lsp = "[LSP]",
-                    nvim_lua = "[Lua]",
-                    --luasnip = "[LuaSnip]",
-                    --tn = "[TN]",
-                    --copilot = "[Copilot]"
-                })[entry.source.name]
-                return vim_item
-            end
-        }
+        format = function(entry, vim_item)
+            -- if you have lspkind installed, you can use it like
+            -- in the following line:
+	 	 vim_item.kind = lspkind.symbolic(vim_item.kind, {mode = "symbol"})
+	 	 vim_item.menu = source_mapping[entry.source.name]
+	 	 if entry.source.name == "cmp_tabnine" then
+                local detail = (entry.completion_item.labelDetails or {}).detail
+	 		vim_item.kind = ""
+	 		if detail and detail:find('.*%%.*') then
+	 		    vim_item.kind = vim_item.kind .. ' ' .. detail
+	 		end
+
+	 		if (entry.completion_item.data or {}).multiline then
+	 		    vim_item.kind = vim_item.kind .. ' ' .. '[ML]'
+	 		end
+	 	 end
+	 	 local maxwidth = 80
+	 	 vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
+	 	 return vim_item
+	  end
     },
-    sources = cmp.config.sources(
+    sources =
     {
-        { name = "nvim_lsp" }, { name = "luasnip", option = { show_autosnippets = true } },
-        { name = "nvim_lua" }, { name = "tn" }, { name = "copilot", group_index = 2 }
-    }, { name = "buffer", keyword_length = 3 }),
+        { name = "nvim_lsp" }, { name = "nvim_lua" },
+        { name = "luasnip" }, { name = "buffer" },
+        { name = "cmp_tabnine" }, { name = "path" }, 
+    },    
     completion = { completeopt = "menu,menuone,noselect,noinsert" },
     confirm_opts = { behavior = cmp.ConfirmBehavior.Replace, select = false, },
     window = { documentation = cmp.config.window.bordered() },
@@ -162,32 +142,3 @@ cmp.setup.filetype({ "TelescopePrompt", "dap-repl", "dapui_watches", "dapui_hove
 
 -- TabNine
 require "cmp_tabnine.config":setup({max_lines = 1000, max_num_results = 20, sort = true})
-
-bufIsBig = function(bufnr)
-	local max_filesize = 100 * 1024 -- 100 KB
-	local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(bufnr))
-	if ok and stats and stats.size > max_filesize then
-		return true
-	else
-		return false
-	end
-end
-
--- default sources for all buffers
-local default_cmp_sources = cmp.config.sources({
-	{ name = "nvim_lsp" }
-}, {
-	{ name = "path" }
-})
--- If a file is too large, I don't want to add to it's cmp sources treesitter, see:
--- https://github.com/hrsh7th/nvim-cmp/issues/1522
-vim.api.nvim_create_autocmd("BufReadPre", 
-{
-	callback = function(t)
-		local sources = default_cmp_sources
-		if not bufIsBig(t.buf) then
-			sources[#sources+1] = {name = "treesitter", group_index = 2}
-		end
-	cmp.setup.buffer { sources = sources	}
-	end
-})
