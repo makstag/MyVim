@@ -4,7 +4,8 @@ require "nvim-autopairs".setup
     ts_config = 
     {
         lua = { "string", "source" },
-        cpp = { "string", "source" }
+        cpp = { "string", "source" },
+        c = { "string", "source" }
     },
     disable_filetype = { "TelescopePrompt", "specter_panel" },
     fast_wrap = 

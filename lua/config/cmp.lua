@@ -15,33 +15,14 @@ local check_back_space = function()
     return col == 0 or vim.fn.getline ".":sub(col, col):match "%s" ~= nil
 end
 
-local kind_icons = 
+local lspsnips = {}
+local source_mapping = 
 {
-    Text = "",
-    Method = "m",
-    Function = "",
-    Constructor = "",
-    Field = "",
-    Variable = "",
-    Class = "",
-    Interface = "",
-    Module = "",
-    Property = "",
-    Unit = "",
-    Value = "",
-    Enum = "",
-    Keyword = "",
-    Snippet = "",
-    Color = "",
-    File = "",
-    Reference = "",
-    Folder = "",
-    EnumMember = "",
-    Constant = "",
-    Struct = "",
-    Event = "",
-    Operator = "",
-    TypeParameter = "",
+	buffer = "[Buffer]",
+	nvim_lsp = "[LSP]",
+	nvim_lua = "[Lua]",
+	cmp_tabnine = "[TN]",
+	path = "[Path]",
 }
 
 cmp.setup 
@@ -59,7 +40,16 @@ cmp.setup
             end
         end    
     },
-    snippet = { expand = function(args) luasnip.lsp_expand(args.body) end },
+    snippet = 
+    { 
+        expand = function(args) 
+            if lspsnips[args.body] then
+                luasnip.snip_expand(lspsnips[args.body])
+            else
+                luasnip.lsp_expand(args.body) 
+            end
+        end 
+    },
     mapping = 
     {
         ["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -98,32 +88,33 @@ cmp.setup
     formatting = 
     {
         -- Youtube: How to set up nice formatting for your sources.
-        format = lspkind.cmp_format 
-        {
-            mode = "symbol_text",
-            max_width = 50,
-            with_text = true,
-            ellipsis_char = '...',
-            before = function (entry, vim_item)
-                vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-                vim_item.menu = 
-                ({
-                    buffer = "[Buffer]",
-                    nvim_lsp = "[LSP]",
-                    nvim_lua = "[Lua]",
-                    luasnip = "[LuaSnip]",
-                    tn = "[TabNine]",
-                    copilot = "[Copilot]"
-                })[entry.source.name]
-                return vim_item
-            end
-        }
+        format = function(entry, vim_item)
+            -- if you have lspkind installed, you can use it like
+            -- in the following line:
+	 	 vim_item.kind = lspkind.symbolic(vim_item.kind, {mode = "symbol"})
+	 	 vim_item.menu = source_mapping[entry.source.name]
+	 	 if entry.source.name == "cmp_tabnine" then
+                local detail = (entry.completion_item.labelDetails or {}).detail
+	 		vim_item.kind = ""
+	 		if detail and detail:find('.*%%.*') then
+	 		    vim_item.kind = vim_item.kind .. ' ' .. detail
+	 		end
+
+	 		if (entry.completion_item.data or {}).multiline then
+	 		    vim_item.kind = vim_item.kind .. ' ' .. '[ML]'
+	 		end
+	 	 end
+	 	 local maxwidth = 80
+	 	 vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
+	 	 return vim_item
+	  end
     },
-    sources = 
+    sources =
     {
-        { name = "nvim_lsp" }, { name = "buffer" }, { name = "luasnip" },
-        { name = "nvim_lua" }, { name = "tn" }, { name = "copilot" }
-    },
+        { name = "nvim_lsp" }, { name = "nvim_lua" },
+        { name = "luasnip" }, { name = "buffer" },
+        { name = "cmp_tabnine" }, { name = "path" }, 
+    },    
     completion = { completeopt = "menu,menuone,noselect,noinsert" },
     confirm_opts = { behavior = cmp.ConfirmBehavior.Replace, select = false, },
     window = { documentation = cmp.config.window.bordered() },
@@ -134,13 +125,13 @@ cmp.setup
 cmp.setup.cmdline(':', 
 {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({ { name = 'path' } }, 
-        { { name = 'cmdline' } })
+    sources = cmp.config.sources({ { name = "path" } }, 
+        { { name = "cmdline" } })
 })
 
-cmp.setup.cmdline('/', 
+cmp.setup.cmdline("/", 
 {                                  
-    view = { entries = {name = 'wildmenu', separator = '|' } }                                             
+    view = { entries = {name = "wildmenu", separator = "|" } }                                             
 })                                                        
 
 cmp.setup.filetype({ "TelescopePrompt", "dap-repl", "dapui_watches", "dapui_hover" }, 

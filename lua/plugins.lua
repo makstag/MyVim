@@ -81,12 +81,12 @@ return packer.startup(function(use)
             "onsails/lspkind-nvim",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
-            "hrsh7th/cmp-cmdline",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lua",
+            "hrsh7th/cmp-cmdline",
             "saadparwaiz1/cmp_luasnip"
         },
-        config = function() require "config.luasnipet" require "config.cmp" end
+        config = function() require "config.luasnip" require "config.cmp" end
     }
 
     -- Syntax/Treesitter
@@ -123,7 +123,7 @@ return packer.startup(function(use)
     use
     {
         "nvim-lualine/lualine.nvim",
-        config = [[require "config.lualine"]]
+        config = function() require "lualine".setup { options = { theme = "retrowave" } } end
     }
     use
     {
@@ -172,9 +172,6 @@ return packer.startup(function(use)
         config = [[require "config.telescope"]]
     }
 
-    -- Project
-    use { "nvim-pack/nvim-spectre", config = [[require "config.spectre"]] }     -- TODO: examine
-
     -- Quickfix
     use
     {
@@ -202,31 +199,6 @@ return packer.startup(function(use)
     }                                                                           -- TODO: examine
 
     use { "rmagatti/goto-preview", config = [[require "config.goto-preview"]] } -- TODO: examine
-
-    --AI
-    use
-    {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = function() 
-            require "copilot".setup
-            {
-                suggestion = { enabled = false },
-                panel = { enabled = false },
-                filetypes = { cpp = true, c = true, markdown = true, cmake = true, ["*"] = false }
-            } 
-        end
-    }
-    use
-    {
-        "zbirenbaum/copilot-cmp",
-        event = "InsertEnter",
-        fix_pairs = true,
-        after = "copilot.lua",
-        config = function() require "copilot_cmp".setup {} end
-    }
-    use "AndreM222/copilot-lualine"
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
