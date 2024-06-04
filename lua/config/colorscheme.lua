@@ -13,20 +13,20 @@ end
 require "fluoromachine".setup 
 {
     glow = true,
-    theme = 'retrowave',
+    theme = "retrowave",
     overrides = overrides,
-    transparent = 'full',
+    transparent = "full",
     colors = function(_, d)
         return 
         {
-            bg = '#190920',
-            alt_bg = d('#190920', 20),
-            cyan = '#49eaff',
-            red = '#ff1e34',
-            yellow = '#ffe756',
-            orange = '#f38e21',
-            pink = '#ffadff',
-            purple = '#9544f7',
+            bg = "#190920",
+            alt_bg = d("#190920", 20),
+            cyan = "#49eaff",
+            red = "#ff1e34",
+            yellow = "#ffe756",
+            orange = "#f38e21",
+            pink = "#ffadff",
+            purple = "#9544f7",
         }
     end,
 }
