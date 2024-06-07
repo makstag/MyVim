@@ -28,5 +28,6 @@ require "nvim-treesitter.parsers".get_parser_configs().caddy =
     filetype = "caddy"
 }
 
+configs.ensure_installed = configs.ensure_installed or {}
 vim.list_extend(configs.ensure_installed, { "caddy" })
 vim.filetype.add({ pattern = { ["Caddyfile"] = "caddy" } })
