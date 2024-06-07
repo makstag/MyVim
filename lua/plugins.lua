@@ -94,7 +94,7 @@ return packer.startup(function(use)
     {
         "nvim-treesitter/nvim-treesitter",
         requires = "JoosepAlviste/nvim-ts-context-commentstring", -- TODO: examine
-        event = "BufRead Caddyfile",
+        event = "BufEnter",
         run = function() require "nvim-treesitter.install".update { with_sync = true } end,
         config = [[require "config.treesitter"]]
     }
