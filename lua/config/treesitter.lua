@@ -16,17 +16,3 @@ configs.setup
     autotag = { enable = true },
     indent = { enable = false }
 }
-
-require "nvim-treesitter.parsers".get_parser_configs().caddy = 
-{
-    install_info = 
-    {
-        url = "https://github.com/Samonitari/tree-sitter-caddy",
-        files = { "src/parser.c", "src/scanner.c" },
-        branch = "master",
-    },
-    filetype = "caddy"
-}
-
-vim.list_extend(configs.ensure_installed, { "caddy" })
-vim.filetype.add({ pattern = { ["Caddyfile"] = "caddy" } })
