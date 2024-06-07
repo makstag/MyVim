@@ -65,7 +65,6 @@ local function lsp_highlight_document(client, bufnr)
     if client.server_capabilities.documentHighlightProvider then
         api.nvim_create_augroup("lsp_document_highlight", { clear = true })
         api.nvim_clear_autocmds({ buffer = bufnr, group = "lsp_document_highlight" })
-        api.nvim_create_autocmd("InsertEnter", { command = "set norelativenumber", pattern = "*" })
         api.nvim_create_autocmd("TermOpen", { command = "startinsert", pattern = "*" })
         api.nvim_create_autocmd("CursorHold", 
         {
@@ -74,13 +73,15 @@ local function lsp_highlight_document(client, bufnr)
             group = "lsp_document_highlight",
             desc = "Document Highlight",
         })
-        api.nvim_create_autocmd("CursorMoved", {
+        api.nvim_create_autocmd("CursorMoved", 
+        {
             callback = vim.lsp.buf.clear_references,
             buffer = bufnr,
             group = "lsp_document_highlight",
             desc = "Clear All the References",
         })
-        api.nvim_create_autocmd("TermOpen", {
+        api.nvim_create_autocmd("TermOpen", 
+        {
             callback = function()
                 -- disable line numbers
                 vim.opt_local.number = false
@@ -90,17 +91,14 @@ local function lsp_highlight_document(client, bufnr)
             end,
             pattern = "*"
         })
-        api.nvim_create_autocmd(
-            {"TextChangedI", "TextChangedP"},
+        api.nvim_create_autocmd({"TextChangedI", "TextChangedP"},
             {
                 callback = function()
                 local line = vim.api.nvim_get_current_line()
                 local cursor = vim.api.nvim_win_get_cursor(0)[2]
 
                 local current = string.sub(line, cursor, cursor + 1)
-                if after_line == "" or current == "#" then
-                    require "cmp".complete()
-                end
+                if after_line == "" or current == "#" then require "cmp".complete() end
             end,
             pattern = "*"
         })
