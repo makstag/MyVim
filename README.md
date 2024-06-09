@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="images/desktop_screen.gif" style="margin: auto"/>
+    <img src="images/build.gif" style="margin: auto"/>
 </div>
 
 ## Useful link  
