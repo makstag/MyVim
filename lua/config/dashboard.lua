@@ -8,7 +8,7 @@ require "dashboard".setup
     {
         command = "chafa --stretch -C on -c 240 -p on --polite on --color-space rgb -w 9 --dither bayer --dither-grain 2 --dither-intensity 1.0 --threads 2", 
         -- preview command -C on -p on --polite on --threads 2  --stretch
-        file_path = vim.fn.stdpath "config" .. "/static/nge.gif",     -- preview file path
+        file_path = vim.fn.stdpath "config" .. "/static/pp.gif",     -- preview file path
         file_height = 36,  -- preview file height
         file_width = 120,    -- preview file width
     },

@@ -199,6 +199,8 @@ return packer.startup(function(use)
     }                                                                           -- TODO: examine
 
     use { "rmagatti/goto-preview", config = [[require "config.goto-preview"]] } -- TODO: examine
+    
+    use { "folke/trouble.nvim", config = function() require "trouble".setup {} end }    -- TODO: examine
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
