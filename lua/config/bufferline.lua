@@ -20,7 +20,7 @@ require "bufferline".setup
             style = "underline",
         },
         buffer_close_icon = "",
-        modified_icon = "●",
+        modified_icon = "u",
         close_icon = "",
         left_trunc_marker = "",
         right_trunc_marker = "",
@@ -30,13 +30,13 @@ require "bufferline".setup
         --- some limitations that will *NOT* be fixed.
         name_formatter = function(buf)  -- buf contains a "name", "path" and "bufnr"
             -- remove extension from markdown files for example
-            if buf.name:match('%.md') then return vim.fn.fnamemodify(buf.name, ':t:r') end
+            if buf.name:match("%.md") then return vim.fn.fnamemodify(buf.name, ":t:r") end
         end,
         max_name_length = 30,
         max_prefix_length = 30, -- prefix used when a buffer is de-duplicated
         tab_size = 21,
-        diagnostics = "nvim_lsp",
-        diagnostics_update_in_insert = true,        
+        diagnostics = "none", -- "nvim_lsp"
+        diagnostics_update_in_insert = false,        
         diagnostics_indicator = function(count, level, diagnostics_dict, context)
             local s = " "
             for e, n in pairs(diagnostics_dict) do
@@ -72,7 +72,7 @@ require "bufferline".setup
         -- can also be a table containing 2 custom separators
         -- [focused and unfocused]. eg: { '|', '|' }
         separator_style = "thin", -- | "thick" | "thin" | { 'any', 'any' },
-        enforce_regular_tabs = true,
+        enforce_regular_tabs = false,
         always_show_bufferline = true,
         -- sort_by = 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
         --   -- add custom logic
