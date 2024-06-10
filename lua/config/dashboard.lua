@@ -6,11 +6,11 @@ require "dashboard".setup
     change_to_vcs_root = false,
     preview = 
     {
-        command = "chafa --stretch -C on -c 240 -p on --polite on --color-space rgb -w 9 --dither bayer --dither-grain 2 --dither-intensity 1.0 --threads 2", 
+        command = "chafa --stretch -C on -c full -p on --polite on --color-space rgb -w 9 --dither bayer --dither-grain 2 --dither-intensity 1.0 --threads 3", 
         -- preview command -C on -p on --polite on --threads 2  --stretch
         file_path = vim.fn.stdpath "config" .. "/static/pp.gif",     -- preview file path
-        file_height = 36,  -- preview file height
-        file_width = 120,    -- preview file width
+        file_height = 33,  -- preview file height
+        file_width = 124,    -- preview file width
     },
     config = 
     {
