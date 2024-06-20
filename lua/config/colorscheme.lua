@@ -20,7 +20,7 @@ require "fluoromachine".setup
         return 
         {
             bg = "#190920",
-            alt_bg = d("#190920", 20),
+            alt_bg = "#190920",
             cyan = "#49eaff",
             red = "#ff1e34",
             yellow = "#ffe756",
