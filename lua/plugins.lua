@@ -163,7 +163,9 @@ return packer.startup(function(use)
         requires =
         {
             "nvim-lua/plenary.nvim",
+            { "nosduco/remote-sshfs.nvim", config = function() require "remote-sshfs".setup {} end },
             "nvim-telescope/telescope-ui-select.nvim", -- TODO: examine
+            "nvim-telescope/telescope-file-browser.nvim",
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
                 run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
@@ -201,8 +203,6 @@ return packer.startup(function(use)
     use { "rmagatti/goto-preview", config = [[require "config.goto-preview"]] } -- TODO: examine
     
     use { "folke/trouble.nvim", config = function() require "trouble".setup {} end }    -- TODO: examine
-
-    use { "nosduco/remote-sshfs.nvim",  config = function() require "remote-sshfs".setup {} end }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
