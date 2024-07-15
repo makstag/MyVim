@@ -202,6 +202,8 @@ return packer.startup(function(use)
     
     use { "folke/trouble.nvim", config = function() require "trouble".setup {} end }    -- TODO: examine
 
+    use { "nosduco/remote-sshfs.nvim",  config = function() require "remote-sshfs".setup {} end }
+
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if PACKER_BOOTSTRAP then

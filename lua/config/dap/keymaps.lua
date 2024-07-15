@@ -39,7 +39,7 @@ function M.setup()
         noremap = true,
         nowait = false,
     }
-    whichkey.register(keymap, opts)
+    -- whichkey.register(keymap, opts)
 
     local keymap_v = 
     {
@@ -58,7 +58,7 @@ function M.setup()
         noremap = true,
         nowait = false,
     }
-    whichkey.register(keymap_v, opts)
+    -- whichkey.register(keymap_v, opts)
 end
 
 return M
