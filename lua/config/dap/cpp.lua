@@ -2,7 +2,7 @@ local M = {}
 
 function M.setup()
     local dap = require "dap"
-    local install_root_dir = vim.fn.stdpath "config" .. "/data/cpptools"
+    local install_root_dir = vim.fn.stdpath "config" .. "/dap"
     local extension_path = install_root_dir .. "/extension/debugAdapters/bin"
     local cppdbg_path = extension_path .. "/OpenDebugAD7"
 
