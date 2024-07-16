@@ -163,7 +163,6 @@ return packer.startup(function(use)
         requires =
         {
             "nvim-lua/plenary.nvim",
-            { "nosduco/remote-sshfs.nvim", config = function() require "remote-sshfs".setup {} end },
             "nvim-telescope/telescope-ui-select.nvim", -- TODO: examine
             "nvim-telescope/telescope-file-browser.nvim",
             {
