@@ -165,6 +165,8 @@ return packer.startup(function(use)
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope-ui-select.nvim", -- TODO: examine
             "nvim-telescope/telescope-file-browser.nvim",
+            "MunifTanjim/nui.nvim",
+            { "amitds1997/remote-nvim.nvim", tag = "v0.3.9", config = function() require "remote-nvim".setup {} end },
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
                 run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"

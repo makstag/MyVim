@@ -16,7 +16,7 @@ require "dashboard".setup
     {
         shortcut = 
         {
-            --{ desc = "SSH Connect", group = "@property", action = "RemoteSSHFSConnect", key = "u" },
+            --{ desc = "SSH Connect", group = "@property", action = "", key = "u" },
             { desc = "File Browser", group = "DiagnosticHint", action = "Telescope file_browser", key = "n" },
             { desc = "Find File", group = "Label", action = "Telescope find_files", key = "f" },
             { desc = "Configure Neovim", group = "Number", action = "edit ~/.config/nvim/init.lua", key = "v" },

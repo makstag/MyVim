@@ -46,7 +46,16 @@ local config =
     {
         -- these are to remove the defaults
         lualine_a = {},
-        lualine_b = {},
+        lualine_b = 
+        {
+            {
+                function()
+                    return vim.g.remote_neovim_host and ("Remote: %s"):format(vim.uv.os_gethostname()) or ""
+                end,
+                padding = { right = 1, left = 1 },
+                separator = { left = "", right = "" },
+            }
+        },
         lualine_y = {},
         lualine_z = {},
         -- These will be filled later
