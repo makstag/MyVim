@@ -19,7 +19,7 @@ lspconfig.lua_ls.setup
     on_attach = on_attach,
     capabilities = capabilities,
     flags = lsp_flags,
-    lua_ls_opts
+    -- lua_ls_opts
 }
 
 -- cmake
@@ -29,7 +29,7 @@ lspconfig.cmake.setup
     on_attach = on_attach,
     capabilities = capabilities,
     flags = lsp_flags,
-    cmake_opts
+    -- cmake_opts
 }
 
 -- cpp
@@ -41,3 +41,24 @@ lspconfig.clangd.setup
     flags = lsp_flags,
     clangd_opts
 }
+
+-- make
+local make_opts = require "config.lsp.settings.autotools_ls"
+lspconfig.autotools_ls.setup
+{
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = lsp_flags,
+    -- make_opts
+}
+
+-- assembly
+local asm_lsp_opts = require "config.lsp.settings.asm_lsp"
+lspconfig.asm_lsp.setup
+{
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = lsp_flags,
+    -- asm_lsp_opts
+}
+

@@ -9,7 +9,9 @@ require "mason-lspconfig".setup
         "diagnosticls", 
         "clangd", 
         "cmake", 
-        "lua_ls"
+        "lua_ls",
+        "autotools_ls@0.0.20",
+        "asm_lsp"
     },
     automatic_installation = true
 }

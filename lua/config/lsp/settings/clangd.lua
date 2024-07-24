@@ -19,7 +19,7 @@ return
 	     "--pch-storage=memory"
 	},
 	handlers = handler.with { clangd_ext_handler },
-	filetypes = { "c", "cpp", "cuda", "proto" },
+	filetypes = { "c", "cpp", "cuda", "proto", "cc" },
 	init_options = 
 	{
 		clangdFileStatus = true,
