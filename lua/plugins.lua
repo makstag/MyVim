@@ -202,6 +202,19 @@ return packer.startup(function(use)
     use { "rmagatti/goto-preview", config = [[require "config.goto-preview"]] } -- TODO: examine
     
     use { "folke/trouble.nvim", config = function() require "trouble".setup {} end }    -- TODO: examine
+    
+    use
+    {
+        "ThePrimeagen/refactoring.nvim",
+        config = function()
+            require "refactoring".setup
+            {
+                prompt_func_return_type = { lua = true, python = true, cpp = true, c = true, h = true, hpp = true },
+                prompt_func_param_type = { lua = true, python = true, cpp = true, c = true, h = true, hpp = true },
+                	show_success_message = true
+            }
+        end
+    }                                                                            -- TODO: examine
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

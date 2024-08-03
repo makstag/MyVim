@@ -19,7 +19,7 @@ require "bufferline".setup
             icon = "▎", -- this should be omitted if indicator style is not 'icon'
             style = "underline",
         },
-        buffer_close_icon = "",
+        buffer_close_icon = "c",
         modified_icon = "u",
         close_icon = "",
         left_trunc_marker = "",
