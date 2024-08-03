@@ -13,23 +13,19 @@ local capabilities = require "config.lsp.handlers".capabilities
 -- language servers config
 
 -- lua
-local lua_ls_opts = require "config.lsp.settings.lua_ls"
 lspconfig.lua_ls.setup
 {
     on_attach = on_attach,
     capabilities = capabilities,
-    flags = lsp_flags,
-    lua_ls_opts
+    flags = lsp_flags
 }
 
 -- cmake
-local cmake_opts = require "config.lsp.settings.cmake"
 lspconfig.cmake.setup
 {
     on_attach = on_attach,
     capabilities = capabilities,
-    flags = lsp_flags,
-    cmake_opts
+    flags = lsp_flags
 }
 
 -- cpp
@@ -40,4 +36,23 @@ lspconfig.clangd.setup
     capabilities = capabilities,
     flags = lsp_flags,
     clangd_opts
+}
+
+-- make
+--[[
+lspconfig.autotools_ls.setup
+{
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = lsp_flags
+}
+]]
+
+-- assembly
+
+lspconfig.asm_lsp.setup
+{
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = lsp_flags
 }

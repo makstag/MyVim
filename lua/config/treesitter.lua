@@ -2,7 +2,7 @@ vim.g.skip_ts_context_commentstring_module = true
 local configs = require "nvim-treesitter.configs"
 configs.setup 
 {
-    ensure_installed = { "c", "cpp", "cmake", "comment", "gitignore", "lua", "markdown" }, 
+    ensure_installed = { "c", "cpp", "cmake", "comment", "gitignore", "lua", "markdown", "asm", "make" }, 
     
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,
