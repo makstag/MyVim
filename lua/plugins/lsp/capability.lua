@@ -10,10 +10,7 @@ M.textDocument.completion.completionItem.deprecatedSupport = true
 M.textDocument.completion.completionItem.preselectSupport = true
 M.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
 M.textDocument.completion.completionItem.insertReplaceSupport = true
-M.textDocument.completion.completionItem.resolveSupport = 
-{
-    properties = { "documentation", "detail", "additionalTextEdits" }
-}
+M.textDocument.completion.completionItem.resolveSupport = { properties = { "documentation", "detail", "additionalTextEdits" } }
 M.textDocument.completion.completionItem.labelDetailsSupport = true
 
 return M

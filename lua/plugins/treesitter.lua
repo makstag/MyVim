@@ -14,5 +14,5 @@ configs.setup
     highlight = { enable = true },
 
     autotag = { enable = true },
-    indent = { enable = false }
+    indent = { enable = true }
 }

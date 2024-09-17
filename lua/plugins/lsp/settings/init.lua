@@ -12,14 +12,6 @@ local capabilities = require "config.lsp.handlers".capabilities
 
 -- language servers config
 
--- lua
-lspconfig.lua_ls.setup
-{
-    on_attach = on_attach,
-    capabilities = capabilities,
-    flags = lsp_flags
-}
-
 -- cmake
 lspconfig.cmake.setup
 {

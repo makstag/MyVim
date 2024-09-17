@@ -29,12 +29,12 @@ keymap("n", "<leader>l", "<Cmd>:vsplit term://zsh <CR>", opts)
 keymap("t", "<leader><Esc>", "<C-\\><C-n>", opts)
 keymap("n", "<leader>v", "<Cmd>:edit ~/.config/nvim/init.lua<CR>", opts)
 
-keymap("n", "<C-r>", "<Cmd>NvimTreeToggle<CR>", opts)
+--keymap("n", "<C-r>", "<Cmd>NvimTreeToggle<CR>", opts)
 keymap("n", "<C-s>", "<Cmd>:w<CR>", opts)
 keymap("n", "<C-q>", "<Cmd>:q<CR>", opts)
 keymap("n", "<C-a>", "<Cmd>:qa!<CR>", opts)
 keymap("n", "<C-z>", "<Cmd>:u<CR>", opts)
-keymap("n", "<leader>x", require "lsp_lines".toggle)
+--keymap("n", "<leader>x", require "lsp_lines".toggle)
 
 -- Copy - Paste
 keymap("n", "<C-y>", "<Cmd>:+y<CR>", opts)

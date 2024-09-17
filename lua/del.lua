@@ -138,9 +138,9 @@ return packer.startup(function(use)
     -- File Explorer
     use
     {
-        "nvim-tree/nvim-tree.lua",
-        requires = "nvim-tree/nvim-web-devicons",
-        config = [[require "config.tree"]]
+        --"nvim-tree/nvim-tree.lua",
+        --requires = "nvim-tree/nvim-web-devicons",
+        --config = [[require "config.tree"]]
     }
 
     -- Preview
@@ -151,9 +151,6 @@ return packer.startup(function(use)
         requires = "nvim-tree/nvim-web-devicons",
         config = [[require "config.dashboard"]]
     }
-
-    -- Terminal
-    use { "akinsho/toggleterm.nvim", tag = "*", config = [[require "config.toggleterm"]] }
 
     -- Telescope
     use
@@ -189,17 +186,7 @@ return packer.startup(function(use)
     -- Editing Support
     use { "windwp/nvim-autopairs", config = [[require "config.autopairs"]] }
 
-    use { "karb94/neoscroll.nvim", config = function () require "neoscroll".setup {} end } -- TODO: examine
-
     -- Utility
-    use
-    {
-        "j-hui/fidget.nvim",
-        after = "nvim-lspconfig",
-        config = function() require "fidget".setup {} end
-    }                                                                           -- TODO: examine
-
-    use { "rmagatti/goto-preview", config = [[require "config.goto-preview"]] } -- TODO: examine
     
     use { "folke/trouble.nvim", config = function() require "trouble".setup {} end }    -- TODO: examine
     

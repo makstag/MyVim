@@ -1,17 +1,7 @@
 local M = {}
 
-M.with = function(handlers)
-    local _handlers = {}
-    for _, handler in ipairs(handlers) do
-        _handlers = vim.tbl_extend("keep", _handlers, handler)
-    end
-    return _handlers
-end
-
--- TODO: backfill this to template
 M.setup = function()
-    local signs = 
-    {
+    local signs = {
         { name = "DiagnosticSignError", text = "" },
         { name = "DiagnosticSignWarn", text = "" },
         { name = "DiagnosticSignHint", text = "" },
@@ -171,10 +161,9 @@ local function lsp_keymaps(bufnr)
         opts
     )
 
-    vim.cmd([[ command! Format execute "lua vim.lsp.buf.format({async = true })" ]])
+    vim.cmd [[ command! Format execute "lua vim.lsp.buf.format({async = true })" ]]
 end
 
--- client is LSP client, buffer?
 M.on_attach = function(client, bufnr)
     lsp_keymaps(bufnr)
     lsp_highlight_document(client, bufnr)

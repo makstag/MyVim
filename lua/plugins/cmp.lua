@@ -115,7 +115,7 @@ cmp.setup
         { name = "luasnip" }, { name = "buffer" },
         { name = "cmp_tabnine" }, { name = "path" }, 
     },    
-    completion = { completeopt = "menu,menuone,noselect,noinsert" },
+    completion = { completeopt = "menu,menuone,noinsert" }, -- noselect
     confirm_opts = { behavior = cmp.ConfirmBehavior.Replace, select = false, },
     window = { documentation = cmp.config.window.bordered() },
     experimental = { ghost_text = false, view = { entries = "native_menu" }}
