@@ -1,13 +1,21 @@
+local icons = require"utils.icons"
 local M = {}
+
+M.with = function(handlers)
+    local h = {}
+    for _, handler in ipairs(handlers) do
+        h = vim.tbl_extend("keep", h, handler)
+    end
+    return h
+end
 
 M.setup = function()
     local signs = {
-        { name = "DiagnosticSignError", text = "🆇" },
-        { name = "DiagnosticSignWarn", text = "⚠️" },
-        { name = "DiagnosticSignHint", text = "ℹ️" },
-        { name = "DiagnosticSignInfo", text = "" }
+        { name = "DiagnosticSignError", text = icons.diagnostics.error },
+        { name = "DiagnosticSignWarn", text = icons.diagnostics.warning },
+        { name = "DiagnosticSignHint", text = icons.diagnostics.hint },
+        { name = "DiagnosticSignInfo", text = icons.diagnostics.information }
     }
-
     for _, sign in ipairs(signs) do
         vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
     end
@@ -140,19 +148,19 @@ M.on_attach = function(client, bufnr)
     lsp_keymaps(bufnr)
     lsp_highlight_document(client, bufnr)
     
-    --vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+    vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-    --vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
+    vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
     
     lsp_signature.on_attach { floating_window = false, timer_interval = 500 }
 end
 
 local capabilities = require "plugins.lsp.capability"
-local cmp_nvim_lsp = require "cmp_nvim_lsp"
+local cmp = require "cmp_nvim_lsp"
 
 -- See :h deprecated
 -- update_capabilities is deprecated, use default_capabilities instead.
-M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+M.capabilities = cmp.default_capabilities(capabilities)
 M.capabilities.textDocument.semanticHighlighting = true
 M.capabilities.offsetEncoding = "utf-8"
 
