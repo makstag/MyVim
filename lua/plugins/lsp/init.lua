@@ -4,6 +4,7 @@ return
     dependencies = {
 	    "williamboman/mason-lspconfig.nvim",
 	    "williamboman/mason.nvim",
+	    "nvim-lua/lsp-status.nvim",
 	    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 	    "ray-x/lsp_signature.nvim"
     },
@@ -11,11 +12,11 @@ return
     config = function()
         require "mason".setup {}
         require "lsp_lines".setup {}
-        local handlers = require "plugins.lsp.handlers"
+        local handler = require "plugins.lsp.handler"
         
-        handlers.setup {}
-        local on_attach = handlers.on_attach
-        local capabilities = handlers.capabilitie
+        handler.setup {}
+        local on_attach = handler.on_attach
+        local capabilities = handler.capabilitie
 
         local servers = {
             clangd = require "plugins.lsp.servers.clangd"(on_attach), 
