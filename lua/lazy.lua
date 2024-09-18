@@ -34,6 +34,6 @@ lazy.setup
 	spec = {
 		require "plugins.lsp",
 		require "plugins.cmp",
-		
+		require "plugins.dap",
 	}
 }
