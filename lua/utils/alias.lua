@@ -1,18 +1,21 @@
 -- alias for quick access to the hotkey setting method
+local M = {}
 local map = vim.api.nvim_set_keymap 
 
-function nm(key, command) 
+M.nm = function(key, command) 
 	map('n', key, command, {noremap = true})
 end
 
-function im(key, command)
+M.im = function(key, command)
 	map('i', key, command, {noremap = true})
 end
 
-function vm(key, command)
+M.vm = function(key, command)
 	map('v', key, command, {noremap = true})
 end
 
-function tm(key, command)
+M.tm = function(key, command)
 	map('t', key, command, {noremap = true})
 end
+
+return M

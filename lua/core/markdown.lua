@@ -11,8 +11,7 @@ vim.g.mkdp_echo_preview_url = 1
 -- a custom vim function name to open preview page this function will receive url as param
 vim.g.mkdp_browserfunc = ""
 -- options for markdown render
-vim.g.mkdp_preview_options = 
-{
+vim.g.mkdp_preview_options = {
     mkit = {},
     katex = {},
     uml = {},
