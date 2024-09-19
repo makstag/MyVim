@@ -1,12 +1,8 @@
 local M = {}
 
-local whichkey = require "which-key"
-
 function M.setup()
-    local keymap = 
-    {
-        d = 
-        {
+    local keymap = {
+        d = {
             name = "DAP",
             R = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run to Cursor" },
             E = { "<cmd>lua require'dapui'.eval(vim.fn.input '[Expression] > ')<cr>", "Evaluate Input" },
@@ -30,8 +26,7 @@ function M.setup()
             u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
         },
     }
-    local opts = 
-    {
+    local opts = {
         mode = "n",
         prefix = "<leader>",
         buffer = nil,
@@ -39,18 +34,14 @@ function M.setup()
         noremap = true,
         nowait = false,
     }
-    -- whichkey.register(keymap, opts)
 
-    local keymap_v = 
-    {
-        d = 
-        {
+    local keymap_v = {
+        d = {
             name = "Debug",
             e = { "<cmd>lua require 'dapui'.eval()<cr>", "Evaluate" },
         }
     }
-    opts = 
-    {
+    opts = {
         mode = "v",
         prefix = "<leader>",
         buffer = nil,
@@ -58,7 +49,6 @@ function M.setup()
         noremap = true,
         nowait = false,
     }
-    -- whichkey.register(keymap_v, opts)
 end
 
 return M

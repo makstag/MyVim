@@ -1,24 +1,20 @@
 local M = {}
 
 local function configure()
-    local dap_breakpoint = 
-    {
-        breakpoint = 
-        {
+    local dap_breakpoint = {
+        breakpoint = {
             text = "",
             texthl = "LspDiagnosticsSignError",
             linehl = "",
             numhl = "",
         },
-        rejected = 
-        {
+        rejected = {
             text = "",
             texthl = "LspDiagnosticsSignHint",
             linehl = "",
             numhl = "",
         },
-        stopped = 
-        {
+        stopped = {
             text = "",
             texthl = "LspDiagnosticsSignInformation",
             linehl = "DiagnosticUnderlineInfo",
@@ -32,8 +28,7 @@ local function configure()
 end
 
 local function configure_exts()
-    require "nvim-dap-virtual-text".setup 
-    {
+    require("nvim-dap-virtual-text").setup({
         enabled = true,                        -- enable this plugin (the default)
         enabled_commands = true,               -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
         highlight_changed_variables = true,    -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
@@ -58,17 +53,15 @@ local function configure_exts()
         virt_lines = false,                    -- show virtual lines instead of virtual text (will flicker!)
         virt_text_win_col = 80                -- position the virtual text at a fixed window column (starting from the first text column) ,
                                            -- e.g. 80 to position at column 80, see `:h nvim_buf_set_extmark()`
-    }
+    })
 
-    require "telescope".load_extension "dap"
+    require("telescope").load_extension("dap")
 
-    local dap, dapui = require "dap", require "dapui"
-    dapui.setup 
-    {
+    local dap, dapui = require("dap"), require("dapui")
+    dapui.setup({
         expand_lines = true,
         icons = { expanded = "", collapsed = "", circular = "" },
-        mappings = 
-        {
+        mappings = {
             -- Use a table to apply multiple mappings
             expand = { "<CR>", "<2-LeftMouse>" },
             open = "o",
@@ -77,11 +70,9 @@ local function configure_exts()
             repl = "r",
             toggle = "t",
         },
-        layouts = 
-        {
+        layouts = {
             {
-                elements = 
-                {
+                elements = {
                     { id = "scopes",      size = 0.33 },
                     { id = "breakpoints", size = 0.17 },
                     { id = "stacks",      size = 0.25 },
@@ -91,8 +82,7 @@ local function configure_exts()
                 position = "right",
             },
             {
-                elements = 
-                {
+                elements = {
                     { id = "repl",    size = 0.45 },
                     { id = "console", size = 0.55 },
                 },
@@ -100,14 +90,13 @@ local function configure_exts()
                 position = "bottom",
             },
         },
-        floating = 
-        {
+        floating = {
             max_height = 0.9,
             max_width = 0.5,       -- Floats will be treated as percentage of your screen.
             border = vim.g.border_chars, -- Border style. Can be 'single', 'double' or 'rounded'
             mappings = { close = { "q", "<Esc>" } }
-        },
-    } -- use default
+        }
+    })
     dap.listeners.after.event_initialized["dapui_config"] = function()
         dapui.open()
     end
@@ -120,16 +109,14 @@ local function configure_exts()
 end
 
 local function configure_debuggers()
-    require "config.dap.lua".setup {}
-    require "config.dap.python".setup {}
-    require "config.dap.cpp".setup {}
+    require("plugins.dap.cpp").setup({})
 end
 
 function M.setup()
     configure()                         -- Configuration
     configure_exts()                    -- Extensions
     configure_debuggers()               -- Debugger
-    require "config.dap.keymaps".setup{} -- Keymaps
+    require("plugins.dap.keymaps").setup({}) -- Keymaps
 end
 
 return M
