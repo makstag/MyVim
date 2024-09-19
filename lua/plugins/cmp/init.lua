@@ -1,13 +1,13 @@
 return 
 {
 
-{
-	"zbirenbaum/copilot.lua",
-	verylazy = true,
-	cmd = "Copilot",
-	build = ":Copilot auth",
-	config = [[ require("plugins.cmp.copilot") ]]
-},
+-- {
+--	"zbirenbaum/copilot.lua",
+--	verylazy = true,
+--	cmd = "Copilot",
+--	build = ":Copilot auth",
+--	config = [[ require("plugins.cmp.copilot") ]]
+-- },
 {
 	"L3MON4D3/LuaSnip",
 	event = "InsertEnter",
@@ -30,14 +30,14 @@ return
 			"tzachar/cmp-tabnine",
 			build = "./install.sh"
 		},
-		{
-			"zbirenbaum/copilot-cmp",
-			verylazy = true,
-			dependencies = "copilot.lua",
-		    	config = function ()
-				require("copilot_cmp").setup({})
-		    	end
-		},
+		-- {
+		--	"zbirenbaum/copilot-cmp",
+		--	verylazy = true,
+		--	dependencies = "copilot.lua",
+		--   	config = function ()
+		--		require("copilot_cmp").setup({})
+		--   	end
+		-- },
 		"windwp/nvim-autopairs",
 		"onsails/lspkind-nvim"
 	},
@@ -133,7 +133,7 @@ return
 					vim_item.menu = ({
 						buffer = "[Buffer]",
 						nvim_lsp = "[LSP]",
-						copilot = "[Copilot]",
+						-- copilot = "[Copilot]",
 						luasnip = "[LuaSnip]",
 						cmp_tabnine = "[TN]",
 						path = "[Path]"
@@ -156,7 +156,7 @@ return
 			},
 			sources = {
 				{ name = "luasnip",                 max_item_count = 5,  group_index = 1 },
-				{ name = "copilot",                 max_item_count = 10,  group_index = 2 },
+				-- { name = "copilot",                 max_item_count = 10,  group_index = 2 },
 				{ name = "cmp_tabnine",             max_item_count = 5,  group_index = 1 },
 				{ name = "nvim_lsp",                max_item_count = 20, group_index = 1 },
 				{ name = "buffer",                  keyword_length = 2,  max_item_count = 5, group_index = 2 },
