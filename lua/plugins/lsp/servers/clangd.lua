@@ -7,8 +7,6 @@ local i = ls.insert_node
 local t = ls.text_node
 local c = ls.choice_node
 
-lspsnips = {}
-
 return function(on_attach)
     return 
     {
@@ -36,7 +34,7 @@ return function(on_attach)
 						    -- cmp, because it will be copied there and cmps [copy](https://github.com/hrsh7th/nvim-cmp/blob/ac476e05df2aab9f64cdd70b6eca0300785bb35d/lua/cmp/utils/misc.lua#L125-L143) doesn't account
 						    -- for self-referential tables and metatables (rightfully so, a response from lsp
 						    -- would contain neither), both of which are vital for a snippet.
-						    lspsnips[snip_text] = s("", {
+						    h.lspsnips[snip_text] = s("", {
 						        t(name),
 							   c(1, {
 							       -- use a restoreNode to remember the text typed here.
@@ -68,7 +66,7 @@ return function(on_attach)
 	       "--pch-storage=memory"
 	   },
 	   handlers = h.with { clangd_ext_handler },
-	   filetypes = { "c", "cpp", "cuda", "proto", "cc" },
+	   filetypes = { "c", "cpp" },
 	   init_options = {
 		  clangdFileStatus = true,
 		  usePlaceholders = true,

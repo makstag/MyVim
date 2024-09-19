@@ -1,11 +1,4 @@
-local opts = { noremap = true, silent = true }
-local keymap = vim.keymap.set
-
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
---Remap space as leader key
-keymap({ "n", "v" }, "<Space>", "<Nop>", opts)
+local alias = require("utils.alias")
 
 -- Modes
 --   normal_mode = "n",
@@ -15,29 +8,31 @@ keymap({ "n", "v" }, "<Space>", "<Nop>", opts)
 --   term_mode = "t",
 --   command_mode = "c",
 
-keymap("n", "<C-k>", "<C-w>k")
-keymap("n", "<C-h>", "<C-w>h")
-keymap("n", "<C-j>", "<C-w>j")
-keymap("n", "<C-l>", "<C-w>l")
-keymap("n", "<leader>j", "<Cmd>:bprevious<CR>", opts)
-keymap("n", "<leader>k", "<Cmd>:bnext<CR>", opts)
-keymap("n", "<leader>q", "<Cmd>:bprevious<CR>:bdelete #<CR>", opts)
-keymap("n", "<leader>y", "<Cmd>:%y<CR>")
-keymap("n", "k", "gk", opts)
-keymap("n", "j", "gj", opts)
-keymap("n", "<leader>l", "<Cmd>:vsplit term://zsh <CR>", opts)
-keymap("t", "<leader><Esc>", "<C-\\><C-n>", opts)
-keymap("n", "<leader>v", "<Cmd>:edit ~/.config/nvim/init.lua<CR>", opts)
+alias.nm("<C-k>", "<C-w>k")
+alias.nm("<C-h>", "<C-w>h")
+alias.nm("<C-j>", "<C-w>j")
+alias.nm("<C-l>", "<C-w>l")
+alias.nm("<leader>j", "<cmd>:bprevious<cr>")
+alias.nm("<leader>k", "<cmd>:bnext<cr>")
+alias.nm("<leader>q", "<cmd>:bprevious<cr>:bdelete #<cr>")
+alias.nm("<leader>y", "<cmd>:%y<cr>")
+alias.nm("<leader>l", "<cmd>:vsplit term://zsh <cr>")
+alias.tm("<leader><Esc>", "<C-\\><C-n>")
+alias.nm("<leader>v", "<cmd>:edit ~/.config/nvim/init.lua<cr>")
 
---keymap("n", "<C-r>", "<Cmd>NvimTreeToggle<CR>", opts)
-keymap("n", "<C-s>", "<Cmd>:w<CR>", opts)
-keymap("n", "<C-q>", "<Cmd>:q<CR>", opts)
-keymap("n", "<C-a>", "<Cmd>:qa!<CR>", opts)
-keymap("n", "<C-z>", "<Cmd>:u<CR>", opts)
---keymap("n", "<leader>x", require "lsp_lines".toggle)
+alias.nm("<C-s>", "<cmd>:w<cr>")
+alias.nm("<C-q>", "<cmd>:q<cr>")
+alias.nm("<C-a>", "<cmd>:qa!<cr>")
+alias.nm("<C-z>", "<cmd>:u<cr>")
 
 -- Copy - Paste
-keymap("n", "<C-y>", "<Cmd>:+y<CR>", opts)
-keymap("v", "<C-y>", "<Cmd>:+y<CR>", opts)
-keymap("n", "<C-p>", "<Cmd>:+gP<CR>", opts)
-keymap("v", "<C-p>", "<Cmd>:+gP<CR>", opts)
+alias.nm("<C-y>", "<cmd>:+y<cr>")
+alias.vm("<C-y>", "<cmd>:+y<cr>")
+alias.nm("<C-p>", "<cmd>:+gP<cr>")
+alias.vm("<C-p>", "<cmd>:+gP<cr>")
+
+-- Resize Windows
+alias.nm("<C-Left>", "<C-w><")
+alias.nm("<C-Right>", "<C-w>>")
+alias.nm("<C-Up>", "<C-w>+")
+alias.nm("<C-Down>", "<C-w>-")

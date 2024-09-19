@@ -9,6 +9,4 @@
 --
 
 require("lz")
---require "core.keymaps"
---require "core.options"
---require "config.support"
+--require("core")

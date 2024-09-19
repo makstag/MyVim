@@ -45,4 +45,4 @@ ls.filetype_extend("c", { "c" })
 ls.filetype_extend("cpp", { "cpp" })
 ls.filetype_extend("make", { "make" })
 
-require("luasnip.loaders.from_vscode").load({ include = { "c", "cpp", "make", "asm" } })
+require("luasnip.loaders.from_vscode").load({ include = { "c", "cpp", "make" } })

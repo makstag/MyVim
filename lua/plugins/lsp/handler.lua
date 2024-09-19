@@ -32,14 +32,14 @@ M.setup = function()
             focus = false,
             focusable = false,
             style = "minimal",
-            border = "shadow", -- rounded
+            border = "rounded",
             source = "always",
             header = "",
             prefix = "",
         }
     }
     vim.diagnostic.config(config)
-    local border = { border = "shadow", width = 60 }
+    local border = { border = "rounded", width = 60 }
 
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, border)
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, border)
@@ -85,7 +85,7 @@ local function lsp_highlight_document(client, bufnr)
                 local cursor = vim.api.nvim_win_get_cursor(0)[2]
 
                 local current = string.sub(line, cursor, cursor + 1)
-                if after_line == "" or current == "#" then require "cmp".complete() end
+                if after_line == "" or current == "#" then require("cmp").complete() end
             end,
             pattern = "*"
         })
@@ -193,7 +193,7 @@ M.on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
     vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
     
-    lsp_signature.on_attach { floating_window = false, timer_interval = 500 }
+    lsp_signature.on_attach({ floating_window = false, timer_interval = 500 })
 end
 
 local capabilities = require("plugins.lsp.capability")
@@ -204,5 +204,7 @@ local cmp = require("cmp_nvim_lsp")
 M.capabilities = cmp.default_capabilities(capabilities)
 M.capabilities.textDocument.semanticHighlighting = true
 M.capabilities.offsetEncoding = "utf-8"
+
+M.lspsnips = {}
 
 return M

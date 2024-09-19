@@ -1,13 +1,6 @@
 return 
 {
 
--- {
---	"zbirenbaum/copilot.lua",
---	verylazy = true,
---	cmd = "Copilot",
---	build = ":Copilot auth",
---	config = [[ require("plugins.cmp.copilot") ]]
--- },
 {
 	"L3MON4D3/LuaSnip",
 	event = "InsertEnter",
@@ -15,8 +8,7 @@ return
 	-- follow latest release
 	version = "v2.*", -- replace <CurrentMajor> by the latest released major (first number of latest release)
 	-- install jsregexp (optional!)
-	build = "make install_jsregexp",
-	config = [[ require("plugins.cmp.luasnip") ]]
+	build = "make install_jsregexp"
 },
 {
 	"hrsh7th/nvim-cmp",
@@ -30,21 +22,17 @@ return
 			"tzachar/cmp-tabnine",
 			build = "./install.sh"
 		},
-		-- {
-		--	"zbirenbaum/copilot-cmp",
-		--	verylazy = true,
-		--	dependencies = "copilot.lua",
-		--   	config = function ()
-		--		require("copilot_cmp").setup({})
-		--   	end
-		-- },
 		"windwp/nvim-autopairs",
 		"onsails/lspkind-nvim"
 	},
 	config = function()
+		require("plugins.cmp.luasnip")
+		require("plugins.cmp.autopairs")
+		
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		local lspkind = require("lspkind")
+		local h = require("plugins.lsp.handler")
 		
 		local has_words_before = function()
 		    unpack = unpack or table.unpack
@@ -57,8 +45,7 @@ return
 		    return col == 0 or vim.fn.getline ".":sub(col, col):match "%s" ~= nil
 		end
 		
-		cmp.setup 
-		{
+		cmp.setup({
 			enabled = {
 				function()
 					-- disable completion in comments
@@ -74,9 +61,9 @@ return
 			snippet = { 
 			    expand = function(args) 
 					-- check if we created a snippet for this lsp-snippet.
-					if lspsnips[args.body] then
+					if h.lspsnips[args.body] then
 					    -- use `snip_expand` to expand the snippet at the cursor position.
-					    luasnip.snip_expand(lspsnips[args.body])
+					    luasnip.snip_expand(h.lspsnips[args.body])
 					else
 					    luasnip.lsp_expand(args.body) 
 					end
@@ -90,50 +77,41 @@ return
 			    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
 			    ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
 			    ["<C-e>"] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close(), },
-			    ["<CR>"] = cmp.mapping.confirm (function(fallback)
+			    ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+			    ["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
-						if luasnip.expandable() then
-							luasnip.expand()
-						else
-							cmp.confirm({ select = true })
-						end
-					else
-						fallback()
-					end
-			    end),
-			    ["<Tab>"] = vim.schedule_wrap(function(fallback)
-					if cmp.visible() and has_words_before() then
-					    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+					    cmp.select_next_item()
 					elseif luasnip.expandable() then
 					    luasnip.expand()
 					elseif luasnip.expand_or_locally_jumpable() then
 					    luasnip.expand_or_jump()
+					elseif has_words_before() then
+						cmp.complete()
 					elseif check_back_space() then
 					    fallback()
 					else
 					    fallback()
 					end
-			    end, { "i", "s", }),
+			    end, { "i", "s" }),
 			    ["<S-Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 					    cmp.select_prev_item()
-					elseif luasnip.locally_jumpable(-1) then
+					elseif luasnip.jumpable(-1) then
 					    luasnip.jump(-1)
 					else
 					    fallback()
 					end
-			    end, { "i", "s", }),
+			    end, { "i", "s" }),
 			},
 			formatting = {
 				-- Youtube: How to set up nice formatting for your sources.
 				format = function(entry, vim_item)
 					-- if you have lspkind installed, you can use it like
 					-- in the following line:
-					vim_item.kind = lspkind.symbolic(vim_item.kind, {mode = "symbol"})
+					vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" })
 					vim_item.menu = ({
 						buffer = "[Buffer]",
 						nvim_lsp = "[LSP]",
-						-- copilot = "[Copilot]",
 						luasnip = "[LuaSnip]",
 						cmp_tabnine = "[TN]",
 						path = "[Path]"
@@ -156,18 +134,13 @@ return
 			},
 			sources = {
 				{ name = "luasnip",                 max_item_count = 5,  group_index = 1 },
-				-- { name = "copilot",                 max_item_count = 10,  group_index = 2 },
 				{ name = "cmp_tabnine",             max_item_count = 5,  group_index = 1 },
 				{ name = "nvim_lsp",                max_item_count = 20, group_index = 1 },
 				{ name = "buffer",                  keyword_length = 2,  max_item_count = 5, group_index = 2 },
 				{ name = "path",                    group_index = 2 }
-			}
-		}
-	
-		-- TabNine
-		require("cmp_tabnine.config"):setup({ max_lines = 1000, max_num_results = 20, sort = true })
-		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+			},
+			completion = { completeopt = "menu,menuone,noselect,noinsert" }
+		})	
 	end
 }
 
