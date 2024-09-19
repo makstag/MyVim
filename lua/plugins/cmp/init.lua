@@ -1,4 +1,4 @@
-return
+return 
 {
 
 {
@@ -6,9 +6,7 @@ return
 	verylazy = true,
 	cmd = "Copilot",
 	build = ":Copilot auth",
-	config = functioin()
-		require("plugins.cmp.copilot")
-	end
+	config = [[ require("plugins.cmp.copilot") ]]
 },
 {
 	"L3MON4D3/LuaSnip",
@@ -18,9 +16,7 @@ return
 	version = "v2.*", -- replace <CurrentMajor> by the latest released major (first number of latest release)
 	-- install jsregexp (optional!)
 	build = "make install_jsregexp",
-	config = function()
-		require("plugins.cmp.luasnip")
-	end
+	config = [[ require("plugins.cmp.luasnip") ]]
 },
 {
 	"hrsh7th/nvim-cmp",
@@ -134,14 +130,14 @@ return
 					-- if you have lspkind installed, you can use it like
 					-- in the following line:
 					vim_item.kind = lspkind.symbolic(vim_item.kind, {mode = "symbol"})
-					vim_item.menu = {
+					vim_item.menu = ({
 						buffer = "[Buffer]",
 						nvim_lsp = "[LSP]",
 						copilot = "[Copilot]",
 						luasnip = "[LuaSnip]",
 						cmp_tabnine = "[TN]",
 						path = "[Path]"
-					}[entry.source.name]
+					})[entry.source.name]
 					if entry.source.name == "cmp_tabnine" then
 						local detail = (entry.completion_item.labelDetails or {}).detail
 						vim_item.kind = ""

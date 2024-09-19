@@ -3,8 +3,7 @@ local ls = require("luasnip")
 -- where the actual snippet-definitions start.
 
 -- Every unspecified option will be set to the default.
-ls.setup
-{
+ls.setup({
 	keep_roots = true,
 	link_roots = true,
 	link_children = true,
@@ -40,7 +39,7 @@ ls.setup
 	ft_func = function()
 		return vim.split(vim.bo.filetype, ".", true)
 	end
-}
+})
 
 ls.filetype_extend("c", { "c" })
 ls.filetype_extend("cpp", { "cpp" })

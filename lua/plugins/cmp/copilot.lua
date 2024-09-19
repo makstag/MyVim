@@ -1,5 +1,4 @@
-require("copilot").setup(
-{
+require("copilot").setup({
 	suggestion = {
 	auto_trigger = true,
 		keymap = {
@@ -21,7 +20,7 @@ require("copilot").setup(
 vim.api.nvim_command("highlight link CopilotAnnotation LineNr")
 vim.api.nvim_command("highlight link CopilotSuggestion LineNr")
 
-local im = require "utils.alias".im
+local im = require("utils.alias").im
 
 im("<C-S-e>", function() --[copilot] accept suggestion
 	require("cmp").mapping.abort()
