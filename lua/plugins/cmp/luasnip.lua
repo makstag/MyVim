@@ -1,4 +1,4 @@
-local ls = require "luasnip"
+local ls = require("luasnip")
 -- If you're reading this file for the first time, best skip to around line 190
 -- where the actual snippet-definitions start.
 
@@ -45,4 +45,5 @@ ls.setup
 ls.filetype_extend("c", { "c" })
 ls.filetype_extend("cpp", { "cpp" })
 ls.filetype_extend("make", { "make" })
-require "luasnip.loaders.from_vscode".load({ include = { "c", "cpp", "make" } })
+
+require("luasnip.loaders.from_vscode").load({ include = { "c", "cpp", "make", "asm" } })

@@ -1,5 +1,28 @@
 return
 {
+
+{
+	"zbirenbaum/copilot.lua",
+	verylazy = true,
+	cmd = "Copilot",
+	build = ":Copilot auth",
+	config = functioin()
+		require("plugins.cmp.copilot")
+	end
+},
+{
+	"L3MON4D3/LuaSnip",
+	event = "InsertEnter",
+	dependencies = { "benfowler/telescope-luasnip.nvim", "rafamadriz/friendly-snippets" },
+	-- follow latest release
+	version = "v2.*", -- replace <CurrentMajor> by the latest released major (first number of latest release)
+	-- install jsregexp (optional!)
+	build = "make install_jsregexp",
+	config = function()
+		require("plugins.cmp.luasnip")
+	end
+},
+{
 	"hrsh7th/nvim-cmp",
 	event = "InsertEnter",
 	dependencies = {
@@ -8,35 +31,24 @@ return
 		"hrsh7th/cmp-path",
 		"saadparwaiz1/cmp_luasnip",
 		{
-			"L3MON4D3/LuaSnip",
-			dependencies = { "benfowler/telescope-luasnip.nvim", "rafamadriz/friendly-snippets" },
-			-- follow latest release
-			version = "v2.*", -- replace <CurrentMajor> by the latest released major (first number of latest release)
-			-- install jsregexp (optional!)
-			build = "make install_jsregexp",
-			config = function()
-				require "plugins.cmp.luasnip"
-			end
-		},
-		{
 			"tzachar/cmp-tabnine",
 			build = "./install.sh"
 		},
 		{
 			"zbirenbaum/copilot-cmp",
-			event = { "InsertEnter", "LspAttach" },
-		    fix_pairs = true,
-		    config = function ()
-			require "copilot_cmp".setup {}
-		    end
+			verylazy = true,
+			dependencies = "copilot.lua",
+		    	config = function ()
+				require("copilot_cmp").setup({})
+		    	end
 		},
 		"windwp/nvim-autopairs",
 		"onsails/lspkind-nvim"
 	},
 	config = function()
-		local cmp = require "cmp"
-		local luasnip = require "luasnip"
-		local lspkind = require "lspkind"
+		local cmp = require("cmp")
+		local luasnip = require("luasnip")
+		local lspkind = require("lspkind")
 		
 		local has_words_before = function()
 		    unpack = unpack or table.unpack
@@ -54,9 +66,9 @@ return
 			enabled = {
 				function()
 					-- disable completion in comments
-					local context = require "cmp.config.context"
+					local context = require("cmp.config.context")
 					-- keep command mode completion enabled when cursor is in a comment
-					if vim.api.nvim_get_mode().mode == 'c' then
+					if vim.api.nvim_get_mode().mode == "c" then
 								return true
 					else
 					    return not context.in_treesitter_capture "comment" and not context.in_syntax_group "Comment"
@@ -157,8 +169,10 @@ return
 		}
 	
 		-- TabNine
-		require "cmp_tabnine.config":setup({ max_lines = 1000, max_num_results = 20, sort = true })
-		local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+		require("cmp_tabnine.config"):setup({ max_lines = 1000, max_num_results = 20, sort = true })
+		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
 	end
+}
+
 }
