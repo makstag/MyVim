@@ -16,7 +16,7 @@ return
 			indent = { enable = true },
 			autotag = { enable = true },
 			ensure_installed = { "c", "cpp", "cmake", "asm", "make" },
-			sync_install = false,
+			sync_install = true,
 			auto_install = true,
 			incremental_selection = {
 				enable = true,
