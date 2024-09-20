@@ -1,62 +1,39 @@
-local options = 
-{
-    encoding = "utf-8",
-    backup = false,                          -- creates a backup file
-    clipboard = "unnamedplus",               -- allows neovim to access the system clipboard
-    cmdheight = 1,                           -- more space in the neovim command line for displaying messages
-    completeopt = { "menuone", "noselect" }, -- mostly just for cmp
-    conceallevel = 0,                        -- so that `` is visible in markdown files
-    fileencoding = "utf-8",                  -- the encoding written to a file
-    
-    hlsearch = true,                         -- highlight all matches on previous search pattern
-    ignorecase = true,                       -- ignore case in search patterns
-    mouse = "",                              -- allow the mouse to be used in neovim
-    pumheight = 10,                          -- pop up menu height
-    showmode = false,                        -- we don't need to see things like -- INSERT -- anymore
-    showtabline = 0,                         -- always show tabs
-    smartcase = true,                        -- smart case
-    smartindent = true,                      -- make indenting smarter again
-    splitbelow = true,                       -- force all horizontal splits to go below current window
-    splitright = true,                       -- force all vertical splits to go to the right of current window
-    swapfile = false,                        -- creates a swapfile
-    termguicolors = true,                    -- set term gui colors (most terminals support this)
-    timeoutlen = 1000,                       -- time to wait for a mapped sequence to complete (in milliseconds)
-    undofile = true,                         -- enable persistent undo
-    updatetime = 100,                        -- faster completion (4000ms default)
-    writebackup = false,                     -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-    
-    expandtab = false,                       -- convert tabs to spaces
-    shiftwidth = 4,                          -- the number of spaces inserted for each indentation
-    tabstop = 4,                             -- insert 2 spaces for a tab
-    cursorline = false,                      -- highlight the current line
-    laststatus = 3,
-    showcmd = false,
-    ruler = false,
-    relativenumber = true,                   -- set relative numbered lines
-    numberwidth = 4,                         -- set number column width to 2 {default 4}
-    signcolumn = "no",                       -- always show the sign column, otherwise it would shift the text each time
-    wrap = false,                            -- display lines as one long line
-    -- scrolloff = 8,                        -- is one of my fav
-    sidescrolloff = 8,
-    guifont = "monospace:h17",               -- the font used in graphical neovim applications
-    
-    title = true,
-    cc = "120",
-    number = true,
-    history = 1000,
-    guicursor = "i:block-Cursor-blinkwait250-blinkoff200-blinkon200"
-}
+local o = vim.opt
 
-vim.opt.fillchars = vim.opt.fillchars + 'eob: '
-vim.opt.fillchars:append { stl = ' ' }
-vim.opt.termguicolors = true
-vim.opt.shortmess:append "c"
-vim.opt.termguicolors = true
-
-for k, v in pairs(options) do vim.opt[k] = v end
-
-vim.cmd "set whichwrap+=<,>,[,],h,l"
-vim.cmd [[set iskeyword+=-]]
-vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
-
-vim.filetype.add { extension = { conf = "dosini" } }
+-- Editor options
+o.smartcase = true                        	-- smart case
+o.smarttab = true                         	-- smart tab
+o.smartindent = true                      	-- make indenting smarter again
+o.splitbelow = true                       	-- force all horizontal splits to go below current window
+o.splitright = true                       	-- force all vertical splits to go to the right of current window
+o.showmode = false                        	-- we don't need to see things like -- INSERT -- anymore
+o.hlsearch = true                         	-- highlight all matches on previous search pattern
+o.ignorecase = true					-- ignore case in search patterns
+o.number = true 						-- Print the line number in front of each line
+o.relativenumber = true 				-- Show the line number relative to the line with the cursor in front of each line
+o.clipboard = "unnamedplus" 			-- uses the clipboard register for all operations except yank
+o.syntax = "on" 						-- When this option is set, the syntax with this name is loaded
+o.autoindent = true			 		-- Copy indent from current line when starting a new line
+o.cursorline = false 					-- Highlight the screen line of the cursor with CursorLine
+o.expandtab = true 					-- In Insert mode: Use the appropriate number of spaces to insert a <Tab>
+o.shiftwidth = 4 					-- Number of spaces to use for each step of (auto)indent
+o.tabstop = 4 						-- Number of spaces that a <Tab> in the file counts for
+o.softtabstop = 4                         	-- insert 4 spaces for a tab in mode insert
+o.encoding = "UTF-8" 					-- Sets the character encoding used inside Vim
+o.ruler = false 						-- Show the line and column number of the cursor position, separated by a comma
+o.mouse = "a" 						-- Enable the use of the mouse. "a" you can use on all modes
+o.title = true 						-- When on, the title of the window will be set to the value of 'titlestring'
+o.hidden = true 						-- When on a buffer becomes hidden when it is |abandon|ed
+o.ttimeoutlen = 0					-- The time in milliseconds that is waited for a key code or mapped key sequence to complete
+o.wildmenu = true 					-- When 'wildmenu' is on, command-line completion operates in an enhanced mode
+o.showcmd = true 					-- Show (partial) command in the last line of the screen. Set this option off if your terminal is slow
+o.showmatch = true 					-- When a bracket is inserted, briefly jump to the matching one
+o.inccommand = "split" 				-- When nonempty, shows the effects of :substitute, :smagic, :snomagic and user commands with the :command-preview flag as you type
+o.termguicolors = true				-- set term gui colors (most terminals support this)
+o.colorcolumn = "126"                     	-- is a comma-separated list of screen columns that are highlighted with ColorColumn
+o.guicursor = "i:block-Cursor-blinkwait250-blinkoff200-blinkon200"
+								-- configures the cursor style for each mode. Works in the GUI and many terminals
+o.laststatus = 3	
+o.showcmd = false
+								
+vim.g.skip_ts_context_commentstring_module = true

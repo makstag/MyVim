@@ -1,0 +1,5 @@
+require "core.keymaps"
+require "core.options"
+require "core.markdown"
+require "core.vimprettier"
+require "core.autocommands"
