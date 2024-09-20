@@ -10,9 +10,9 @@ return
 			shortcut_type = "number",
 			change_to_vcs_root = false,
 			preview = {
-				command = "chafa --stretch -C on -c full -p on --polite on --color-space rgb -w 9 --dither bayer --dither-grain 2 --dither-intensity 2.0 --threads 3", 
+				command = "chafa --stretch -C on -c 256 -p on --polite on --color-space rgb -w 9 --dither bayer --dither-grain 2 --dither-intensity 2.0 --threads 3", 
 				-- preview command -C on -p on --polite on --threads 2  --stretch --dither-intensity 1.0 -c full
-				file_path = vim.fn.stdpath "config" .. "/static/pp.gif",     -- preview file path
+				file_path = vim.fn.stdpath "config" .. "/static/hm.gif",     -- preview file path
 				file_height = 36,  -- preview file height 33
 				file_width = 130,    -- preview file width 124
 			},
