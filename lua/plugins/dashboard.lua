@@ -18,7 +18,7 @@ return
 			},
 			config = {
 				shortcut = {
-					-- { desc = "Recently latest session", group = "@property", action = "SessionLoad", key = "u" },
+					{ desc = "Update", group = "@property", action = "Lazy update", key = "u" },
 					{ desc = "Shortcut", group = "DiagnosticHint", action = "Telescope keymaps", key = "n" },
 					{ desc = "Find File", group = "Label", action = "Telescope find_files", key = "f" },
 					{ desc = "Configure Neovim", group = "Number", action = "edit ~/.config/nvim/init.lua", key = "v" }
