@@ -1,6 +1,7 @@
 return
 {
 	"mfussenegger/nvim-dap",
+	event = "VeryLazy",
 	dependencies = {
 		"theHamsta/nvim-dap-virtual-text",
 		"rcarriga/nvim-dap-ui",
@@ -9,6 +10,11 @@ return
 		"nvim-neotest/nvim-nio"
 	},
 	config = function()
-		require("plugins.dap.debug").setup({})
+		require("plugins.dap.debugger").setup()
+		require("cmp").setup.filetype({ "TelescopePrompt", "dap-repl", "dapui_watches", "dapui_hover" }, 
+		{
+			enabled = true,
+			sources = { { name = "dap" } }
+		})
 	end
 }

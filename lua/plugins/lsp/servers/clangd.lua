@@ -1,5 +1,5 @@
 local h = require("plugins.lsp.handler")
-local clangd_ext_handler = require("lsp-status").extensions.clangd.setup {}
+local clangd_ext_handler = require("lsp-status").extensions.clangd.setup()
 local ls = require("luasnip")
 local s = ls.snippet
 local r = ls.restore_node

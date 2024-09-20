@@ -11,11 +11,11 @@ return
     },
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-        require("mason").setup({})
-        require("lsp_lines").setup({})
+        require("mason").setup()
+        require("lsp_lines").setup()
         local handler = require("plugins.lsp.handler")
         
-        handler.setup({})
+        handler.setup()
         local on_attach = handler.on_attach
         local capabilities = handler.capabilitie
 

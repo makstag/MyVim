@@ -3,7 +3,6 @@ return
 	"nvim-treesitter/nvim-treesitter",
 	event = { "BufReadPost", "BufNewFile" },
 	dependencies = {
-		"JoosepAlviste/nvim-ts-context-commentstring",
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"windwp/nvim-ts-autotag"
 	},

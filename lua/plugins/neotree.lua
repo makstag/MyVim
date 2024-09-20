@@ -11,7 +11,7 @@ return
 		local nm = require("utils.alias").nm
 		
 		-- NeoTree
-		nm("<leader>e", "<CMD>Neotree toggle<CR>")
-		nm("<leader>r", "<CMD>Neotree focus<CR>")
+		nm("C-A-t", "<cmd>Neotree toggle<cr>")
+		nm("<leader>r", "<cmd>Neotree focus<cr>")
 	end
 }

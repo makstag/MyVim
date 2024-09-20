@@ -48,7 +48,7 @@ local function configure_exts()
         end,
 
         -- experimental features:
-        virt_text_pos = 'eol',                 -- position of virtual text, see `:h nvim_buf_set_extmark()`
+        virt_text_pos = "eol",                 -- position of virtual text, see `:h nvim_buf_set_extmark()`
         all_frames = true,                    -- show virtual text for all stack frames not only current. Only works for debugpy on my machine.
         virt_lines = false,                    -- show virtual lines instead of virtual text (will flicker!)
         virt_text_win_col = 80                -- position the virtual text at a fixed window column (starting from the first text column) ,
@@ -109,14 +109,14 @@ local function configure_exts()
 end
 
 local function configure_debuggers()
-    require("plugins.dap.cpp").setup({})
+    require("plugins.dap.cpp").setup()
 end
 
 function M.setup()
     configure()                         -- Configuration
     configure_exts()                    -- Extensions
     configure_debuggers()               -- Debugger
-    require("plugins.dap.keymaps").setup({}) -- Keymaps
+    require("plugins.dap.keymaps").setup() -- Keymaps
 end
 
 return M

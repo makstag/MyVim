@@ -10,15 +10,11 @@ M.with = function(handlers)
 end
 
 M.setup = function()
-    local signs = {
-        { name = "DiagnosticSignError", text = icons.diagnostics.error },
-        { name = "DiagnosticSignWarn", text = icons.diagnostics.warning },
-        { name = "DiagnosticSignHint", text = icons.diagnostics.hint },
-        { name = "DiagnosticSignInfo", text = icons.diagnostics.information }
-    }
-    for _, sign in ipairs(signs) do
-        vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-    end
+    local define = vim.fn.sign_define
+    define("DiagnosticSignError", { texthl = "DiagnosticSignError", text = icons.diagnostics.error, numhl = "" })
+    define("DiagnosticSignWarn", { texthl = "DiagnosticSignWarn", text = icons.diagnostics.warning, numhl = "" })
+    define("DiagnosticSignHint", { texthl = "DiagnosticSignHint", text = icons.diagnostics.hint, numhl = "" })
+    define("DiagnosticSignInfo", { texthl = "DiagnosticSignInfo", text = icons.diagnostics.information, numhl = "" })
 
     local config = {
         virtual_text = false,  -- appears after the line
@@ -32,17 +28,16 @@ M.setup = function()
             focus = false,
             focusable = false,
             style = "minimal",
-            border = "rounded",
+            border = "shadow",
             source = "always",
             header = "",
-            prefix = "",
+            prefix = ""
         }
     }
     vim.diagnostic.config(config)
-    local border = { border = "rounded", width = 60 }
 
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, border)
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, border)
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { "shadow" })
+    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { "shadow" })
 end
 
 local function lsp_highlight_document(client, bufnr)
@@ -85,7 +80,17 @@ local function lsp_highlight_document(client, bufnr)
                 local cursor = vim.api.nvim_win_get_cursor(0)[2]
 
                 local current = string.sub(line, cursor, cursor + 1)
-                if after_line == "" or current == "#" then require("cmp").complete() end
+                if current == "." or current == "," or current == " " then
+                		require("cmp").close() 
+                	end
+                	
+                	local before_line = string.sub(line, 1, cursor + 1)
+			local after_line = string.sub(line, cursor + 1, -1)
+			if not string.match(before_line, "^%s+$") then
+				if after_line == "" or string.match(before_line, " $") or string.match(before_line, "%.$") then
+					require("cmp").complete()
+				end
+			end
             end,
             pattern = "*"
         })
