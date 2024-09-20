@@ -18,7 +18,7 @@ M.setup = function()
 
     local config = {
         virtual_text = false,  -- appears after the line
-        virtual_lines = false, -- appears under the line
+        virtual_lines = true, -- appears under the line
         signs = { active = signs },
         flags = { debounce_text_changes = 200 },
         update_in_insert = false, -- when insert, don't show diagnostic
@@ -47,31 +47,19 @@ local function lsp_highlight_document(client, bufnr)
     if client.server_capabilities.documentHighlightProvider then
         api.nvim_create_augroup("lsp_document_highlight", { clear = true })
         api.nvim_clear_autocmds({ buffer = bufnr, group = "lsp_document_highlight" })
-        api.nvim_create_autocmd("TermOpen", { command = "startinsert", pattern = "*" })
         api.nvim_create_autocmd("CursorHold", 
         {
             callback = vim.lsp.buf.document_highlight,
             buffer = bufnr,
             group = "lsp_document_highlight",
-            desc = "Document Highlight",
+            desc = "Document Highlight"
         })
         api.nvim_create_autocmd("CursorMoved", 
         {
             callback = vim.lsp.buf.clear_references,
             buffer = bufnr,
             group = "lsp_document_highlight",
-            desc = "Clear All the References",
-        })
-        api.nvim_create_autocmd("TermOpen", 
-        {
-            callback = function()
-                -- disable line numbers
-                vim.opt_local.number = false
-                vim.opt_local.relativenumber = false
-                -- always start in insert mode
-                vim.cmd("stopinsert")
-            end,
-            pattern = "*"
+            desc = "Clear All the References"
         })
         api.nvim_create_autocmd({"TextChangedI", "TextChangedP"},
         {
@@ -108,9 +96,9 @@ local function lsp_keymaps(bufnr)
     map(bufnr, "n", "gi", "<cmd>lua lb.implementation()<cr>", opts)
     map(bufnr, "n", "<leader>[", "<cmd>lua lb.signature_help()<cr>", opts)
 
-    map(bufnr, "n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts)
+    map(bufnr, "n", "<space>rn", "<cmd>Lspsaga rename<cr>", opts)
     map(bufnr, "n", "gr", "<cmd>lua lb.references()<cr>", opts)
-    map(bufnr, "n", "<leader>ga", "<cmd>Lspsaga code_action<cr>", opts)
+    map(bufnr, "n", "<space>ga", "<cmd>Lspsaga code_action<cr>", opts)
     map(bufnr, "n", "gl", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
     map(bufnr, "n", "[g", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
     map(bufnr, "n", "]g", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
@@ -160,7 +148,7 @@ local function lsp_keymaps(bufnr)
         opts
     )
 
-    map(bufnr, "n","<leader>o", "<cmd>Lspsaga outline<cr>", opts)
+    map(bufnr, "n","<space>o", "<cmd>Lspsaga outline<cr>", opts)
     map(bufnr, "n", "<A-d>", "<cmd>Lspsaga open_floaterm<cr>", opts)
     -- if you want pass somc cli command into terminal you can do like this
     -- open lazygit in lspsaga float terminal

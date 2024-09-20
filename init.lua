@@ -8,5 +8,5 @@
 -- ░░░   ░░  ░░░░░░  ░░░░░░     ░░    ░░ ░░░  ░░  ░░
 --
 
-require("nlazy")
 require("core")
+require("nlazy")

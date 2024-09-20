@@ -20,7 +20,7 @@ o.shiftwidth = 4 					-- Number of spaces to use for each step of (auto)indent
 o.tabstop = 4 						-- Number of spaces that a <Tab> in the file counts for
 o.softtabstop = 4                         	-- insert 4 spaces for a tab in mode insert
 o.encoding = "UTF-8" 					-- Sets the character encoding used inside Vim
-o.ruler = true 						-- Show the line and column number of the cursor position, separated by a comma
+o.ruler = false 						-- Show the line and column number of the cursor position, separated by a comma
 o.mouse = "a" 						-- Enable the use of the mouse. "a" you can use on all modes
 o.title = true 						-- When on, the title of the window will be set to the value of 'titlestring'
 o.hidden = true 						-- When on a buffer becomes hidden when it is |abandon|ed
@@ -31,5 +31,9 @@ o.showmatch = true 					-- When a bracket is inserted, briefly jump to the match
 o.inccommand = "split" 				-- When nonempty, shows the effects of :substitute, :smagic, :snomagic and user commands with the :command-preview flag as you type
 o.termguicolors = true				-- set term gui colors (most terminals support this)
 o.colorcolumn = "126"                     	-- is a comma-separated list of screen columns that are highlighted with ColorColumn
-o. guicursor = "i:block-Cursor-blinkwait250-blinkoff200-blinkon200"
+o.guicursor = "i:block-Cursor-blinkwait250-blinkoff200-blinkon200"
 								-- configures the cursor style for each mode. Works in the GUI and many terminals
+o.laststatus = 3	
+o.showcmd = false
+								
+vim.g.skip_ts_context_commentstring_module = true

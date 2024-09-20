@@ -1,4 +1,5 @@
 require "core.keymaps"
 require "core.options"
 require "core.markdown"
-require "core.vim-prettier"
+require "core.vimprettier"
+require "core.autocommands"

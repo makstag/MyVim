@@ -43,7 +43,7 @@ function M.setup()
     }
     opts = {
         mode = "v",
-        prefix = "<leader>",
+        prefix = "<space>",
         buffer = nil,
         silent = true,
         noremap = true,

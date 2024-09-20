@@ -17,6 +17,7 @@ return
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
+		"hrsh7th/cmp-cmdline",
 		"saadparwaiz1/cmp_luasnip",
 		{
 			"tzachar/cmp-tabnine",
@@ -138,7 +139,19 @@ return
 				{ name = "path",                    group_index = 2 }
 			},
 			completion = { completeopt = "menu,menuone,noselect,noinsert" }
-		})	
+		})
+		
+		-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+		cmp.setup.cmdline(':', 
+		{
+			mapping = cmp.mapping.preset.cmdline(),
+			sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } })
+		})
+		
+		cmp.setup.cmdline("/", 
+		{                                  
+			view = { entries = {name = "wildmenu", separator = "|" } }                                             
+		})  
 	end
 }
 
