@@ -42,8 +42,8 @@ return
 		local mason = require("mason-lspconfig")
 		mason.setup({ ensure_installed = server_names, automatic_installation = true })
 		mason.setup_handlers({ function(server)
-		local merged_config = vim.tbl_deep_extend("force", default_lsp_config, server_configs[server] or {})
-		lspconfig[server].setup(merged_config)
+			local merged_config = vim.tbl_deep_extend("force", default_lsp_config, server_configs[server] or {})
+			lspconfig[server].setup(merged_config)
 		end })
 	end
 }
