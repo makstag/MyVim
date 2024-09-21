@@ -21,7 +21,7 @@ return {
 		    violet   = "#a9a1e1",
 		    magenta  = "#c678dd",
 		    blue     = "#51afef",
-		    red      = "#ec5f67",
+		    red      = "#ec5f67"
 		}
 		
 		local conditions = {
@@ -45,8 +45,8 @@ return {
 		    sections = {
 		        -- These will be filled later
 		        lualine_c = {},
-		        lualine_x = {},
-		    },
+		        lualine_x = {}
+		    }
 		}
 		
 		-- Inserts a component in lualine_c at left section
@@ -109,10 +109,6 @@ return {
 		    color = { fg = colors.magenta, gui = "bold" }
 		}
 		
-		ins_left { "location" }
-		
-		ins_left { "progress", color = { fg = colors.fg, gui = "bold" } }
-		
 		ins_left 
 		{
 		    "diagnostics",
@@ -166,8 +162,6 @@ return {
 		    color = { fg = colors.green, gui = "bold" },
 		}
 		
-		ins_right { "branch", icon = "", color = { fg = colors.violet, gui = "bold" } }
-		
 		ins_right 
 		{
 		    "diff",
@@ -183,6 +177,20 @@ return {
 		}
 		
 		ins_right { function() return "▊" end, color = { fg = colors.blue }, padding = { left = 1 } }
+		
+		
+		local symbols = require("trouble").statusline({
+			mode = "lsp_document_symbols",
+			groups = {},
+			title = false,
+			filter = { range = true },
+			format = "{kind_icon}{symbol.name:Normal}",
+			-- The following line is needed to fix the background color
+			-- Set it to the lualine section you want to use
+			hl_group = "lualine_c_normal"
+		})
+
+		ins_left { symbols.get, cond = symbols.has }
 				
 		-- Now don't forget to initialize lualine
 		lualine.setup(config)

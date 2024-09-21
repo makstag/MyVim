@@ -82,6 +82,12 @@ local function lsp_highlight_document(client, bufnr)
             end,
             pattern = "*"
         })
+        api.nvim_create_autocmd("LspAttach", {
+        	callback = function()
+                vim.wo.winbar = "  %{%v:lua.Symbols.get()%}"
+                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+        	end
+        })
     end
 end
 
