@@ -66,7 +66,7 @@ return
 					else
 					    luasnip.lsp_expand(args.body) 
 					end
-			    end 
+			    end
 			},
 			mapping = {
 			    ["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -134,15 +134,15 @@ return
 			sources = {
 				{ name = "luasnip",                 max_item_count = 5,  group_index = 1 },
 				{ name = "cmp_tabnine",             max_item_count = 5,  group_index = 1 },
-				{ name = "nvim_lsp",                max_item_count = 20, group_index = 1 },
+				{ name = "nvim_lsp",                max_item_count = 10, group_index = 1 },
 				{ name = "buffer",                  keyword_length = 2,  max_item_count = 5, group_index = 2 },
 				{ name = "path",                    group_index = 2 }
 			},
 			completion = { completeopt = "menu,menuone,noselect,noinsert" }
 		})
 		
-		-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-		cmp.setup.cmdline(':', 
+		-- Use cmdline & path source for ":" (if you enabled `native_menu`, this won't work anymore).
+		cmp.setup.cmdline(":", 
 		{
 			mapping = cmp.mapping.preset.cmdline(),
 			sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } })
