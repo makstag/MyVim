@@ -16,7 +16,7 @@ alias.nm("<space>j", "<cmd>:bprevious<cr>")
 alias.nm("<space>k", "<cmd>:bnext<cr>")
 alias.nm("<space>q", "<cmd>:bprevious<cr>:bdelete #<cr>")
 alias.nm("<space>y", "<cmd>:%y<cr>")
-alias.nm("<C-t>", "<cmd>:23split term://zsh <cr>")
+alias.nm("<C-t>", "<cmd>:25split term://zsh <cr>")
 alias.tm("<Esc>", "<C-\\><C-n>")
 alias.nm("<space>v", "<cmd>:edit ~/.config/nvim/init.lua<cr>")
 

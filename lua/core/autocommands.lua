@@ -11,3 +11,8 @@ api.nvim_create_autocmd("TermOpen",
     end,
     pattern = "*"
 })
+api.nvim_create_autocmd("QuickFixCmdPost", {
+	callback = function()
+		vim.cmd([[Trouble qflist open]])
+	end
+})
