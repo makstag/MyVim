@@ -11,22 +11,22 @@ return function(on_attach)
     return 
     {
         on_attach = function(client, bufnr)
-            on_attach(client, bufnr)
-            client.server_capabilities.document_formatting = false
-		 client.server_capabilities.document_range_formatting = false
+		on_attach(client, bufnr)
+		client.server_capabilities.document_formatting = true
+		client.server_capabilities.document_range_formatting = true
 
-            local orig_rpc_request = client.rpc.request
-            function client.rpc.request(method, params, handler, ...)
-                local orig_handler = handler
-                if method == "textDocument/completion" then
-                    -- Idiotic take on <https://github.com/fannheyward/coc-pyright/blob/6a091180a076ec80b23d5fc46e4bc27d4e6b59fb/src/index.ts#L90-L107>.
-                    handler = function(...)
-                        local err, result = ...
-                        if not err and result then
-                            local items = result.items or result
-                            for _, item in ipairs(items) do
-                                -- override snippets for kind `field`, matching the snippets for member initializer lists.
-                                if item.kind == vim.lsp.protocol.CompletionItemKind.Field and item.textEdit.newText:match("^[%w_]+%(${%d+:[%w_]+}%)$") then
+		local orig_rpc_request = client.rpc.request
+		function client.rpc.request(method, params, handler, ...)
+		    local orig_handler = handler
+		    if method == "textDocument/completion" then
+		        -- Idiotic take on <https://github.com/fannheyward/coc-pyright/blob/6a091180a076ec80b23d5fc46e4bc27d4e6b59fb/src/index.ts#L90-L107>.
+		        handler = function(...)
+		            local err, result = ...
+		            if not err and result then
+		                local items = result.items or result
+		                for _, item in ipairs(items) do
+		                    -- override snippets for kind `field`, matching the snippets for member initializer lists.
+		                    if item.kind == vim.lsp.protocol.CompletionItemKind.Field and item.textEdit.newText:match("^[%w_]+%(${%d+:[%w_]+}%)$") then
 						    local snip_text = item.textEdit.newText
 						    local name = snip_text:match("^[%w_]+")
 						    local type = snip_text:match("%{%d+:([%w_]+)%}")
@@ -43,13 +43,13 @@ return function(on_attach)
 							   }, {restore_cursor = true})
 						    })
 						end
-                            end
-                        end
-                        return orig_handler(...)
-                    end
-                end
-                return orig_rpc_request(method, params, handler, ...)
-            end
+		                end
+		            end
+		            return orig_handler(...)
+		        end
+		    end
+		    return orig_rpc_request(method, params, handler, ...)
+		end
         end,
         cmd = {
             "clangd",
@@ -65,7 +65,7 @@ return function(on_attach)
 	       "--header-insertion=iwyu",
 	       "--pch-storage=memory"
 	   },
-	   handlers = h.with { clangd_ext_handler },
+	   handlers = h.with({ clangd_ext_handler }),
 	   filetypes = { "c", "cpp" },
 	   init_options = {
 		  clangdFileStatus = true,
