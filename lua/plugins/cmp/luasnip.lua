@@ -130,27 +130,3 @@ vim.tbl_map(
 ls.filetype_extend("c", { "cdoc" })
 ls.filetype_extend("cpp", { "cppdoc" })
 ls.filetype_extend("make", { "make" })
-
-local s = ls.snippet
-local i = ls.insert_node
-local fmt = require("luasnip.extras.fmt").fmt
-local c = ls.choice_node
-local f = ls.function_node
-
-s(
-	"mfn",
-	c(1, {
-		fmt("function {}.{}({})\n  {}\nend", {
-			f(get_returned_mod_name, {}),
-			i(1),
-			i(2),
-			i(3)
-		}),
-		fmt("function {}:{}({})\n  {}\nend", {
-			f(get_returned_mod_name, {}),
-			i(1),
-			i(2),
-			i(3)
-		})
-	})
-)

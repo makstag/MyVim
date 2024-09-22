@@ -28,6 +28,7 @@ return
 	},
 	config = function()
 		require("plugins.cmp.luasnip")
+		require("plugins.cmp.snippets")
 		require("plugins.cmp.autopairs")
 		
 		local cmp = require("cmp")
@@ -132,10 +133,10 @@ return
 				end
 			},
 			sources = {
-				{ name = "luasnip",                 max_item_count = 5,  group_index = 1 },
-				{ name = "cmp_tabnine",             max_item_count = 5,  group_index = 1 },
-				{ name = "nvim_lsp",                max_item_count = 10, group_index = 1 },
-				{ name = "buffer",                  keyword_length = 2,  max_item_count = 5, group_index = 2 },
+				{ name = "luasnip",                 group_index = 1, option = { show_autosnippets = true } },
+				{ name = "cmp_tabnine",             group_index = 1 },
+				{ name = "nvim_lsp",                group_index = 1 },
+				{ name = "buffer",                  keyword_length = 2, group_index = 2 },
 				{ name = "path",                    group_index = 2 }
 			},
 			completion = { completeopt = "menu,menuone,noselect,noinsert" }

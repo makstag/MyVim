@@ -61,6 +61,20 @@ local function lsp_highlight_document(client, bufnr)
             group = "lsp_document_highlight",
             desc = "Clear All the References"
         })
+        api.nvim_create_autocmd({"TextChangedI", "TextChangedP"},
+        {
+            callback = function()
+                local line = vim.api.nvim_get_current_line()
+                local cursor = vim.api.nvim_win_get_cursor(0)[2]
+
+                local current = string.sub(line, cursor, cursor + 1)
+                local after_line = string.sub(line, cursor + 1, -1)
+                if after_line == "" and current == "#" then
+                		require("cmp").complete() 
+                	end                	
+            end,
+            pattern = "*"
+        })
         api.nvim_create_autocmd("LspAttach", {
         	callback = function()
                 vim.wo.winbar = "  %{%v:lua.Symbols.get()%}"
