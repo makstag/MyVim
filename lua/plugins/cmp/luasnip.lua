@@ -38,7 +38,7 @@ ls.setup({
 	parser_nested_assembler = function(_, snippetNode)
 		local select = function(snip, no_move, dry_run)
 		    if dry_run then
-		    return
+		    	return
 		    end
 		    snip:focus()
 		    -- make sure the inner nodes will all shift to one side when the
@@ -49,8 +49,8 @@ ls.setup({
 		
 		    -- SELECT all text inside the snippet.
 		    if not no_move then
-		    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
-		    node_util.select_node(snip)
+			    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+			    node_util.select_node(snip)
 		    end
 		end
 		
@@ -64,7 +64,7 @@ ls.setup({
 		
 		function snippetNode:init_dry_run_active(dry_run)
 		    if dry_run and dry_run.active[self] == nil then
-		    dry_run.active[self] = self.active
+		    	dry_run.active[self] = self.active
 		    end
 		end
 		
@@ -75,37 +75,37 @@ ls.setup({
 		function snippetNode:jump_into(dir, no_move, dry_run)
 		    self:init_dry_run_active(dry_run)
 		    if self:is_active(dry_run) then
-		    -- inside snippet, but not selected.
-		    if dir == 1 then
-		        self:input_leave(no_move, dry_run)
-		        return self.next:jump_into(dir, no_move, dry_run)
+			    -- inside snippet, but not selected.
+			    if dir == 1 then
+			        self:input_leave(no_move, dry_run)
+			        return self.next:jump_into(dir, no_move, dry_run)
+			    else
+			        select(self, no_move, dry_run)
+			        return self
+			    end
 		    else
-		        select(self, no_move, dry_run)
-		        return self
-		    end
-		    else
-		    -- jumping in from outside snippet.
-		    self:input_enter(no_move, dry_run)
-		    if dir == 1 then
-		        select(self, no_move, dry_run)
-		        return self
-		    else
-		        return self.inner_last:jump_into(dir, no_move, dry_run)
-		    end
+			    -- jumping in from outside snippet.
+			    self:input_enter(no_move, dry_run)
+			    if dir == 1 then
+			        select(self, no_move, dry_run)
+			        return self
+			    else
+			        return self.inner_last:jump_into(dir, no_move, dry_run)
+			    end
 		    end
 		end
 		
 		-- this is called only if the snippet is currently selected.
 		function snippetNode:jump_from(dir, no_move, dry_run)
 		    if dir == 1 then
-		    if original_extmarks_valid(snippetNode) then
-		        return self.inner_first:jump_into(dir, no_move, dry_run)
+			    if original_extmarks_valid(snippetNode) then
+			        return self.inner_first:jump_into(dir, no_move, dry_run)
+			    else
+			        return self.next:jump_into(dir, no_move, dry_run)
+			    end
 		    else
-		        return self.next:jump_into(dir, no_move, dry_run)
-		    end
-		    else
-		    self:input_leave(no_move, dry_run)
-		    return self.prev:jump_into(dir, no_move, dry_run)
+			    self:input_leave(no_move, dry_run)
+			    return self.prev:jump_into(dir, no_move, dry_run)
 		    end
 		end
 		
