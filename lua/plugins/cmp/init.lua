@@ -133,24 +133,22 @@ return
 				end
 			},
 			sources = {
-				{ name = "luasnip",                 max_item_count = 5, group_index = 1, option = { show_autosnippets = true } },
-				{ name = "cmp_tabnine",             max_item_count = 10, group_index = 1 },
-				{ name = "nvim_lsp",                max_item_count = 15, group_index = 1 },
-				{ name = "buffer",                  max_item_count = 5, keyword_length = 2, group_index = 2 },
-				{ name = "path",                    group_index = 2 }
+				{ name = "luasnip",       max_item_count = 5,    group_index = 1,     option = { show_autosnippets = true } },
+				{ name = "cmp_tabnine",   max_item_count = 10,   group_index = 1 },
+				{ name = "nvim_lsp",      max_item_count = 15,   group_index = 1 },
+				{ name = "buffer",        max_item_count = 5,    keyword_length = 2,  group_index = 2 },
+				{ name = "path",          group_index = 2 }
 			},
 			completion = { completeopt = "menu,menuone,noselect,noinsert" }
 		})
 		
 		-- Use cmdline & path source for ":" (if you enabled `native_menu`, this won't work anymore).
-		cmp.setup.cmdline(":", 
-		{
+		cmp.setup.cmdline(":", {
 			mapping = cmp.mapping.preset.cmdline(),
 			sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } })
 		})
 		
-		cmp.setup.cmdline("/", 
-		{                                  
+		cmp.setup.cmdline("/", {                                  
 			view = { entries = {name = "wildmenu", separator = "|" } }                                             
 		})  
 	end

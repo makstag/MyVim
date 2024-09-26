@@ -93,7 +93,7 @@ local function lsp_keymaps(bufnr)
     map(bufnr, "n", "gd", "<cmd>lua lb.definition()<cr>", opts)
     map(bufnr, "n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
     map(bufnr, "n", "gi", "<cmd>lua lb.implementation()<cr>", opts)
-    map(bufnr, "n", "<leader>[", "<cmd>lua lb.signature_help()<cr>", opts)
+    map(bufnr, "n", "<space>[", "<cmd>lua lb.signature_help()<cr>", opts)
 
     map(bufnr, "n", "<space>rn", "<cmd>Lspsaga rename<cr>", opts)
     map(bufnr, "n", "gr", "<cmd>lua lb.references()<cr>", opts)
@@ -104,7 +104,7 @@ local function lsp_keymaps(bufnr)
 
     local ft = vim.bo[bufnr].filetype
     if ft == "sh" or ft == "lua" then
-        map(bufnr, "n", "<leader>li", function()
+        map(bufnr, "n", "<space>li", function()
             local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
             local msgs = vim.diagnostic.get(bufnr)
             local last, result = unpack({ "error", "" })
@@ -129,7 +129,7 @@ local function lsp_keymaps(bufnr)
     -- when you use action in finder like open vsplit then you can
     -- use <C-t> to jump back
     map(bufnr, "n", "gh", "<cmd>Lspsaga lsp_finder<cr>", opts)
-    map(bufnr, "n", "<leader>cd", "<cmd>Lspsaga show_cursor_diagnostics<cr>", opts)
+    map(bufnr, "n", "<space>cd", "<cmd>Lspsaga show_cursor_diagnostics<cr>", opts)
 
     -- Only jump to error
     map(
