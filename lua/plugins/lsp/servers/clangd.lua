@@ -19,7 +19,6 @@ return function(on_attach)
 		function client.rpc.request(method, params, handler, ...)
 		    local orig_handler = handler
 		    if method == "textDocument/completion" then
-		        -- Idiotic take on <https://github.com/fannheyward/coc-pyright/blob/6a091180a076ec80b23d5fc46e4bc27d4e6b59fb/src/index.ts#L90-L107>.
 		        handler = function(...)
 		            local err, result = ...
 		            if not err and result then

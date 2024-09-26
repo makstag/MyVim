@@ -1,6 +1,7 @@
-local api = vim.api
-api.nvim_create_autocmd("TermOpen", { command = "startinsert", pattern = "*" })
-api.nvim_create_autocmd("TermOpen", 
+local autocmd = vim.api.nvim_create_autocmd
+
+autocmd("TermOpen", { command = "startinsert", pattern = "*" })
+autocmd("TermOpen", 
 {
     callback = function()
         -- disable line numbers
@@ -11,19 +12,21 @@ api.nvim_create_autocmd("TermOpen",
     end,
     pattern = "*"
 })
-api.nvim_create_autocmd("QuickFixCmdPost", 
+autocmd("QuickFixCmdPost", 
 {
 	callback = function()
 		vim.cmd([[Trouble qflist open]])
 	end
 })
-api.nvim_create_autocmd("BufWritePre", 
-{
-	group = vim.api.nvim_create_augroup("better_backup", { clear = true }),
-	callback = function(event)
-		local file = vim.uv.fs_realpath(event.match) or event.match
-		local backup = vim.fn.fnamemodify(file, ":p:~:h")
-		backup = backup:gsub("[/\\]", "%%")
-		vim.go.backupext = backup
-	end
+
+vim.g.autoformat = true
+local augroup = vim.api.nvim_create_augroup
+
+augroup("__formatter__", { clear = true })
+autocmd("BufWritePost", {
+	group = "__formatter__",
+	callback = function()
+		vim.cmd("FormatWrite")
+	end,
+	pattern = "*"
 })
