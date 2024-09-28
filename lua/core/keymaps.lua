@@ -1,4 +1,6 @@
-local alias = require("utils.alias")
+local nm = require("utils.alias").nm
+local vm = require("utils.alias").vm
+local tm = require("utils.alias").tm
 
 -- Modes
 --   normal_mode = "n",
@@ -8,31 +10,31 @@ local alias = require("utils.alias")
 --   term_mode = "t",
 --   command_mode = "c",
 
-alias.nm("<C-k>", "<C-w>k")
-alias.nm("<C-h>", "<C-w>h")
-alias.nm("<C-j>", "<C-w>j")
-alias.nm("<C-l>", "<C-w>l")
-alias.nm("<space>j", "<cmd>:bprevious<cr>")
-alias.nm("<space>k", "<cmd>:bnext<cr>")
-alias.nm("<space>q", "<cmd>:bprevious<cr>:bdelete #<cr>")
-alias.nm("<space>y", "<cmd>:%y<cr>")
-alias.nm("<C-t>", "<cmd>:25split term://zsh <cr>")
-alias.tm("<Esc>", "<C-\\><C-n>")
-alias.nm("<space>v", "<cmd>:edit ~/.config/nvim/init.lua<cr>")
+nm("<C-k>", "<C-w>k", "go to the down window")
+nm("<C-h>", "<C-w>h", "go to the left window")
+nm("<C-j>", "<C-w>j", "go to the up window")
+nm("<C-l>", "<C-w>l", "go to the right window")
+nm("<space>j", "<cmd>:bprevious<cr>", "go to the previous tab")
+nm("<space>k", "<cmd>:bnext<cr>", "go to the next tab")
+nm("<space>q", "<cmd>:bprevious<cr>:bdelete #<cr>", "go to the previous tab and close current")
+nm("<space>y", "<cmd>:%y<cr>", "copy all lines in the file")
+nm("<C-t>", "<cmd>:25split term://zsh <cr>", "open terminal in normal mode")
+tm("<Esc>", "<C-\\><C-n>", "close insert mode in terminal")
+nm("<space>v", "<cmd>:edit ~/.config/nvim/init.lua<cr>", "open config neovim file")
 
-alias.nm("<C-s>", "<cmd>:w<cr>")
-alias.nm("<C-q>", "<cmd>:q<cr>")
-alias.nm("<C-a>", "<cmd>:qa!<cr>")
-alias.nm("<C-z>", "<cmd>:u<cr>")
+nm("<C-s>", "<cmd>:w<cr>", "save file")
+nm("<C-q>", "<cmd>:q<cr>", "quit file")
+nm("<C-a>", "<cmd>:qa!<cr>", "quit all files and don't saves")
+nm("<C-z>", "<cmd>:u<cr>", "cancel operations")
 
 -- Copy - Paste
-alias.nm("<C-y>", "<cmd>:+y<cr>")
-alias.vm("<C-y>", "<cmd>:+y<cr>")
-alias.nm("<C-p>", "<cmd>:+gP<cr>")
-alias.vm("<C-p>", "<cmd>:+gP<cr>")
+nm("<C-y>", "<cmd>:+y<cr>", "copy in normal mode")
+vm("<C-y>", "<cmd>:+y<cr>", "copy in visual mode")
+nm("<C-p>", "<cmd>:+gP<cr>", "paste in normal mode")
+vm("<C-p>", "<cmd>:+gP<cr>", "paste in visual mode")
 
 -- Resize Windows
-alias.nm("<C-Left>", "<C-w><")
-alias.nm("<C-Right>", "<C-w>>")
-alias.nm("<C-Up>", "<C-w>+")
-alias.nm("<C-Down>", "<C-w>-")
+nm("<C-Left>", "<C-w><", "increase the window size to the left")
+nm("<C-Right>", "<C-w>>", "increase the window size to the right")
+nm("<C-Up>", "<C-w>+", "increase the window size to the up")
+nm("<C-Down>", "<C-w>-", "increase the window size to the down")
