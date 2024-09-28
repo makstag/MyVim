@@ -30,3 +30,11 @@ autocmd("BufWritePost", {
 	end,
 	pattern = "*"
 })
+
+augroup("__update__", { clear = true })
+autocmd("VimEnter", {
+	group = "__update__",
+	callback = function()
+		require("lazy").update({ show = false })
+	end
+})
