@@ -51,5 +51,6 @@ return
 		
 		-- NeoTree
 		nm("<C-r>", "<cmd>Neotree toggle<cr>")
+		nm("<space>r", "<cmd>Neotree focus<cr>")
 	end
 }
