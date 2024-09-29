@@ -3,13 +3,12 @@ local M = {}
 function M.setup()
     local dap = require("dap")
     local install_root_dir = vim.fn.stdpath "config" .. "/dap"
-    local extension_path = install_root_dir .. "/extension/debugAdapters/bin"
-    local cppdbg_path = extension_path .. "/OpenDebugAD7"
+    local cppdbg = install_root_dir .. "/extension/debugAdapters/bin/OpenDebugAD7"
 
     dap.adapters.cppdbg = {
         id = "cppdbg",
         type = "executable",
-        command = cppdbg_path,
+        command = cppdbg,
     }
 
     dap.configurations.cpp = {

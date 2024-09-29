@@ -17,6 +17,7 @@ return
 	config = function()
 		require("mason").setup()
 		require("lsp_lines").setup()
+		require("lspsaga").setup({ symbol_in_winbar = { enable = false } })
 		local handler = require("plugins.lsp.handler")
 		
 		handler.setup()

@@ -11,8 +11,7 @@ return
 	},
 	config = function()
 		require("plugins.dap.debugger").setup()
-		require("cmp").setup.filetype({ "TelescopePrompt", "dap-repl", "dapui_watches", "dapui_hover" }, 
-		{
+		require("cmp").setup.filetype({ "TelescopePrompt", "dap-repl", "dapui_watches", "dapui_hover" }, {
 			enabled = true,
 			sources = { { name = "dap" } }
 		})

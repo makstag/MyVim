@@ -23,9 +23,9 @@ ls.setup({
 	ext_opts = {
 	 	[types.choiceNode] = {
 	 		active = {
-				virt_text = { { "choiceNode", "Comment" } },
-			},
-		},
+				virt_text = { { "choiceNode", "Comment" } }
+			}
+		}
 	},
 	-- treesitter-hl has 100, use something higher (default is 200).
 	ext_base_prio = 300,

@@ -36,6 +36,9 @@ o.guicursor = "i:block-Cursor-blinkwait250-blinkoff200-blinkon200"
 o.laststatus = 3	
 								
 vim.g.skip_ts_context_commentstring_module = true
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
 
 o.pumheight = 10						-- pop up menu height
 o.showtabline = 0					-- always show tabs

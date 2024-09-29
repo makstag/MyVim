@@ -42,41 +42,36 @@ return
 			},
 			on_attach = function(bufnr)
 				local gs = package.loaded.gitsigns
-				
-				local function map(mode, l, r, opts)
-					opts = opts or {}
-					opts.buffer = bufnr
-					vim.keymap.set(mode, l, r, opts)
-				end
+				local nm = require("utils.alias").nm
 				
 				-- Navigation
-				map("n", "]c", function()
+				vim.keymap.set("n", "]c", function()
 					if vim.wo.diff then return "]c" end
 					vim.schedule(function() gs.next_hunk() end)
 					return "<Ignore>"
-				end, {expr=true})
+				end, { expr=true, desc = ""})
 				
-				map("n", "[c", function()
+				vim.keymap.set("n", "[c", function()
 					if vim.wo.diff then return "[c" end
 					vim.schedule(function() gs.prev_hunk() end)
 					return "<Ignore>"
-				end, {expr=true})
+				end, { expr=true, desc = ""})
 				
 				-- Actions
-				map({"n", "v"}, "<space>hs", ":Gitsigns stage_hunk<CR>")
-				map({"n", "v"}, "<space>hr", ":Gitsigns reset_hunk<CR>")
-				map("n", "<space>hS", gs.stage_buffer)
-				map("n", "<space>ha", gs.stage_hunk)
-				map("n", "<space>hu", gs.undo_stage_hunk)
-				map("n", "<space>hR", gs.reset_buffer)
-				map("n", "<space>hp", gs.preview_hunk)
-				map("n", "<space>hb", function() gs.blame_line{full=true} end)
-				map("n", "<space>tB", gs.toggle_current_line_blame)
-				map("n", "<space>hd", gs.diffthis)
-				map("n", "<space>hD", function() gs.diffthis("~") end)
+				vim.keymap.set({ "n", "v" }, "<space>hs", ":Gitsigns stage_hunk<CR>", {  noremap = true, silent = true, desc = "" })
+				vim.keymap.set({ "n", "v" }, "<space>hr", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true, desc = "" })
+				nm("<space>hS", gs.stage_buffer, "")
+				nm("<space>ha", gs.stage_hunk, "")
+				nm("<space>hu", gs.undo_stage_hunk, "")
+				nm("<space>hR", gs.reset_buffer, "")
+				nm("<space>hp", gs.preview_hunk, "")
+				nm("<space>hb", function() gs.blame_line{full=true} end, "")
+				nm("<space>tB", gs.toggle_current_line_blame, "")
+				nm("<space>hd", gs.diffthis, "")
+				nm("<space>hD", function() gs.diffthis("~") end, "")
 				
 				-- Text object
-				map({"o", "x"}, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+				vim.keymap.set({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { noremap = true, silent = true, desc = "" })
 			end
 		})
 	end

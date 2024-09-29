@@ -86,93 +86,71 @@ end
 
 local function lsp_keymaps(bufnr)
     local map = vim.api.nvim_buf_set_keymap
-    local opts = { noremap = true, silent = true }
+    local function opts(description)
+		return { noremap = true, silent = true, desc = description }
+    end
     local lb = vim.lsp.buf
     
-    map(bufnr, "n", "gD", "<cmd>lua lb.declaration()<cr>", opts)
-    map(bufnr, "n", "gd", "<cmd>lua lb.definition()<cr>", opts)
-    map(bufnr, "n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
-    map(bufnr, "n", "gi", "<cmd>lua lb.implementation()<cr>", opts)
-    map(bufnr, "n", "<space>[", "<cmd>lua lb.signature_help()<cr>", opts)
+    map(bufnr, "n", "gD", "<cmd>lua lb.declaration()<cr>", opts(""))
+    map(bufnr, "n", "gd", "<cmd>lua lb.definition()<cr>", opts(""))
+    map(bufnr, "n", "K", "<cmd>Lspsaga hover_doc<cr>", opts(""))
+    map(bufnr, "n", "gi", "<cmd>lua lb.implementation()<cr>", opts(""))
+    map(bufnr, "n", "<space>[", "<cmd>lua lb.signature_help()<cr>", opts(""))
 
-    map(bufnr, "n", "<space>rn", "<cmd>Lspsaga rename<cr>", opts)
-    map(bufnr, "n", "gr", "<cmd>lua lb.references()<cr>", opts)
-    map(bufnr, "n", "<space>ga", "<cmd>Lspsaga code_action<cr>", opts)
-    map(bufnr, "n", "gl", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
-    map(bufnr, "n", "[g", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
-    map(bufnr, "n", "]g", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
-
-    local ft = vim.bo[bufnr].filetype
-    if ft == "sh" or ft == "lua" then
-        map(bufnr, "n", "<space>li", function()
-            local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
-            local msgs = vim.diagnostic.get(bufnr)
-            local last, result = unpack({ "error", "" })
-            if ft == "lua" then
-                result = "---@diagnostic disable-next-line"
-            else
-                for _, d in pairs(msgs) do
-                    if d.lnum == (row - 1) and d.code ~= last then
-                        result = (result ~= "") and result .. "," .. d.code or "#shellcheck disable=" .. d.code
-                        last = tostring(d.code)
-                    end
-                end
-            end
-            if result ~= "" then
-                vim.api.nvim_buf_set_lines(0, row - 1, row - 1, false, { result })
-            end
-        end, opts)
-    end
+    map(bufnr, "n", "<space>rn", "<cmd>Lspsaga rename<cr>", opts(""))
+    map(bufnr, "n", "gr", "<cmd>lua lb.references()<cr>", opts(""))
+    map(bufnr, "n", "<space>ga", "<cmd>Lspsaga code_action<cr>", opts(""))
+    map(bufnr, "n", "gl", "<cmd>Lspsaga show_line_diagnostics<cr>", opts(""))
+    map(bufnr, "n", "[g", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts(""))
+    map(bufnr, "n", "]g", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts(""))
     
     -- Lsp finder find the symbol definition implement reference
     -- if there is no implement it will hide
     -- when you use action in finder like open vsplit then you can
     -- use <C-t> to jump back
-    map(bufnr, "n", "gh", "<cmd>Lspsaga lsp_finder<cr>", opts)
-    map(bufnr, "n", "<space>cd", "<cmd>Lspsaga show_cursor_diagnostics<cr>", opts)
+    map(bufnr, "n", "gh", "<cmd>Lspsaga lsp_finder<cr>", opts(""))
+    map(bufnr, "n", "<space>cd", "<cmd>Lspsaga show_cursor_diagnostics<cr>", opts(""))
 
     -- Only jump to error
     map(
         bufnr, 
         "n", 
         "[E",
-        "<cmd>lua require('lspsaga.diagnostic').goto_prev { severity = vim.diagnostic.severity.ERROR }<cr>",
-        opts
+        "<cmd>lua require('lspsaga.diagnostic').goto_prev({ severity = vim.diagnostic.severity.ERROR })<cr>",
+        opts("")
     )
     map(
         bufnr, 
         "n", 
         "]E", 
-        "<cmd>lua require('lspsaga.diagnostic').goto_next { severity = vim.diagnostic.severity.ERROR }<cr>",
-        opts
+        "<cmd>lua require('lspsaga.diagnostic').goto_next({ severity = vim.diagnostic.severity.ERROR })<cr>",
+        opts("")
     )
 
-    map(bufnr, "n","<space>o", "<cmd>Lspsaga outline<cr>", opts)
-    map(bufnr, "n", "<A-d>", "<cmd>Lspsaga open_floaterm<cr>", opts)
+    map(bufnr, "n","<space>o", "<cmd>Lspsaga outline<cr>", opts(""))
+    map(bufnr, "n", "<A-d>", "<cmd>Lspsaga open_floaterm<cr>", opts(""))
     -- if you want pass somc cli command into terminal you can do like this
     -- open lazygit in lspsaga float terminal
-    -- map(bufnr, "n", "<A-d>", "<cmd>Lspsaga open_floaterm lazygit<cr>", opts)
-    -- close floaterm
-    map(bufnr, "t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<cr>]], opts)
+    map(bufnr, "n", "<A-d>", "<cmd>Lspsaga term_toggle lazygit<cr>", opts(""))
 
-    map(bufnr, "n", "<space>q", "<cmd>lua vim.diagnostic.setloclist()<cr>", opts)
+    map(bufnr, "n", "<space>q", "<cmd>lua vim.diagnostic.setloclist()<cr>", opts(""))
 
     map(
         bufnr,
         "n",
         "<C-u>",
         "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-u>')<cr>",
-        opts
+        opts("")
     )
     map(
         bufnr,
         "n",
         "<C-d>",
         "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<cr>",
-        opts
+        opts("")
     )
 
-    vim.cmd [[ command! Format execute "lua lb.format({async = true })" ]]
+    vim.cmd [[ command! Format execute "lua lb.format({ async = true })" ]]
 end
 
 local lsp_signature = require("lsp_signature")
