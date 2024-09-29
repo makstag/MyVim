@@ -47,31 +47,31 @@ return
 				-- Navigation
 				vim.keymap.set("n", "]c", function()
 					if vim.wo.diff then return "]c" end
-					vim.schedule(function() gs.next_hunk() end)
+						vim.schedule(function() gs.next_hunk() end)
 					return "<Ignore>"
-				end, { expr=true, desc = ""})
+				end, { expr=true, desc = "]c next hunk"})
 				
 				vim.keymap.set("n", "[c", function()
 					if vim.wo.diff then return "[c" end
-					vim.schedule(function() gs.prev_hunk() end)
+						vim.schedule(function() gs.prev_hunk() end)
 					return "<Ignore>"
-				end, { expr=true, desc = ""})
+				end, { expr=true, desc = "[c prev hunk"})
 				
 				-- Actions
-				vim.keymap.set({ "n", "v" }, "<space>hs", ":Gitsigns stage_hunk<CR>", {  noremap = true, silent = true, desc = "" })
-				vim.keymap.set({ "n", "v" }, "<space>hr", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true, desc = "" })
-				nm("<space>hS", gs.stage_buffer, "")
-				nm("<space>ha", gs.stage_hunk, "")
-				nm("<space>hu", gs.undo_stage_hunk, "")
-				nm("<space>hR", gs.reset_buffer, "")
-				nm("<space>hp", gs.preview_hunk, "")
-				nm("<space>hb", function() gs.blame_line{full=true} end, "")
-				nm("<space>tB", gs.toggle_current_line_blame, "")
-				nm("<space>hd", gs.diffthis, "")
-				nm("<space>hD", function() gs.diffthis("~") end, "")
+				vim.keymap.set({ "n", "v" }, "<space>hs", ":Gitsigns stage_hunk<cr>", {  noremap = true, silent = true, desc = "<space>hs " })
+				vim.keymap.set({ "n", "v" }, "<space>hr", ":Gitsigns reset_hunk<cr>", { noremap = true, silent = true, desc = "<space>hr " })
+				nm("<space>hS", gs.stage_buffer, "<space>hS stage all hunks in current buffer")
+				nm("<space>ha", gs.stage_hunk, "<space>ha ")
+				nm("<space>hu", gs.undo_stage_hunk, "<space>hu undo the last call of stage_hunk")
+				nm("<space>hR", gs.reset_buffer, "<space>hR stage the hunk at the cursor position, or all lines in the given range")
+				nm("<space>hp", gs.preview_hunk, "<space>hp preview the hunk at the cursor position in a floating window")
+				nm("<space>hb", function() gs.blame_line{full=true} end, "<space>hb run git blame on the current line and show the results in a floating window")
+				nm("<space>tB", gs.toggle_current_line_blame, "<space>tB toggle")
+				nm("<space>hd", gs.diffthis, "<space>hd perform a |vimdiff| on the given file with {base} if it is given, or with the currently set base")
+				nm("<space>hD", function() gs.diffthis("~") end, "<space>hD ")
 				
 				-- Text object
-				vim.keymap.set({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { noremap = true, silent = true, desc = "" })
+				vim.keymap.set({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { noremap = true, silent = true, desc = "ih elect the hunk under the cursor" })
 			end
 		})
 	end

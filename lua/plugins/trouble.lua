@@ -18,11 +18,11 @@ return
 		})
 		
 		local nm = require("utils.alias").nm
-		nm("<space>xx", "<cmd>Trouble diagnostics toggle<cr>", "")
-		nm("<space>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", "")
-		nm("<space>cs", "<cmd>Trouble symbols toggle focus=false<cr>", "")
-		nm("<space>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", "")
-		nm("<space>xL", "<cmd>Trouble loclist toggle<cr>", "")
-		nm("<space>xQ", "<cmd>Trouble qflist toggle<cr>", "")
+		nm("<space>xx", "<cmd>Trouble diagnostics toggle<cr>", "<space>xx diagnostics")
+		nm("<space>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", "<space>xX buffer Diagnostics")
+		nm("<space>cs", "<cmd>Trouble symbols toggle focus=false<cr>", "<space>cs symbols")
+		nm("<space>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", "<space>cl LSP definitions / references / ...")
+		nm("<space>xL", "<cmd>Trouble loclist toggle<cr>", "<space>xL location list")
+		nm("<space>xQ", "<cmd>Trouble qflist toggle<cr>", "<space>xQ quickfix list ")
 	end
 }

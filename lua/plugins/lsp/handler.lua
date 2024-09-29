@@ -75,12 +75,6 @@ local function lsp_highlight_document(client, bufnr)
             end,
             pattern = "*"
         })
-        api.nvim_create_autocmd("LspAttach", {
-        	callback = function()
-                vim.wo.winbar = "  %{%v:lua.Symbols.get()%}"
-                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-        	end
-        })
     end
 end
 
@@ -91,25 +85,25 @@ local function lsp_keymaps(bufnr)
     end
     local lb = vim.lsp.buf
     
-    map(bufnr, "n", "gD", "<cmd>lua lb.declaration()<cr>", opts(""))
-    map(bufnr, "n", "gd", "<cmd>lua lb.definition()<cr>", opts(""))
-    map(bufnr, "n", "K", "<cmd>Lspsaga hover_doc<cr>", opts(""))
-    map(bufnr, "n", "gi", "<cmd>lua lb.implementation()<cr>", opts(""))
-    map(bufnr, "n", "<space>[", "<cmd>lua lb.signature_help()<cr>", opts(""))
+    map(bufnr, "n", "gD", "<cmd>lua lb.declaration()<cr>", opts("gD go to the function declaration"))
+    map(bufnr, "n", "gd", "<cmd>lua lb.definition()<cr>", opts("gd go to the function definition"))
+    map(bufnr, "n", "K", "<cmd>Lspsaga hover_doc<cr>", opts("K show documentation"))
+    map(bufnr, "n", "gi", "<cmd>lua lb.implementation()<cr>", opts("gi lists all the implementations for the symbol under the cursor in the quickfix window"))
+    map(bufnr, "n", "<space>[", "<cmd>lua lb.signature_help()<cr>", opts("<space>[ displays signature information about the symbol under the cursor in a floating window"))
 
-    map(bufnr, "n", "<space>rn", "<cmd>Lspsaga rename<cr>", opts(""))
-    map(bufnr, "n", "gr", "<cmd>lua lb.references()<cr>", opts(""))
-    map(bufnr, "n", "<space>ga", "<cmd>Lspsaga code_action<cr>", opts(""))
-    map(bufnr, "n", "gl", "<cmd>Lspsaga show_line_diagnostics<cr>", opts(""))
-    map(bufnr, "n", "[g", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts(""))
-    map(bufnr, "n", "]g", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts(""))
+    map(bufnr, "n", "<space>rn", "<cmd>Lspsaga rename<cr>", opts("<space>rn rename"))
+    map(bufnr, "n", "gr", "<cmd>lua lb.references()<cr>", opts("gr lists all the references to the symbol under the cursor in the quickfix window"))
+    map(bufnr, "n", "<space>ga", "<cmd>Lspsaga code_action<cr>", opts("<space>ga perform a specific action for a section of code"))
+    map(bufnr, "n", "gl", "<cmd>Lspsaga show_line_diagnostics<cr>", opts("gl show line diagnostic"))
+    map(bufnr, "n", "[g", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts("[g  to jump prev diagnostics"))
+    map(bufnr, "n", "]g", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts("]g  to jump next diagnostics"))
     
     -- Lsp finder find the symbol definition implement reference
     -- if there is no implement it will hide
     -- when you use action in finder like open vsplit then you can
     -- use <C-t> to jump back
-    map(bufnr, "n", "gh", "<cmd>Lspsaga lsp_finder<cr>", opts(""))
-    map(bufnr, "n", "<space>cd", "<cmd>Lspsaga show_cursor_diagnostics<cr>", opts(""))
+    map(bufnr, "n", "gh", "<cmd>Lspsaga lsp_finder<cr>", opts("gh find the symbol definition implement reference"))
+    map(bufnr, "n", "<space>cd", "<cmd>Lspsaga show_cursor_diagnostics<cr>", opts("<space>cd show cursor diagnostics"))
 
     -- Only jump to error
     map(
@@ -117,37 +111,36 @@ local function lsp_keymaps(bufnr)
         "n", 
         "[E",
         "<cmd>lua require('lspsaga.diagnostic').goto_prev({ severity = vim.diagnostic.severity.ERROR })<cr>",
-        opts("")
+        opts("[E to jump prev over error with specific severity diagnostic")
     )
     map(
         bufnr, 
         "n", 
         "]E", 
         "<cmd>lua require('lspsaga.diagnostic').goto_next({ severity = vim.diagnostic.severity.ERROR })<cr>",
-        opts("")
+        opts("]E to jump next over error with specific severity diagnostic")
     )
 
-    map(bufnr, "n","<space>o", "<cmd>Lspsaga outline<cr>", opts(""))
-    map(bufnr, "n", "<A-d>", "<cmd>Lspsaga open_floaterm<cr>", opts(""))
+    map(bufnr, "n","<space>o", "<cmd>Lspsaga outline<cr>", opts("<space>o show outline current file"))
     -- if you want pass somc cli command into terminal you can do like this
     -- open lazygit in lspsaga float terminal
-    map(bufnr, "n", "<A-d>", "<cmd>Lspsaga term_toggle lazygit<cr>", opts(""))
+    map(bufnr, "n", "<A-d>", "<cmd>Lspsaga term_toggle lazygit<cr>", opts("<A-d> open lazygit in float terminal"))
 
-    map(bufnr, "n", "<space>q", "<cmd>lua vim.diagnostic.setloclist()<cr>", opts(""))
+    map(bufnr, "n", "<space>q", "<cmd>lua vim.diagnostic.setloclist()<cr>", opts("<space>q Add buffer diagnostics to the location list"))
 
     map(
         bufnr,
         "n",
         "<C-u>",
         "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-u>')<cr>",
-        opts("")
+        opts("<C-u> scroll down")
     )
     map(
         bufnr,
         "n",
         "<C-d>",
         "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<cr>",
-        opts("")
+        opts("<C-d> scroll up")
     )
 
     vim.cmd [[ command! Format execute "lua lb.format({ async = true })" ]]

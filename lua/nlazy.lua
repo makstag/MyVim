@@ -50,5 +50,8 @@ require("lazy").setup({
 		root = vim.fn.stdpath("data") .. "/lazy-rocks",
 		server = "https://nvim-neorocks.github.io/rocks-binaries/"
 	},
-	checker = { enabled = true }
+	checker = { 
+		enabled = true,
+		notify = false 
+	}
 })

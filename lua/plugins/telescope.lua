@@ -46,10 +46,10 @@ return
 		telescope.load_extension("ui-select")
 
 		local nm = require("utils.alias").nm		
-		nm("<space>ff", "<cmd>Telescope find_files<cr>", "")
-		nm("<space>fg", "<cmd>Telescope live_grep<cr>", "")
-		nm("<space>fb", "<cmd>Telescope buffers<cr>", "")
-		nm("<space>fs", "<cmd>Telescope git_status<cr>", "")
-		nm("<space>fc", "<cmd>Telescope git commits<cr>", "")
+		nm("<space>ff", "<cmd>Telescope find_files<cr>", "<space>ff find file")
+		nm("<space>fg", "<cmd>Telescope live_grep<cr>", "<space>fg live grep")
+		nm("<space>fb", "<cmd>Telescope buffers<cr>", "<space>fb buffers")
+		nm("<space>fs", "<cmd>Telescope git_status<cr>", "<space>fs git status")
+		nm("<space>fc", "<cmd>Telescope git_commits<cr>", "<space>fc git commits")
 	end
 }
