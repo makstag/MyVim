@@ -1,1 +1,1 @@
-command <space>n show "Telescope keymaps"
+command <space>n show "Telescope keymaps". Close windows in telescope plugins, push <ESC> button
