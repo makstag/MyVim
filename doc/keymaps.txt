@@ -1,1 +1,22 @@
 command <space>n show "Telescope keymaps". Close windows in telescope plugins, push <ESC> button
+LSP  
+gD - go to the function declaration
+gd - go to the function definition
+K - show documentation
+gi - lists all the implementations for the symbol under the cursor in the quickfix window
+<space>[ - displays signature information about the symbol under the cursor in a floating window
+<space>rn - rename
+gr - lists all the references to the symbol under the cursor in the quickfix window
+<space>ga - perform a specific action for a section of code
+gl - show line diagnostic
+[g -  to jump prev diagnostics
+]g  to jump next diagnostics
+gh - find the symbol definition implement reference
+<space>cd - show cursor diagnostics
+[E - to jump prev over error with specific severity diagnostic
+]E - to jump next over error with specific severity diagnostic
+<space>o - show outline current file
+<A-d> - open lazygit in float terminal
+<space>q - Add buffer diagnostics to the location list
+<C-u> - scroll down
+<C-d> - scroll up
