@@ -45,7 +45,9 @@ return
 		telescope.load_extension("fzf")
 		telescope.load_extension("ui-select")
 
-		local nm = require("utils.alias").nm		
+		local nm = require("utils.alias").nm
+		nm("<space>n", "<cmd>Telescope keymaps<cr>", "<space>n show keymaps")
+
 		nm("<space>ff", "<cmd>Telescope find_files<cr>", "<space>ff find file")
 		nm("<space>fg", "<cmd>Telescope live_grep<cr>", "<space>fg live grep")
 		nm("<space>fb", "<cmd>Telescope buffers<cr>", "<space>fb buffers")
