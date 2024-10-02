@@ -16,7 +16,7 @@ return
 						return {
 							exe = "clang-format",
 							args = {
-								"-style='{ BasedOnStyle: WebKit, IndentWidth: 4, SortIncludes: false }'",
+								"-style='{ BasedOnStyle: Microsoft, InsertNewlineAtEOF: true, IndentWidth: 4, SortIncludes: false }'",
 								"--assume-filename",
 								"-i",
 								vim.api.nvim_buf_get_name(0)
@@ -32,7 +32,7 @@ return
 						return {
 							exe = "clang-format",
 							args = {
-								"-style='{ BasedOnStyle: WebKit, IndentWidth: 4, SortIncludes: false }'",
+								"-style='{ BasedOnStyle: Microsoft, InsertNewlineAtEOF: true, IndentWidth: 4, SortIncludes: false }'",
 								"--assume-filename",
 								"-i",
 								vim.api.nvim_buf_get_name(0)
