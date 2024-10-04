@@ -16,3 +16,4 @@ neotest
 indent-blankline  
 fidget  
 whichkey  
+cmake-tools  
