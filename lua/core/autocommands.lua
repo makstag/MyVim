@@ -40,9 +40,9 @@ autocmd("VimEnter", {
 })
 
 augroup("__lint__", { clear = true })
-autocmd("BufWritePost", {
+autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
 	group = "__lint__",
 	callback = function()
-		require("lint").try_lint("clangtidy")
+		require("lint").try_lint()
 	end
 })
