@@ -38,3 +38,11 @@ autocmd("VimEnter", {
 		require("lazy").update({ show = false })
 	end
 })
+
+augroup("__lint__", { clear = true })
+autocmd("BufWritePost", {
+	group = "__lint__",
+	callback = function()
+		require("lint").try_lint("clangtidy")
+	end
+})

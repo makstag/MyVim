@@ -1,5 +1,7 @@
 return
 {
+
+{
 	"mhartington/formatter.nvim",
 	cmd = { "FormatWrite", "Format" }, -- Utilities for creating configurations
 	config = function()
@@ -52,4 +54,16 @@ return
 			}
 		})
 	end
+},
+{
+	"mfussenegger/nvim-lint",
+	event = { "BufReadPre", "BufNewFile" },
+	config = function()
+		require("lint").linters_by_ft = {
+			cpp = { "clangtidy" },
+			c = { "clangtidy" }
+		}
+	end
+}
+
 }
