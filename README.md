@@ -4,6 +4,10 @@
 
 
 Install [neovim](doc/install_neovim.md), [keymaps](doc/keymaps.txt)  
+```ssh
+cd ~/.config
+git clone https://github.com/makstag/nvim.git
+```
 [IDE images](doc/images)  
 
 ## Useful link  
