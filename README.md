@@ -4,6 +4,7 @@
 
 
 Install [neovim](doc/install_neovim.md), [keymaps](doc/keymaps.txt)  
+[IDE images](doc/images)  
 
 ## Useful link  
 
