@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="doc/images/startup.gif" style="margin: auto"/>
+    <img src="doc/images/neovim.jpg" style="margin: auto"/>
 </div>
 
 ## Useful link  
