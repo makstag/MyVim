@@ -15,4 +15,4 @@ vim tutorial
 https://www.youtube.com/playlist?list=PL8hRAtHSjAgZv7WFVDvQzzU-WoL-7jZGJ  
 
 ## TODO  
-neotest, indent-blankline, fidget, whichkey, cmake-tools  
+Plugins: neotest, indent-blankline, fidget, whichkey, cmake-tools  
