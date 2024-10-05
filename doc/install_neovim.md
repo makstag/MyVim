@@ -1,5 +1,5 @@
 # install dependencies  
-##Install dependencies for neovim  
+## Install dependencies for neovim  
 ```sh
 sudo dnf copr enable atim/lazygit -y
 sudo dnf install -y cmake python3-pip lazygit cargo clang pkg-config openssl-devel chafa luarocks ripgrep fd-find xsel 
@@ -14,7 +14,7 @@ make
 sudo make install
 ```
 
-##Create links  
+## Create links  
 ```sh
 cd /usr/bin && sudo ln -s clang-tidy-sarif clang-tidy && cd
 mkdir -p ~/.local/share/nvim/lazy-rocks/hererocks/bin
@@ -23,7 +23,7 @@ cd ~/.local/share/nvim/lazy-rocks/hererocks/bin && \
 	sudo ln -s /usr/bin/luarocks luarocks 
 ```  
 
-##Install npm plugins and add path  
+## Install npm plugins and add path  
 ```sh
 npm install tree-sitter-cli
 sudo npm install -g neovim
@@ -31,7 +31,7 @@ sudo npm install -g neovim
 change path to .bashrc or .zshrc  
 export PATH=$HOME/node_modules/.bin:$HOME/.local/bin:$PATH  
 
-##Install clangd config  
+## Install clangd config  
 ```sh
 mkdir -p ~/.config/clangd && /
 	cd ~/.config/clangd
@@ -41,14 +41,14 @@ add in config.yaml following config:
 CompileFlags:  
 	Add: [-std=c++23]  
 
-##Install nerd-font for neovim  
+## Install nerd-font for neovim  
 https://www.nerdfonts.com/font-downloads  
 download any font and unpack it into .fonts  
 ```sh
 mkdir ~/.fonts
 ```  
 
-#Install neovim  
+# Install neovim  
 version not lower than 0.10.0  
 ```sh
 sudo dnf install -y neovim
