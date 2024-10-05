@@ -1,4 +1,5 @@
 command <space>n show "Telescope keymaps". Close windows in telescope plugins, push <ESC> button
+
 LSP  
 gD - go to the function declaration
 gd - go to the function definition
