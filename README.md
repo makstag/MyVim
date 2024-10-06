@@ -5,7 +5,7 @@
 
 ### Install [neovim](doc/install_neovim.md) 
 ```ssh
-cd ~/.config
+cd ~/.config && \
 git clone https://github.com/makstag/nvim.git
 ```
 Neovim needs to be run a couple of times  
