@@ -40,6 +40,9 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 o.pumheight = 10						-- pop up menu height
 o.showtabline = 0					-- always show tabs
 o.timeoutlen = 1000					-- time to wait for a mapped sequence to complete (in milliseconds)
