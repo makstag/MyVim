@@ -3,12 +3,15 @@
 </div>  
 
 
-Install [neovim](doc/install_neovim.md). [keymaps](doc/keymaps.txt)  
+### Install [neovim](doc/install_neovim.md) 
 ```ssh
 cd ~/.config
 git clone https://github.com/makstag/nvim.git
 ```
+Neovim needs to be run a couple of times  
+
 ### Gallery  
+
 <details>
 <summary>
 📷 Screenshots
@@ -22,11 +25,11 @@ git clone https://github.com/makstag/nvim.git
 
 ## Useful link  
 
-keymaps    
+[Keymaps](doc/keymaps.txt)  
 https://vim.rtorr.com/  
 https://mnorin.com/goryachie-klavishi-vim.html  
 
-vim tutorial  
+Vim tutorial(ru)  
 https://www.youtube.com/playlist?list=PL8hRAtHSjAgZv7WFVDvQzzU-WoL-7jZGJ  
 
 ## TODO  
