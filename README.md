@@ -8,7 +8,7 @@ Install [neovim](doc/install_neovim.md). [keymaps](doc/keymaps.txt)
 cd ~/.config
 git clone https://github.com/makstag/nvim.git
 ```
-### Gallery and Videos
+### Gallery  
 <details>
 <summary>
 📷 Screenshots
