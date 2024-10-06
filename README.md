@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="doc/images/neovim.jpg" style="margin: auto"/>
+    <img src="doc/images/startup.gif" style="margin: auto"/>
 </div>  
 
 
@@ -13,13 +13,11 @@ git clone https://github.com/makstag/nvim.git
 <summary>
 📷 Screenshots
 </summary>
-
-<p align="center">
-    <img align="center" width="49%" src="https://raw.githubusercontent.com/makstag/nvim/tree/master/doc/images/startup.gif" />
-    <img align="center" width="49%" src="https://raw.githubusercontent.com/makstag/nvim/tree/master/doc/images/description.jpg" /> <img align="center" width="49%" src="https://raw.githubusercontent.com/makstag/nvim/tree/master/doc/images/lazygit.jpg" />   
-   <img align="center" width="49%" src="https://raw.githubusercontent.com/makstag/nvim/tree/master/doc/images/ide.jpg" /> <img align="center" width="49%" src="https://raw.githubusercontent.com/makstag/nvim/tree/master/doc/images/lsp.jpg" /> 
-   <img align="center" width="49%" src="https://raw.githubusercontent.com/makstag/nvim/tree/master/doc/images/keymaps.jpg" /> <img align="center" width="49%" src="https://raw.githubusercontent.com/makstag/nvim/tree/master/doc/images/neovim.jpg" /> 
-</p>
+<div align="center">
+    <img align="center" width="49%" src="doc/images/neovim.jpg" style="margin: auto"/> <img align="center" width="49%"  src="doc/images/ide.jpg" style="margin: auto"/>
+    <img align="center" width="49%" src="doc/images/description.jpg" style="margin: auto"/> <img align="center" width="49%"  src="doc/images/keymaps.jpg" style="margin: auto"/>
+    <img align="center" width="49%" src="doc/images/lazygit.jpg" style="margin: auto"/> <img align="center" width="49%"  src="doc/images/lsp.jpg" style="margin: auto"/>
+</div>  
 </details>
 
 ## Useful link  
