@@ -19,7 +19,6 @@ autocmd("QuickFixCmdPost",
 	end
 })
 
-vim.g.autoformat = true
 local augroup = vim.api.nvim_create_augroup
 
 augroup("__formatter__", { clear = true })
