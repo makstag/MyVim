@@ -1,11 +1,11 @@
 <div align="center">
-    <img src="doc/images/startup.gif" style="margin: auto"/>
+    <img src="doc/images/preview.jpg" style="margin: auto"/>
 </div>  
 
 
 ### Install [neovim](doc/install_neovim.md) 
 ```ssh
-git clone https://github.com/makstag/LightVim.git ~/.config/nvim
+git clone --depth=1 https://github.com/makstag/LightVim.git ~/.config/nvim
 ```
 Neovim needs to be run a couple of times  
 
@@ -19,6 +19,7 @@ Neovim needs to be run a couple of times
     <img align="center" width="49%" src="doc/images/neovim.jpg" style="margin: auto"/> <img align="center" width="49%"  src="doc/images/ide.jpg" style="margin: auto"/>
     <img align="center" width="49%" src="doc/images/description.jpg" style="margin: auto"/> <img align="center" width="49%"  src="doc/images/keymaps.jpg" style="margin: auto"/>
     <img align="center" width="49%" src="doc/images/lazygit.jpg" style="margin: auto"/> <img align="center" width="49%"  src="doc/images/lsp.jpg" style="margin: auto"/>
+    <img align="center" width="49%"  src="doc/images/startup.gif" style="margin: auto"/>
 </div>  
 </details>
 
