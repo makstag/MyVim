@@ -11,9 +11,10 @@ https://github.com/neovim/neovim/blob/master/BUILD.md#quick-start
 ```sh
 sudo dnf install -y nodejs python3 git-lfs curl gcc
 sudo dnf copr enable atim/lazygit -y
-sudo dnf install -y python3-pip lazygit cargo clang pkg-config openssl-devel chafa luarocks ripgrep fd-find xsel clang-tidy-sarif
+sudo dnf install -y python3-pip lazygit cargo clang pkg-config openssl-devel luarocks ripgrep fd-find xsel clang-tidy-sarif
 ```  
 alternative install chafa  
+if you need an animated screensaver on the preview  
 ```sh
 sudo dnf install -y autoconf automake libtool glib2-devel freetype-devel
 git clone https://github.com/hpjansson/chafa.git --branch=1.12.0 && cd chafa
