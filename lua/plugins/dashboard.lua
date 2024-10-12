@@ -34,7 +34,11 @@ return
 					{ desc = "Find File", group = "Label", action = "Telescope find_files", key = "f" },
 					{ desc = "Configure Neovim", group = "Number", action = "edit ~/.config/nvim/init.lua", key = "v" }
 				},
-				hide = { statusline = false },
+				hide = { 
+					statusline = false,
+					tabline = false,
+					winbar = false
+				},
 				packages = { enable = true }, -- show how many plugins neovim loaded
 				-- limit how many projects list, action when you press key or enter it will run this action.
 				-- action can be a functino type, e.g.
