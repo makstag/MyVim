@@ -1,5 +1,5 @@
 # Install neovim  
-version not lower than 0.10.0  
+version should be >= 0.10.0  
 ```sh
 sudo dnf install -y neovim
 ```  
