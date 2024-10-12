@@ -1,4 +1,12 @@
-# install dependencies  
+# Install neovim  
+version not lower than 0.10.0  
+```sh
+sudo dnf install -y neovim
+```  
+alternative install neovim  
+https://github.com/neovim/neovim/blob/master/BUILD.md#quick-start  
+
+# Install dependencies  
 ## Install dependencies for neovim  
 ```sh
 sudo dnf install -y nodejs python3 git-lfs curl gcc
@@ -47,11 +55,3 @@ download any font and unpack it into .fonts
 ```sh
 mkdir ~/.fonts
 ```  
-
-# Install neovim  
-version not lower than 0.10.0  
-```sh
-sudo dnf install -y neovim
-```  
-alternative install neovim  
-https://github.com/neovim/neovim/blob/master/BUILD.md#quick-start  
