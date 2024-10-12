@@ -1,7 +1,7 @@
 # install dependencies  
 ## Install dependencies for neovim  
 ```sh
-# sudo dnf install -y nodejs python3 git curl build-essential
+sudo dnf install -y nodejs python3 git-lfs curl gcc
 sudo dnf copr enable atim/lazygit -y
 sudo dnf install -y cmake python3-pip lazygit cargo clang pkg-config openssl-devel chafa luarocks ripgrep fd-find xsel 
 ```  
