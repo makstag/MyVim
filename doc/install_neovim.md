@@ -52,6 +52,8 @@ add in config.yaml following config:
 CompileFlags:  
 	Add: [-std=c++23]  
 ```
+Note: swears at the c code  
+
 
 ## Install nerd-font for neovim  
 https://www.nerdfonts.com/font-downloads  
