@@ -47,8 +47,11 @@ mkdir -p ~/.config/clangd && /
 nano config.yaml
 ```
 add in config.yaml following config:  
+
+```yaml
 CompileFlags:  
 	Add: [-std=c++23]  
+```
 
 ## Install nerd-font for neovim  
 https://www.nerdfonts.com/font-downloads  
