@@ -40,6 +40,11 @@ return {
 		        -- Disable sections and component separators
 		        component_separators = "",
 		        section_separators = "",
+			globalstatus = true,
+		        disabled_filetypes = {
+			    "dashboard",
+			    "lazy"
+			},
 		        theme = "retrowave"  
 		    },
 		    sections = {
