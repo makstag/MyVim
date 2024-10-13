@@ -34,6 +34,7 @@ cd ~/.local/share/nvim/lazy-rocks/hererocks/bin && \
 
 ## Install npm plugins and add path  
 ```sh
+cd
 npm install tree-sitter-cli
 sudo npm install -g neovim
 ```  
