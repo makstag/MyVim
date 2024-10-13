@@ -2,7 +2,7 @@ return
 {
 	"j-hui/fidget.nvim",
 	config = function()
-		require("fidget").setup({
+		--[[require("fidget").setup({
 			-- Options related to LSP progress subsystem
 			progress = {
 				poll_rate = 0,                -- How and when to poll for progress messages
@@ -102,6 +102,7 @@ return
 				path =                        -- Where Fidget writes its logs to
 					string.format("%s/fidget.nvim.log", vim.fn.stdpath("cache"))
 			}
-		})
+		})]]
+		require("fidget").setup()
 	end
 }
