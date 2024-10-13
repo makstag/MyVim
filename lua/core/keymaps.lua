@@ -19,7 +19,7 @@ nm("<space>j", "<cmd>:bprevious<cr>", "<space>j go to the previous tab")
 nm("<space>k", "<cmd>:bnext<cr>", "<space>k go to the next tab")
 nm("<space>q", "<cmd>:bprevious<cr>:bdelete #<cr>", "<space>q go to the previous tab and close current")
 nm("<space>y", "<cmd>:%y<cr>", "<space>y copy all lines in the file")
-nm("<C-t>", "<cmd>:25split term://zsh<cr>", "<C-t> open terminal in normal mode")
+nm("<C-t>", "<cmd>:23split term://zsh<cr>", "<C-t> open terminal in normal mode")
 tm("<Esc>", "<C-\\><C-n>", "<Esc> close terminal mode in terminal")
 nm("<space>v", "<cmd>:edit ~/.config/nvim/init.lua<cr>", "<space>v open config neovim file")
 

@@ -41,41 +41,59 @@ M.setup = function()
 end
 
 local function lsp_highlight_document(client, bufnr)
-    local api = vim.api
+    local augroup = vim.api.nvim_create_augroup
+    local autocmd = vim.api.nvim_create_autocmd
+    local autocmds = vim.api.nvim_clear_autocmds
 
     -- Set autocommands conditional on server_capabilities
     if client.server_capabilities.documentHighlightProvider then
-        api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-        api.nvim_clear_autocmds({ buffer = bufnr, group = "lsp_document_highlight" })
-        api.nvim_create_autocmd("CursorHold", 
+        augroup("__lsp_document_highlight__", { clear = true })
+        autocmds({ buffer = bufnr, group = "__lsp_document_highlight__" })
+        autocmd("CursorHold", 
         {
             callback = vim.lsp.buf.document_highlight,
             buffer = bufnr,
-            group = "lsp_document_highlight",
+            group = "__lsp_document_highlight__",
             desc = "Document Highlight"
         })
-        api.nvim_create_autocmd("CursorMoved", 
+        autocmd("CursorMoved", 
         {
             callback = vim.lsp.buf.clear_references,
             buffer = bufnr,
-            group = "lsp_document_highlight",
+            group = "__lsp_document_highlight__",
             desc = "Clear All the References"
         })
-        api.nvim_create_autocmd({"TextChangedI", "TextChangedP"},
-        {
-            callback = function()
-                local line = vim.api.nvim_get_current_line()
-                local cursor = vim.api.nvim_win_get_cursor(0)[2]
-
-                local current = string.sub(line, cursor, cursor + 1)
-                local after_line = string.sub(line, cursor + 1, -1)
-                if after_line == "" and current == "#" then
-                		require("cmp").complete() 
-                	end                	
-            end,
-            pattern = "*"
-        })
     end
+
+    autocmd({"TextChangedI", "TextChangedP"},
+    {
+        callback = function()
+	    local line = vim.api.nvim_get_current_line()
+	    local cursor = vim.api.nvim_win_get_cursor(0)[2]
+
+	    local current = string.sub(line, cursor, cursor + 1)
+	    local after_line = string.sub(line, cursor + 1, -1)
+	    if after_line == "" and current == "#" then
+                require("cmp").complete() 
+            end                	
+        end,
+        pattern = "*"
+    })
+    augroup("__formatter__", { clear = true })
+    autocmd("BufWritePost", {
+        group = "__formatter__",
+        callback = function()
+        vim.cmd("FormatWrite")
+        end,
+        pattern = "*"
+    })
+    augroup("__lint__", { clear = true })
+    autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+        group = "__lint__",
+        callback = function()
+            require("lint").try_lint()
+        end
+    })
 end
 
 local function lsp_keymaps(bufnr)
