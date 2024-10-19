@@ -39,11 +39,11 @@ return
 					tabline = false,
 					winbar = false
 				},
-				packages = { enable = true }, -- show how many plugins neovim loaded
+				packages = { enable = false }, -- show how many plugins neovim loaded
 				-- limit how many projects list, action when you press key or enter it will run this action.
 				-- action can be a functino type, e.g.
 				-- action = func(path) vim.cmd("Telescope find_files cwd=" .. path) end
-				footer = { "NEOVIM/v0.10.1 CHAFA/v1.12.0" }
+				footer = { "NEOVIM/v0.10.2 CHAFA/v1.12.0" }
 			}
 		})
 	end
