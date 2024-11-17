@@ -17,7 +17,7 @@ M.setup = function()
     define("DiagnosticSignInfo", { texthl = "DiagnosticSignInfo", text = icons.diagnostics.information, numhl = "" })
 
     local config = {
-        virtual_text = false,  -- appears after the line
+        virtual_text = true,  -- appears after the line
         virtual_lines = true, -- appears under the line
         signs = { active = signs },
         flags = { debounce_text_changes = 200 },
@@ -174,7 +174,15 @@ M.on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
     vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
     
-    lsp_signature.on_attach({ floating_window = false, timer_interval = 500 })
+    lsp_signature.on_attach({
+	bind = true,
+	hint_enable = false,
+	hint_inline = function() return "eol" end,
+	hi_parameter = "LspSignatureActiveParameter",
+	handler_opts = { border = "shadow" },
+	always_trigger = false, 
+	timer_interval = 500
+    })
 end
 
 local capabilities = require("plugins.lsp.capability")

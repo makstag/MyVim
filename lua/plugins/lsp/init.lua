@@ -10,17 +10,16 @@ return
 		},
 		"nvim-lua/lsp-status.nvim",
 		"nvimdev/lspsaga.nvim",
-		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 		"ray-x/lsp_signature.nvim"
 	},
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		require("mason").setup()
-		require("lsp_lines").setup()
 		require("lspsaga").setup({ symbol_in_winbar = { enable = false } })
-		local handler = require("plugins.lsp.handler")
 		
+		local handler = require("plugins.lsp.handler")
 		handler.setup()
+		
 		local on_attach = handler.on_attach
 		local capabilities = handler.capabilitie
 		
