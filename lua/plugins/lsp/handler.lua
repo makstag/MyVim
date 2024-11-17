@@ -177,6 +177,7 @@ M.on_attach = function(client, bufnr)
     lsp_signature.on_attach({
 	bind = true,
 	hint_enable = false,
+	use_lspsaga = true,
 	hint_inline = function() return "eol" end,
 	hi_parameter = "LspSignatureActiveParameter",
 	handler_opts = { border = "shadow" },
