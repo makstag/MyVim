@@ -32,4 +32,4 @@ https://mnorin.com/goryachie-klavishi-vim.html
 [Vim tutorial(ru)](https://www.youtube.com/playlist?list=PL8hRAtHSjAgZv7WFVDvQzzU-WoL-7jZGJ)  
 
 ## TODO  
-Plugins: neotest, indent-blankline, whichkey 
+Plugins: indent-blankline, whichkey 
