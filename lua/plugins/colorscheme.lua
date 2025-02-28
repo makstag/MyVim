@@ -17,7 +17,7 @@ return
 		end
 		
 		require("fluoromachine").setup({
-			glow = true,
+			glow = false,
 			theme = "retrowave",
 			overrides = overrides,
 			transparent = "full",
