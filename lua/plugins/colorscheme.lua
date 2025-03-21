@@ -5,14 +5,15 @@ return
 	priority = 1000,
 	config = function ()
 		function overrides(c)
-		return {
-			TelescopeResultsBorder = { fg = c.alt_bg, bg = c.alt_bg },
-			TelescopeResultsNormal = { bg = c.alt_bg },
-			TelescopePreviewNormal = { bg = c.bg },
-			TelescopePromptBorder = { fg = c.alt_bg, bg = c.alt_bg },
-			TelescopeTitle = { fg = c.fg, bg = c.comment },
-			TelescopePromptPrefix = { fg = c.purple }
-		}
+			return 
+			{
+				TelescopeResultsBorder = { fg = c.alt_bg, bg = c.alt_bg },
+				TelescopeResultsNormal = { bg = c.alt_bg },
+				TelescopePreviewNormal = { bg = c.bg },
+				TelescopePromptBorder = { fg = c.alt_bg, bg = c.alt_bg },
+				TelescopeTitle = { fg = c.fg, bg = c.comment },
+				TelescopePromptPrefix = { fg = c.purple }
+			}
 		end
 		
 		require("fluoromachine").setup({
@@ -21,7 +22,8 @@ return
 			overrides = overrides,
 			transparent = "full",
 			colors = function(_, d)
-				return {
+				return 
+				{
 					bg = "#190920",
 					alt_bg = "#190920",
 					cyan = "#49eaff",
@@ -34,6 +36,6 @@ return
 			end
 		})
 		
-		vim.cmd.colorscheme "fluoromachine"
+		vim.cmd("colorscheme fluoromachine")
 	end
 }
