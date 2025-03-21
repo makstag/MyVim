@@ -43,7 +43,7 @@ return {
 		        disabled_filetypes = {
 			    "dashboard",
 			},
-		        theme = "retrowave"
+		        theme = "auto"
 		    },
 		    sections = {
 		        -- These will be filled later
