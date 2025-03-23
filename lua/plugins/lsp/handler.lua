@@ -17,7 +17,10 @@ M.setup = function()
     define("DiagnosticSignInfo", { texthl = "DiagnosticSignInfo", text = icons.diagnostics.information, numhl = "" })
 
     local config = {
-        virtual_text = true,  -- appears after the line
+        virtual_text = {
+            prefix = "",
+            spacing = 8
+        },  -- appears after the line
         virtual_lines = true, -- appears under the line
         signs = { active = signs },
         flags = { debounce_text_changes = 200 },
@@ -31,7 +34,9 @@ M.setup = function()
             border = "shadow",
             source = "always",
             header = "",
-            prefix = ""
+            prefix = function(diag)
+                return icons[diag.severity] .. " "
+            end
         }
     }
     vim.diagnostic.config(config)
@@ -45,22 +50,24 @@ local function lsp_highlight_document(client, bufnr)
     local autocmd = vim.api.nvim_create_autocmd
     local autocmds = vim.api.nvim_clear_autocmds
 
+    local gid = augroup("MyLspAutocmdsSetup" .. bufnr, { clear = true })
+
     -- Set autocommands conditional on server_capabilities
     if client.server_capabilities.documentHighlightProvider then
-        augroup("__lsp_document_highlight__", { clear = true })
-        autocmds({ buffer = bufnr, group = "__lsp_document_highlight__" })
+
+        autocmds({ buffer = bufnr, group = gid })
         autocmd("CursorHold", 
         {
             callback = vim.lsp.buf.document_highlight,
             buffer = bufnr,
-            group = "__lsp_document_highlight__",
+            group = gid,
             desc = "Document Highlight"
         })
         autocmd("CursorMoved", 
         {
             callback = vim.lsp.buf.clear_references,
             buffer = bufnr,
-            group = "__lsp_document_highlight__",
+            group = gid,
             desc = "Clear All the References"
         })
     end
@@ -79,19 +86,30 @@ local function lsp_highlight_document(client, bufnr)
         end,
         pattern = "*"
     })
-    augroup("__formatter__", { clear = true })
+
     autocmd("BufWritePost", {
-        group = "__formatter__",
+        group = gid,
         callback = function()
         vim.cmd("FormatWrite")
         end,
         pattern = "*"
     })
-    augroup("__lint__", { clear = true })
+
     autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-        group = "__lint__",
+        buffer = bufnr,
+        group = gid,
         callback = function()
             require("lint").try_lint()
+        end
+    })
+
+    autocmd("BufDelete", {
+        buffer = bufnr,
+        group = gid,
+        callback = function()
+            vim.lsp.inlay_hint.enable(false, { buffer = bufnr })
+            vim.lsp.buf_detach_client(bufnr, client.id)
+            vim.api.nvim_clear_autocmds({ group = gid })
         end
     })
 end
