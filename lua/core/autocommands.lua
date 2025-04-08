@@ -28,3 +28,4 @@ autocmd("VimEnter", {
 		require("lazy").update({ show = false })
 	end
 })
+

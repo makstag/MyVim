@@ -17,6 +17,30 @@ return
 		require("mason").setup()
 		require("lspsaga").setup({ symbol_in_winbar = { enable = false } })
 		
+		local augroup = vim.api.nvim_create_augroup
+		local autocmd = vim.api.nvim_create_autocmd
+
+		local term = require("lspsaga.floaterm")
+
+		-- Auto close terminal
+		local auto_close_terminal = augroup("AutoCloseTerminal", { clear = true })
+		autocmd({ "TermClose" }, {
+			group = auto_close_terminal,
+			pattern = { "*" },
+			callback = function()
+				local current_bufnr = vim.fn.expand("<abuf>")
+				if term.term_bufnr == tonumber(current_bufnr) then
+					term.first_open = nil
+					vim.api.nvim_buf_delete(term.term_bufnr, { force = true })
+					term.term_bufnr, term.term_winid = nil, nil
+					vim.api.nvim_buf_delete(term.shadow_bufnr, { force = true })
+					term.shadow_bufnr, term.shadow_winid = nil, nil
+				else
+					return vim.fn.execute("bdelete! " .. current_bufnr)
+				end
+			end,
+		})
+		
 		local handler = require("plugins.lsp.handler")
 		handler.setup()
 		
