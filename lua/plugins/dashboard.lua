@@ -34,7 +34,7 @@ return {
 				    return {
 				    	"",
 					"type  :help<Enter>  or  <F1>  for on-line help",
-					"Startup time: " .. require"lazy".stats().startuptime .. " ms"
+					"Startup time: " .. require("lazy").stats().startuptime .. " ms"
 				    }
 				end
 			}
