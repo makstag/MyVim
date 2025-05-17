@@ -22,7 +22,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	colorscheme = "retrowave",
+	colorscheme = "cyberdream",
 	spec = { { import = "plugins" } },
 	ui = {
 		size = { width = 0.8, height = 0.8 },
