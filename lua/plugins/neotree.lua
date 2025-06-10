@@ -21,7 +21,7 @@ return
 			    sources = {
 			        { source = "filesystem" },
 			        { source = "buffers" },
-			        { source = "document_symbols" },
+			        { source = "document_symbols" }
 			    }
 			},
 			default_component_configs = {
@@ -30,7 +30,7 @@ return
 			sources = {
 			    "filesystem",
 			    "buffers",
-			    "document_symbols",
+			    "document_symbols"
 			},
 			buffers = { bind_to_cwd = false	},
 			filesystem = {
@@ -38,7 +38,7 @@ return
 			        visible = true,
 			        hide_gitignored = false,
 			        hide_hidden = false,
-			        hide_dotfiles = false,
+			        hide_dotfiles = false
 			    },
 			    follow_current_file = {
 			        enabled = true,
