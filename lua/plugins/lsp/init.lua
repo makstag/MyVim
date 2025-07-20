@@ -50,7 +50,7 @@ return
 		local servers = {
 			clangd = require("plugins.lsp.servers.clangd")(on_attach), 
 			cmake = require("plugins.lsp.servers.cmake")(on_attach), 
-			asm_lsp = require("plugins.lsp.servers.asm_lsp")(on_attach),
+			-- asm_lsp = require("plugins.lsp.servers.asm_lsp")(on_attach),
 			autotools_ls = require("plugins.lsp.servers.autotools_ls")(on_attach)
 		}
 		
